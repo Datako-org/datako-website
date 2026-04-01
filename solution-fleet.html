@@ -11,122 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <style>
-        /* Shared clean UI Placeholder classes for visuals */
-        .ui-placeholder {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--border-radius);
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.95rem;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            background: rgba(58, 122, 254, 0.05);
-            border: 1px dashed rgba(58, 122, 254, 0.3);
-        }
-
-        .hero-placeholder {
-            aspect-ratio: 16/10;
-            box-shadow: -15px 15px 40px rgba(0, 0, 0, 0.4);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.3s ease;
-        }
-
-        .hero-placeholder:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-
-        .workflow-placeholder {
-            aspect-ratio: 9/16;
-            max-width: 320px;
-            margin: 0 auto;
-            background: rgba(37, 211, 102, 0.05);
-            /* WhatsApp Green Hint */
-            border-color: rgba(37, 211, 102, 0.3);
-        }
-
-        .dash-wide-placeholder {
-            aspect-ratio: 21/9;
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Essential Layout Tweaks */
-        .fleet-hero-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            padding-top: 40px;
-        }
-
-        .hero-buttons-group {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        /* Pain points specific list styling overriding principles */
-        .pain-point-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 16px;
-            background: rgba(255, 0, 0, 0.03);
-            border-left: 3px solid rgba(255, 100, 100, 0.5);
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 12px;
-        }
-
-        .pain-point-item p {
-            margin: 0;
-            color: #fff;
-            font-weight: 500;
-            font-size: 1.05rem;
-        }
-
-        .pain-point-icon {
-            color: rgba(255, 100, 100, 0.8);
-            font-size: 1.2rem;
-            margin-top: 2px;
-        }
-
-        /* Alignment utility for features */
-        .feature-icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(58, 122, 254, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            color: var(--accent-blue);
-        }
-
-        @media (max-width: 992px) {
-            .fleet-hero-layout {
-                grid-template-columns: 1fr;
-                text-align: left;
-                gap: 40px;
-            }
-
-            .hero-placeholder {
-                transform: none;
-            }
-
-            .reverse-on-mobile {
-                display: flex;
-                flex-direction: column-reverse;
-                gap: 40px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/solutions.css">
 </head>
 
 <body>
@@ -181,7 +66,9 @@
 
                 <div class="hero-visual">
                     <div class="ui-placeholder hero-placeholder">
-                        <span>[ Interface Dashboard Fleet - Rotations & Rentabilité ]</span>
+                        <img src="images/dashboard_fleet.png" alt="Fleet Hero"
+                            alt="Dashboard DataKö Fleet - suivi des opérations et rentabilité"
+                            style="border-radius: 12px; box-shadow: -40px 40px 100px rgba(0,0,0,0.7); width: 125%; max-width: none; transform: perspective(1000px) rotateY(-6deg) translateX(40px);">
                     </div>
                 </div>
             </div>
@@ -301,40 +188,36 @@
     </section>
 
     <!-- 4. WHATSAPP INTEGRATION (KEY DIFFERENTIATOR) -->
-    <section class="prest-approach" style="background: var(--bg-primary);">
+    <section class="prest-approach fleet-whatsapp-section">
         <div class="container">
             <div class="prest-approach-layout">
 
                 <!-- Left: Deep Value Pitch -->
                 <div class="prest-approach-text-col">
-                    <span class="hero-tag"
-                        style="color: #25D366; border-bottom: 2px solid #25D366; display: inline-block; padding-bottom: 4px;">Le
-                        Différenciateur</span>
-                    <h2 style="font-size: 2.6rem; margin-bottom: 24px; margin-top: 10px;">Connectée à vos réalités
-                        terrain.</h2>
-                    <p class="prest-approach-desc" style="margin-bottom: 20px;">
-                        Le meilleur logiciel du monde est inutile si vos équipes sur le terrain refusent de l'utiliser.
-                        C'est pourquoi l'acquisition de données de Fleet repose sur l'outil le plus universel :
-                        WhatsApp.
+                    
+                    <!-- Premium WhatsApp Badge -->
+                    <div class="whatsapp-badge">
+                        <span class="whatsapp-icon">💬</span> WhatsApp intégré
+                    </div>
+
+                    <h2 class="whatsapp-title">Connectée à vos réalités terrain.</h2>
+                    
+                    <p class="prest-approach-desc whatsapp-desc">
+                        Même le meilleur logiciel du monde échoue si le terrain ne l’utilise pas. C'est pourquoi l'acquisition de données de Fleet repose sur l'outil le plus universel : WhatsApp.
                     </p>
 
-                    <ul class="prest-card-list" style="margin-top: 30px;">
-                        <li style="font-size: 1.1rem; margin-bottom: 12px; color: #fff;"><strong>Workflows interactifs
-                                :</strong> Vos chauffeurs valident leurs étapes directement via des menus WhatsApp
-                            simples.</li>
-                        <li style="font-size: 1.1rem; margin-bottom: 12px; color: #fff;"><strong>Zéro friction
-                                :</strong> Remontées de photos (bordereaux, pannes) et de kilomètres sans nécessiter de
-                            connexion internet haut débit.</li>
-                        <li style="font-size: 1.1rem; margin-bottom: 12px; color: #fff;"><strong>Zéro formation
-                                :</strong> Pas de nouvelle application lourde à télécharger ou d'interface à apprendre
-                            pour le terrain.</li>
+                    <ul class="prest-card-list whatsapp-benefits-list">
+                        <li><strong>Workflows interactifs :</strong> Vos chauffeurs valident leurs étapes directement via des menus WhatsApp simples.</li>
+                        <li><strong>Zéro friction :</strong> Remontées de photos (bordereaux, pannes) et de kilomètres sans nécessiter de connexion internet haut débit.</li>
+                        <li><strong>Zéro formation :</strong> Pas de nouvelle application lourde à télécharger ou d'interface à apprendre pour le terrain.</li>
                     </ul>
                 </div>
 
-                <!-- Right: Visual Placeholder for WhatsApp flow -->
-                <div class="fleet-visual-col" style="justify-content: center;">
-                    <div class="ui-placeholder workflow-placeholder">
-                        <span>[ Mockup Smartphone / Flow interactif WhatsApp Bot ]</span>
+                <!-- Right: Premium WhatsApp Visual Mockup -->
+                <div class="fleet-visual-col whatsapp-visual-col">
+                    <div class="whatsapp-mockup-container">
+                        <div class="whatsapp-glow"></div> <!-- The premium background glow -->
+                        <img src="images/whatssap.png" alt="Mockup WhatsApp DataKö Fleet" class="fleet-whatsapp-image" />
                     </div>
                 </div>
 
@@ -347,56 +230,136 @@
         <div class="container">
             <div class="section-header" style="text-align: center; margin-bottom: 50px;">
                 <h2>Une visibilité complète sur vos opérations.</h2>
-                <p>Depuis la cabine du camion jusqu'au bureau du directeur des opérations, l'information circule sans
-                    rupture.</p>
+                <p>Chaque rotation est tracée, mesurée et analysée en temps réel.</p>
             </div>
 
             <div style="margin-bottom: 40px;">
                 <!-- Full width Dashboard / Control Center placeholder -->
                 <div class="ui-placeholder dash-wide-placeholder" style="box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
-                    <span style="font-size: 1.1rem;">[ Interface Web Desktop - Vue Centre de Contrôle Manager ]</span>
+                    <img src="images/gains_fleet.png" alt="Suivi des gains par rotation - DataKö Fleet" style="
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  " />
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- 6. BUSINESS IMPACT -->
-    <section class="prest-bridge-section">
+    <section class="prest-bridge-section fleet-impact-section">
         <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+            <div class="section-header fleet-impact-header">
                 <span class="hero-tag">Valeur Générée</span>
                 <h2>Des résultats concrets.</h2>
             </div>
 
-            <div class="prest-bridge-grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px;">
+            <div class="prest-bridge-grid fleet-impact-grid">
 
-                <div class="prest-bridge-card" style="padding: 50px;">
-                    <h3 style="font-size: 1.6rem; color: #fff;">Meilleure maîtrise des coûts</h3>
-                    <p style="font-size: 1.05rem; margin-bottom: 0;">Identifiez immédiatement les surconsommations de
-                        carburant, les coûts de maintenance anormaux et les dépenses injustifiées de vos véhicules.</p>
+                <div class="prest-bridge-card fleet-impact-card">
+                    <h3 class="fleet-impact-title">Meilleure maîtrise des coûts</h3>
+                    <p class="fleet-impact-desc">Identifiez immédiatement les surconsommations de carburant, les coûts de maintenance anormaux et les dépenses injustifiées de vos véhicules.</p>
                 </div>
 
-                <div class="prest-bridge-card" style="padding: 50px;">
-                    <h3 style="font-size: 1.6rem; color: #fff;">Visibilité sur les marges</h3>
-                    <p style="font-size: 1.05rem; margin-bottom: 0;">Ne pilotez plus à l'aveugle. Obtenez le coût de
-                        revient (PRI) et la marge locative de chaque rotation en croisant vos factures de transport à
-                        vos dépenses réelles.</p>
+                <div class="prest-bridge-card fleet-impact-card">
+                    <h3 class="fleet-impact-title">Visibilité sur les marges</h3>
+                    <p class="fleet-impact-desc">Ne pilotez plus à l'aveugle. Obtenez le coût de revient (PRI) et la marge locative de chaque rotation en croisant vos factures de transport à vos dépenses réelles.</p>
                 </div>
 
-                <div class="prest-bridge-card" style="padding: 50px;">
-                    <h3 style="font-size: 1.6rem; color: #fff;">Réduction des pertes</h3>
-                    <p style="font-size: 1.05rem; margin-bottom: 0;">Limitez drastiquement les opérations non tracées,
-                        le vol de matériel ou d'essence et les pertes de bordereaux par la digitalisation de la chaîne
-                        documentaire.</p>
+                <div class="prest-bridge-card fleet-impact-card">
+                    <h3 class="fleet-impact-title">Réduction des pertes</h3>
+                    <p class="fleet-impact-desc">Limitez drastiquement les opérations non tracées, le vol de matériel ou d'essence et les pertes de bordereaux par la digitalisation de la chaîne documentaire.</p>
                 </div>
 
-                <div class="prest-bridge-card" style="padding: 50px;">
-                    <h3 style="font-size: 1.6rem; color: #fff;">Décisions plus rapides</h3>
-                    <p style="font-size: 1.05rem; margin-bottom: 0;">Passez de réactif à proactif. Remontées
-                        d'incidents, gestion des litiges, les managers peuvent prendre action dans la minute plutôt que
-                        d'attendre la fin de semaine.</p>
+                <div class="prest-bridge-card fleet-impact-card">
+                    <h3 class="fleet-impact-title">Décisions plus rapides</h3>
+                    <p class="fleet-impact-desc">Passez de réactif à proactif. Remontées d'incidents, gestion des litiges, les managers peuvent prendre action dans la minute plutôt que d'attendre la fin de semaine.</p>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- 6.5 OFFERS -->
+    <section class="prest-bridge-section" style="background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2>Des offres adaptées à votre réalité terrain</h2>
+                <p style="max-width: 800px; margin: 0 auto;">Que vous démarriez votre structuration ou que vous pilotiez
+                    déjà une activité complexe, DataKö Fleet s’adapte à votre niveau de maturité opérationnelle.</p>
+            </div>
+
+            <div class="fleet-offers-grid">
+                <!-- 1. Starter -->
+                <div class="fleet-offer-card">
+                    <div class="offer-header">
+                        <h3>Starter</h3>
+                        <span class="offer-positioning">Comprendre avant d’agir</span>
+                    </div>
+                    <div class="offer-desc">
+                        <p>Pour les entreprises qui veulent d’abord gagner en visibilité sur leurs opérations, leurs
+                            gains et leurs pertes, sans transformer immédiatement leurs habitudes de travail.</p>
+                    </div>
+                    <div class="offer-features">
+                        <ul class="offer-features-list">
+                            <li class="offer-feature-item">Cockpit transport (gains, profit, cashflow)</li>
+                            <li class="offer-feature-item">Lecture et analyse des performances</li>
+                            <li class="offer-feature-item">Export Excel</li>
+                            <li class="offer-feature-item">1 utilisateur</li>
+                        </ul>
+                        <div class="offer-list-separator"></div>
+                        <ul class="offer-features-list">
+                            <li class="offer-feature-item not-included">Pas de saisie de rotations</li>
+                            <li class="offer-feature-item not-included">Pas de workflows terrain</li>
+                            <li class="offer-feature-item not-included">Pas d’automatisation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. Pro (Highlighted) -->
+                <div class="fleet-offer-card offer-highlighted">
+                    <div class="offer-badge">Recommandé</div>
+                    <div class="offer-header">
+                        <h3>Pro</h3>
+                        <span class="offer-positioning">Piloter efficacement</span>
+                    </div>
+                    <div class="offer-desc">
+                        <p>Pour les opérateurs qui veulent structurer leurs opérations, centraliser la gestion de leur
+                            flotte et piloter la rentabilité de manière active.</p>
+                        <p>Idéal pour les structures en croissance rapide</p>
+
+                    </div>
+                    <div class="offer-features">
+                        <ul class="offer-features-list">
+                            <li class="offer-feature-item">Tout le Starter</li>
+                            <li class="offer-feature-item">Saisie et suivi des rotations</li>
+                            <li class="offer-feature-item">Gestion flotte / clients / routes / dépôts</li>
+                            <li class="offer-feature-item">Multi-utilisateurs</li>
+                            <li class="offer-feature-item">Co-pilote intelligent (analyse & aide à la décision)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. Business -->
+                <div class="fleet-offer-card">
+                    <div class="offer-header">
+                        <h3>Business</h3>
+                        <span class="offer-positioning">Automatiser et scaler</span>
+                    </div>
+                    <div class="offer-desc">
+                        <p>Pour les entreprises qui veulent aller plus loin avec des workflows terrain, une adoption
+                            rapide sur le terrain et une structuration plus avancée de leurs opérations.</p>
+                    </div>
+                    <div class="offer-features">
+                        <ul class="offer-features-list">
+                            <li class="offer-feature-item">Tout le Pro</li>
+                            <li class="offer-feature-item">WhatsApp terrain</li>
+                            <li class="offer-feature-item">Module vente / négoce</li>
+                            <li class="offer-feature-item">Automatisations avancées</li>
+                            <li class="offer-feature-item">Support dédié</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -405,8 +368,7 @@
     <section class="prest-cta">
         <div class="container">
             <h2 style="font-size: 3.2rem;">Passez à une gestion maîtrisée de votre flotte.</h2>
-            <p>Demandez une démonstration et découvrez comment DataKö Fleet peut transformer vos opérations
-                quotidiennes.</p>
+            <p> Choisissez votre niveau et évoluez à votre rythme.</p>
             <button class="btn btn-primary" data-open-modal="projectModal">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" class="btn-icon">

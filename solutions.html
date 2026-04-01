@@ -11,124 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <style>
-        /* Specific tweaks for Solutions Hub */
-        .coming-soon-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .active-badge {
-            display: inline-block;
-            background: rgba(37, 211, 102, 0.15);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            color: #2ED573;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .solution-card-disabled {
-            opacity: 0.8;
-            pointer-events: none;
-        }
-
-        /* Reusable UI Placeholders */
-        .ui-placeholder {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--border-radius);
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.95rem;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .hero-placeholder {
-            aspect-ratio: 16/9;
-            background: rgba(58, 122, 254, 0.05);
-            border: 1px dashed rgba(58, 122, 254, 0.3);
-            box-shadow: -15px 15px 40px rgba(0, 0, 0, 0.4);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.3s ease;
-        }
-
-        .hero-placeholder:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-
-        .fleet-placeholder {
-            aspect-ratio: 4/3;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-        }
-
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            background: rgba(58, 122, 254, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            border: 1px solid rgba(58, 122, 254, 0.15);
-            font-size: 1.5rem;
-        }
-
-        /* Layout Tweaks for Visuals */
-        .solutions-hero-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            padding-top: 40px;
-        }
-
-        .fleet-text-col {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .fleet-visual-col {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @media (max-width: 992px) {
-            .solutions-hero-layout {
-                grid-template-columns: 1fr;
-                text-align: left;
-                gap: 40px;
-            }
-            
-            .hero-placeholder {
-                transform: none;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-
-            .fleet-text-col {
-                order: -1; /* Forces text to appear above visual on mobile */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/solutions.css">
 </head>
 
 <body>
@@ -165,15 +48,23 @@
             <div class="solutions-hero-layout">
                 <div class="hero-content">
                     <span class="hero-tag prest-anim-tag">La Plateforme DataKö</span>
-                    <h1 class="prest-anim-title" style="font-size: 3.2rem;">Des outils logiciels pour piloter vos opérations.</h1>
+                    <h1 class="prest-anim-title" style="font-size: 3.2rem;">Des solutions métiers pour piloter vos
+                        opérations et votre rentabilité.</h1>
                     <p class="prest-hero-subtitle prest-anim-subtitle" style="margin: 0 0 40px 0; max-width: 100%;">
-                        Au-delà de notre expertise en conseil, nous éditons des applications métiers prêtes à l'emploi. Nos solutions transforment vos processus complexes en interfaces simples. Prenez les bonnes décisions au bon moment, avec des outils conçus pour l'action et votre rentabilité.
+                        Au-delà du conseil, Datakö édite des applications métiers conçues pour le terrain.
+
+                        Nos solutions permettent de structurer vos opérations, suivre vos performances en temps réel et
+                        reprendre le contrôle sur vos marges.
+
+                        Moins de complexité, plus de visibilité, et des décisions prises au bon moment.
                     </p>
-                    <button class="btn btn-primary" data-open-modal="projectModal" style="opacity: 0; animation: prestFadeUp 0.8s ease-out forwards; animation-delay: 0.4s;">
+                    <p>Découvrez comment nos solutions s’adaptent à votre activité.</p>
+                    <button class="btn btn-primary" data-open-modal="projectModal"
+                        style="opacity: 0; animation: prestFadeUp 0.8s ease-out forwards; animation-delay: 0.4s;">
                         Demander une démo
                     </button>
                 </div>
-                
+
                 <div class="hero-visual">
                     <div class="ui-placeholder hero-placeholder">
                         <span>[ Visuel de la Plateforme / Aperçu Dashboard ]</span>
@@ -190,40 +81,49 @@
     <section class="prest-approach">
         <div class="container">
             <div class="prest-approach-layout">
-                
+
                 <!-- Left: Fleet Visual -->
                 <div class="fleet-visual-col">
                     <div class="ui-placeholder fleet-placeholder">
                         <span>[ Interface DataKö Fleet & Workflows WhatsApp ]</span>
                     </div>
                 </div>
-                
+
                 <!-- Right: Content & Pillars -->
                 <div class="fleet-text-col">
                     <div style="margin-bottom: 30px;">
                         <span class="active-badge">● Module Disponible</span>
-                        <span class="hero-tag" style="margin-bottom: 10px; color: var(--text-secondary); display: block;">Transport & Logistique</span>
+                        <span class="hero-tag"
+                            style="margin-bottom: 10px; color: var(--text-secondary); display: block;">Transport &
+                            Logistique</span>
                         <h2 style="font-size: 2.8rem; margin-bottom: 16px;">DataKö Fleet</h2>
                         <p class="prest-approach-desc">
-                            Pilotez de A à Z vos opérations de transport. DataKö Fleet n'est pas un simple traceur GPS, c'est une véritable plateforme d'exécution pour gérer vos rotations, vos chauffeurs et vos livraisons. <strong>Connectée aux réalités du terrain via des workflows WhatsApp simples, elle vous donne une visibilité immédiate sur votre rentabilité, la maîtrise de vos coûts et votre performance opérationnelle.</strong>
+                            Pilotez de A à Z vos opérations de transport. DataKö Fleet n'est pas un simple traceur GPS,
+                            c'est une véritable plateforme d'exécution pour gérer vos rotations, vos chauffeurs et vos
+                            livraisons. <strong>Connectée aux réalités du terrain via des workflows WhatsApp simples,
+                                elle vous donne une visibilité immédiate sur votre rentabilité, la maîtrise de vos coûts
+                                et votre performance opérationnelle.</strong>
                         </p>
                     </div>
 
                     <div class="prest-approach-principles">
                         <div class="prest-principle">
                             <span class="prest-principle-number">01</span>
-                            <p><strong>Visibilité & Rotations :</strong> Suivi en direct des expéditions, affectation des chauffeurs et fluidification des cycles de livraison.</p>
+                            <p><strong>Visibilité & Rotations :</strong> Suivi en direct des expéditions, affectation
+                                des chauffeurs et fluidification des cycles de livraison.</p>
                         </div>
                         <div class="prest-principle">
                             <span class="prest-principle-number">02</span>
-                            <p><strong>Maîtrise des Coûts :</strong> Calcul instantané de la marge par trajet, suivi de facturation et contrôle strict des dépenses (carburant, maintenance).</p>
+                            <p><strong>Maîtrise des Coûts :</strong> Calcul instantané de la marge par trajet, suivi de
+                                facturation et contrôle strict des dépenses (carburant, maintenance).</p>
                         </div>
                         <div class="prest-principle">
                             <span class="prest-principle-number">03</span>
-                            <p><strong>Adoption Terrain :</strong> Workflows intégrés directement sur WhatsApp. Zéro friction, pour une prise en main immédiate par vos équipes mobiles.</p>
+                            <p><strong>Adoption Terrain :</strong> Workflows intégrés directement sur WhatsApp. Zéro
+                                friction, pour une prise en main immédiate par vos équipes mobiles.</p>
                         </div>
                     </div>
-                    
+
                     <div style="margin-top: 40px;">
                         <a href="solution-fleet.html" class="btn btn-outline">En savoir plus sur Fleet →</a>
                     </div>
@@ -239,7 +139,8 @@
             <div class="section-header" style="text-align: center; margin-bottom: 60px;">
                 <h2>Notre vision : Bâtir les outils de demain.</h2>
                 <p style="max-width: 700px; margin: 0 auto;">
-                    Nous continuons d'étoffer notre plateforme pour répondre de manière pragmatique aux contraintes opérationnelles d'autres secteurs clés.
+                    Nous continuons d'étoffer notre plateforme pour répondre de manière pragmatique aux contraintes
+                    opérationnelles d'autres secteurs clés.
                 </p>
             </div>
 
@@ -250,7 +151,8 @@
                     <span class="coming-soon-badge">En R&D</span>
                     <div class="icon-box">⛏️</div>
                     <h3>Industrie & Mines</h3>
-                    <p>Gérer la logistique lourde, suivre les équipements sur site et sécuriser la production dans des environnements exigeants.</p>
+                    <p>Gérer la logistique lourde, suivre les équipements sur site et sécuriser la production dans des
+                        environnements exigeants.</p>
                     <div class="prest-card-sep"></div>
                     <ul class="prest-card-list">
                         <li>Suivi des engins de chantier</li>
@@ -264,7 +166,8 @@
                     <span class="coming-soon-badge">Phase exploratoire</span>
                     <div class="icon-box">📦</div>
                     <h3>Supply Chain & Distribution</h3>
-                    <p>Anticiper les ruptures de stock et organiser les entrepôts pour livrer plus vite, au meilleur coût.</p>
+                    <p>Anticiper les ruptures de stock et organiser les entrepôts pour livrer plus vite, au meilleur
+                        coût.</p>
                     <div class="prest-card-sep"></div>
                     <ul class="prest-card-list">
                         <li>Gestion des stocks en direct</li>
@@ -278,7 +181,8 @@
                     <span class="coming-soon-badge">Vision à terme</span>
                     <div class="icon-box">📈</div>
                     <h3>Finance & Pilotage RH</h3>
-                    <p>Relier les performances financières aux équipes sur le terrain pour allouer efficacement vos ressources.</p>
+                    <p>Relier les performances financières aux équipes sur le terrain pour allouer efficacement vos
+                        ressources.</p>
                     <div class="prest-card-sep"></div>
                     <ul class="prest-card-list">
                         <li>Tableaux de bord centralisés</li>
@@ -299,23 +203,29 @@
                 <h2>Des solutions ancrées dans le réel.</h2>
             </div>
             <div class="prest-bridge-grid" style="grid-template-columns: repeat(3, 1fr); gap: 30px;">
-                
+
                 <div class="prest-bridge-card" style="padding: 40px;">
                     <div class="icon-box" style="margin-bottom: 20px;">🌍</div>
                     <h3 style="font-size: 1.4rem;">Pensé pour le terrain</h3>
-                    <p style="font-size: 0.95rem;">Sans wifi fiable ou formation lourde, vos outils doivent fonctionner. Nos applications contournent les contraintes technologiques réelles, tout particulièrement en Afrique de l'Ouest.</p>
+                    <p style="font-size: 0.95rem;">Sans wifi fiable ou formation lourde, vos outils doivent fonctionner.
+                        Nos applications contournent les contraintes technologiques réelles, tout particulièrement en
+                        Afrique de l'Ouest.</p>
                 </div>
 
                 <div class="prest-bridge-card" style="padding: 40px;">
                     <div class="icon-box" style="margin-bottom: 20px;">⚙️</div>
                     <h3 style="font-size: 1.4rem;">Puissant mais invisible</h3>
-                    <p style="font-size: 0.95rem;">L'intelligence artificielle tourne en arrière-plan. Sur le terrain, vos collaborateurs ne voient que ce qui compte vraiment : des actions simples à exécuter et des priorités claires.</p>
+                    <p style="font-size: 0.95rem;">L'intelligence artificielle tourne en arrière-plan. Sur le terrain,
+                        vos collaborateurs ne voient que ce qui compte vraiment : des actions simples à exécuter et des
+                        priorités claires.</p>
                 </div>
 
                 <div class="prest-bridge-card" style="padding: 40px;">
                     <div class="icon-box" style="margin-bottom: 20px;">🔌</div>
                     <h3 style="font-size: 1.4rem;">Connecté à vos outils</h3>
-                    <p style="font-size: 0.95rem;">Pas de nouveau système isolé. Nos applications (API-first) se branchent directement sur vos logiciels, plateformes de comptabilité ou ERP de gestion existants.</p>
+                    <p style="font-size: 0.95rem;">Pas de nouveau système isolé. Nos applications (API-first) se
+                        branchent directement sur vos logiciels, plateformes de comptabilité ou ERP de gestion
+                        existants.</p>
                 </div>
 
             </div>
@@ -326,7 +236,8 @@
     <section class="prest-cta">
         <div class="container">
             <h2>Prêt à optimiser vos opérations ?</h2>
-            <p>Découvrez comment nos solutions d'exécution peuvent transformer votre rentabilité et fluidifier votre croissance dès aujourd'hui.</p>
+            <p>Découvrez comment nos solutions d'exécution peuvent transformer votre rentabilité et fluidifier votre
+                croissance dès aujourd'hui.</p>
             <button class="btn btn-primary" data-open-modal="projectModal">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
