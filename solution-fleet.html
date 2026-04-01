@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataKö Fleet - Pilotage Transport & Logistique</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/prestations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        /* Shared clean UI Placeholder classes for visuals */
+        .ui-placeholder {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(58, 122, 254, 0.05);
+            border: 1px dashed rgba(58, 122, 254, 0.3);
+        }
+
+        .hero-placeholder {
+            aspect-ratio: 16/10;
+            box-shadow: -15px 15px 40px rgba(0, 0, 0, 0.4);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-placeholder:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .workflow-placeholder {
+            aspect-ratio: 9/16;
+            max-width: 320px;
+            margin: 0 auto;
+            background: rgba(37, 211, 102, 0.05);
+            /* WhatsApp Green Hint */
+            border-color: rgba(37, 211, 102, 0.3);
+        }
+
+        .dash-wide-placeholder {
+            aspect-ratio: 21/9;
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Essential Layout Tweaks */
+        .fleet-hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .hero-buttons-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        /* Pain points specific list styling overriding principles */
+        .pain-point-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 0, 0, 0.03);
+            border-left: 3px solid rgba(255, 100, 100, 0.5);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+
+        .pain-point-item p {
+            margin: 0;
+            color: #fff;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .pain-point-icon {
+            color: rgba(255, 100, 100, 0.8);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        /* Alignment utility for features */
+        .feature-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(58, 122, 254, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            color: var(--accent-blue);
+        }
+
+        @media (max-width: 992px) {
+            .fleet-hero-layout {
+                grid-template-columns: 1fr;
+                text-align: left;
+                gap: 40px;
+            }
+
+            .hero-placeholder {
+                transform: none;
+            }
+
+            .reverse-on-mobile {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="DataKö Logo" style="height: 150px; width: auto;">
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li class="nav-item"><a href="prestations.html" class="nav-link">Prestations</a></li>
+                    <li class="nav-item"><a href="solutions.html" class="nav-link active">Solutions</a></li>
+                    <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+                    <li class="nav-item"><a href="matching.html" class="nav-link">Matching</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 1. HERO - Operational Clarity -->
+    <section class="prest-hero" style="text-align: left;">
+        <div class="container">
+            <div class="fleet-hero-layout">
+                <div class="hero-content">
+                    <span class="hero-tag prest-anim-tag">Solution DataKö</span>
+                    <h1 class="prest-anim-title" style="font-size: 3.2rem; line-height: 1.15;">
+                        Pilotez vos opérations de transport avec précision.
+                    </h1>
+                    <p class="prest-hero-subtitle prest-anim-subtitle"
+                        style="margin: 0; max-width: 100%; line-height: 1.6;">
+                        DataKö Fleet est une plateforme de pilotage conçue pour les entreprises de transport et
+                        logistique. Suivez vos rotations, maîtrisez vos coûts et prenez des décisions basées sur des
+                        données fiables, en temps réel.
+                    </p>
+                    <div class="hero-buttons-group"
+                        style="opacity: 0; animation: prestFadeUp 0.8s ease-out forwards; animation-delay: 0.4s;">
+                        <button class="btn btn-primary" data-open-modal="projectModal">Demander une démo</button>
+                        <a href="#demo-visuelle" class="btn btn-outline">Voir en action</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="ui-placeholder hero-placeholder">
+                        <span>[ Interface Dashboard Fleet - Rotations & Rentabilité ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Separator -->
+    <div class="prest-separator"></div>
+
+    <!-- 2. THE FIELD REALITY -->
+    <section class="prest-approach">
+        <div class="container">
+            <div class="prest-approach-layout reverse-on-mobile">
+
+                <!-- Left: the narrative -->
+                <div class="prest-approach-text-col">
+                    <h2 style="font-size: 2.6rem; margin-bottom: 24px;">Des opérations complexes, souvent peu pilotées.
+                    </h2>
+                    <p class="prest-approach-desc">
+                        Dans les marchés émergents et en forte croissance, gérer une flotte de véhicules est un défi
+                        constant. L'absence d'outils adaptés force les équipes à s'appuyer sur des communications
+                        fragmentées et des processus manuels qui dégradent la rentabilité.
+                    </p>
+                    <p class="prest-approach-desc" style="margin-top: 16px;">
+                        Sans logiciel d'exécution centralisé, le contrôle échappe au management, les coûts cachés
+                        s'accumulent et chaque rotation devient une zone d'ombre.
+                    </p>
+                </div>
+
+                <!-- Right: Pain points list -->
+                <div class="prest-approach-principles" style="border-left: none; padding-left: 0;">
+                    <div class="pain-point-item">
+                        <span class="pain-point-icon">✕</span>
+                        <p>Manque de visibilité sur l'exécution des rotations et des livraisons.</p>
+                    </div>
+                    <div class="pain-point-item">
+                        <span class="pain-point-icon">✕</span>
+                        <p>Marges commerciales et rentabilité par trajet difficiles à calculer.</p>
+                    </div>
+                    <div class="pain-point-item">
+                        <span class="pain-point-icon">✕</span>
+                        <p>Dépendance forte à des échanges WhatsApp personnels non structurés.</p>
+                    </div>
+                    <div class="pain-point-item">
+                        <span class="pain-point-icon">✕</span>
+                        <p>Suivi approximatif des coûts critiques (carburant, maintenance, primes).</p>
+                    </div>
+                    <div class="pain-point-item">
+                        <span class="pain-point-icon">✕</span>
+                        <p>Peu ou pas de centralisation des données pour analyser la performance globale.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. THE SOLUTION - What Fleet actually does -->
+    <section class="prest-pillars-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <span class="hero-tag">Core Features</span>
+                <h2>Une plateforme conçue pour l’exécution.</h2>
+                <p style="max-width: 700px; margin: 0 auto;">
+                    DataKö Fleet remplace les feuilles de calcul éparpillées et les communications perdues par un socle
+                    unique de pilotage. Vous ne subissez plus l'opérationnel, vous le maîtrisez.
+                </p>
+            </div>
+
+            <!-- Balanced 6-card grid for execution features -->
+            <div class="prest-expertise-grid">
+
+                <article class="prest-expertise-card">
+                    <div class="feature-icon-box">🔄</div>
+                    <h3>Gestion des rotations</h3>
+                    <p>Création de feuilles de route, suivi d'avancement, et mise à jour des statuts des expéditions de
+                        leur point de départ jusqu'à l'arrivée.</p>
+                </article>
+
+                <article class="prest-expertise-card">
+                    <div class="feature-icon-box">🚚</div>
+                    <h3>Suivi des véhicules et des opérations</h3>
+                    <p>Optimisez l’utilisation de votre flotte grâce à une gestion centralisée des camions sur chaque
+                        rotation.</p>
+                </article>
+
+                <article class="prest-expertise-card">
+                    <div class="feature-icon-box">💰</div>
+                    <h3>Calcul de rentabilité</h3>
+                    <p>Mise en relation automatique de la facturation client et des coûts d'exécution pour délivrer une
+                        marge nette instantanée par trajet.</p>
+                </article>
+
+                <article class="prest-expertise-card">
+                    <div class="feature-icon-box">⛽</div>
+                    <h3>Suivi des coûts</h3>
+                    <p>Saisie et contrôle des dépenses opérationnelles critiques : consommations de carburant, frais de
+                        péages et avances chauffeurs.</p>
+                </article>
+
+                <article class="prest-expertise-card">
+                    <div class="feature-icon-box">🔧</div>
+                    <h3>Suivi de maintenance</h3>
+                    <p>Suivi de l'état du parc, remontée des avaries par les équipes terrain et planification des cycles
+                        d'entretiens préventifs.</p>
+                </article>
+
+                <article class="prest-expertise-card">
+                    <div class="feature-icon-box">📊</div>
+                    <h3>Centralisation des données financières</h3>
+                    <p>Export propre et centralisation de toutes vos données financières pour faciliter la facturation
+                        et s'intégrer à votre système de gestion.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. WHATSAPP INTEGRATION (KEY DIFFERENTIATOR) -->
+    <section class="prest-approach" style="background: var(--bg-primary);">
+        <div class="container">
+            <div class="prest-approach-layout">
+
+                <!-- Left: Deep Value Pitch -->
+                <div class="prest-approach-text-col">
+                    <span class="hero-tag"
+                        style="color: #25D366; border-bottom: 2px solid #25D366; display: inline-block; padding-bottom: 4px;">Le
+                        Différenciateur</span>
+                    <h2 style="font-size: 2.6rem; margin-bottom: 24px; margin-top: 10px;">Connectée à vos réalités
+                        terrain.</h2>
+                    <p class="prest-approach-desc" style="margin-bottom: 20px;">
+                        Le meilleur logiciel du monde est inutile si vos équipes sur le terrain refusent de l'utiliser.
+                        C'est pourquoi l'acquisition de données de Fleet repose sur l'outil le plus universel :
+                        WhatsApp.
+                    </p>
+
+                    <ul class="prest-card-list" style="margin-top: 30px;">
+                        <li style="font-size: 1.1rem; margin-bottom: 12px; color: #fff;"><strong>Workflows interactifs
+                                :</strong> Vos chauffeurs valident leurs étapes directement via des menus WhatsApp
+                            simples.</li>
+                        <li style="font-size: 1.1rem; margin-bottom: 12px; color: #fff;"><strong>Zéro friction
+                                :</strong> Remontées de photos (bordereaux, pannes) et de kilomètres sans nécessiter de
+                            connexion internet haut débit.</li>
+                        <li style="font-size: 1.1rem; margin-bottom: 12px; color: #fff;"><strong>Zéro formation
+                                :</strong> Pas de nouvelle application lourde à télécharger ou d'interface à apprendre
+                            pour le terrain.</li>
+                    </ul>
+                </div>
+
+                <!-- Right: Visual Placeholder for WhatsApp flow -->
+                <div class="fleet-visual-col" style="justify-content: center;">
+                    <div class="ui-placeholder workflow-placeholder">
+                        <span>[ Mockup Smartphone / Flow interactif WhatsApp Bot ]</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. VISUAL DEMONSTRATION -->
+    <section id="demo-visuelle" class="section" style="background: var(--bg-secondary); padding: 100px 0;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <h2>Une visibilité complète sur vos opérations.</h2>
+                <p>Depuis la cabine du camion jusqu'au bureau du directeur des opérations, l'information circule sans
+                    rupture.</p>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <!-- Full width Dashboard / Control Center placeholder -->
+                <div class="ui-placeholder dash-wide-placeholder" style="box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+                    <span style="font-size: 1.1rem;">[ Interface Web Desktop - Vue Centre de Contrôle Manager ]</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. BUSINESS IMPACT -->
+    <section class="prest-bridge-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <span class="hero-tag">Valeur Générée</span>
+                <h2>Des résultats concrets.</h2>
+            </div>
+
+            <div class="prest-bridge-grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px;">
+
+                <div class="prest-bridge-card" style="padding: 50px;">
+                    <h3 style="font-size: 1.6rem; color: #fff;">Meilleure maîtrise des coûts</h3>
+                    <p style="font-size: 1.05rem; margin-bottom: 0;">Identifiez immédiatement les surconsommations de
+                        carburant, les coûts de maintenance anormaux et les dépenses injustifiées de vos véhicules.</p>
+                </div>
+
+                <div class="prest-bridge-card" style="padding: 50px;">
+                    <h3 style="font-size: 1.6rem; color: #fff;">Visibilité sur les marges</h3>
+                    <p style="font-size: 1.05rem; margin-bottom: 0;">Ne pilotez plus à l'aveugle. Obtenez le coût de
+                        revient (PRI) et la marge locative de chaque rotation en croisant vos factures de transport à
+                        vos dépenses réelles.</p>
+                </div>
+
+                <div class="prest-bridge-card" style="padding: 50px;">
+                    <h3 style="font-size: 1.6rem; color: #fff;">Réduction des pertes</h3>
+                    <p style="font-size: 1.05rem; margin-bottom: 0;">Limitez drastiquement les opérations non tracées,
+                        le vol de matériel ou d'essence et les pertes de bordereaux par la digitalisation de la chaîne
+                        documentaire.</p>
+                </div>
+
+                <div class="prest-bridge-card" style="padding: 50px;">
+                    <h3 style="font-size: 1.6rem; color: #fff;">Décisions plus rapides</h3>
+                    <p style="font-size: 1.05rem; margin-bottom: 0;">Passez de réactif à proactif. Remontées
+                        d'incidents, gestion des litiges, les managers peuvent prendre action dans la minute plutôt que
+                        d'attendre la fin de semaine.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FINAL CTA -->
+    <section class="prest-cta">
+        <div class="container">
+            <h2 style="font-size: 3.2rem;">Passez à une gestion maîtrisée de votre flotte.</h2>
+            <p>Demandez une démonstration et découvrez comment DataKö Fleet peut transformer vos opérations
+                quotidiennes.</p>
+            <button class="btn btn-primary" data-open-modal="projectModal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Demander une démo
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Identity -->
+                <div class="footer-col footer-identity">
+                    <img src="images/logo.png" style="height: 80px; width: auto;" alt="DataKö" class="footer-logo">
+                    <p class="footer-desc">
+                        Cabinet de conseil premium spécialisé en Data, Analytics & Intelligence Artificielle.
+                    </p>
+                </div>
+
+                <!-- Column 2: Navigation / Expertise -->
+                <div class="footer-col footer-nav">
+                    <ul class="footer-links">
+                        <li><a href="solutions.html">Solutions & Plateforme</a></li>
+                        <li><a href="prestations.html">Conseil & Prestations</a></li>
+                        <li><a href="formations.html">Training & Academy</a></li>
+                        <li><a href="matching.html">Expert Matching</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div class="footer-col footer-contact">
+                    <ul class="footer-links-contact">
+                        <li><a href="mailto:contact@datakö.com">contact@datakö.com</a></li>
+                        <li>Guinée & France</li>
+                    </ul>
+                    <p class="footer-tagline">
+                        Accompagnement de projets locaux et internationaux.
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 DataKö. Tous droits réservés.
+                </div>
+                <div class="footer-legal">
+                    <a href="mentions-legales.html">Mentions Légales</a>
+                    <a href="politique-confidentialite.html">Politique de Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-container">
+            <button class="modal-close" aria-label="Fermer">✕</button>
+            <h2 style="margin-bottom: 30px; text-align: center;">Demander une démo Fleet</h2>
+            <div id="contact-form-container">
+                <!-- Form injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Button removed since there's multiple CTAs and standard floating btn is already in main if needed, but we can stick to clean buttons on this landing page -->
+    <!-- However, consistency usually requires it. I'll add the global one. -->
+    <button class="floating-btn" data-open-modal="projectModal" aria-label="Demander une démo">
+        <span class="btn-text">Demander une démo</span>
+        <span class="btn-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
