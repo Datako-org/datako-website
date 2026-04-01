@@ -91,7 +91,7 @@
 }
 
 .fleet-placeholder {
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/10;
     background: rgba(255, 255, 255, 0.02);
     border: 1px dashed rgba(255, 255, 255, 0.15);
 }
