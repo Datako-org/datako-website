@@ -218,6 +218,22 @@
     box-shadow: 0 10px 40px rgba(58, 122, 254, 0.1);
 }
 
+.offer-ai-premium {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(139, 92, 246, 0.04) 100%);
+    border-color: rgba(139, 92, 246, 0.25);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.offer-ai-premium::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+}
+
 .offer-badge {
     position: absolute;
     top: -15px;
