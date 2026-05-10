@@ -645,3 +645,226 @@ p {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================
+   Diagnostic UI Components
+   ========================================= */
+
+/* Hero Third CTA - Diagnostic */
+.btn-diagnostic {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(122, 92, 255, 0.4);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(122, 92, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Navbar Diagnostic CTA */
+.nav-btn-diagnostic {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(58, 122, 254, 0.15), rgba(122, 92, 255, 0.15));
+    border: 1px solid rgba(122, 92, 255, 0.3);
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(122, 92, 255, 0.1);
+}
+
+.nav-btn-diagnostic:hover {
+    background: linear-gradient(135deg, rgba(58, 122, 254, 0.25), rgba(122, 92, 255, 0.3));
+    border-color: rgba(122, 92, 255, 0.6);
+    box-shadow: 0 4px 15px rgba(122, 92, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.nav-item .nav-btn-diagnostic::after {
+    display: none !important;
+}
+
+.btn-diagnostic::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(58, 122, 254, 0.1), rgba(122, 92, 255, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-diagnostic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 25px rgba(122, 92, 255, 0.4);
+    border-color: var(--accent-violet);
+}
+
+.btn-diagnostic:hover::before {
+    opacity: 1;
+}
+
+.btn-diagnostic span, .btn-diagnostic svg {
+    position: relative;
+    z-index: 1;
+}
+
+/* Reassurance text in hero */
+.hero-reassurance {
+    display: block;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.5px;
+    font-weight: 400;
+}
+
+/* Diagnostic Section */
+.diagnostic-section {
+    position: relative;
+    padding: 120px 0;
+    background: radial-gradient(circle at center top, rgba(122, 92, 255, 0.08), transparent 70%), var(--bg-primary);
+    overflow: hidden;
+}
+
+.diagnostic-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.diagnostic-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(122, 92, 255, 0.1);
+    border: 1px solid rgba(122, 92, 255, 0.2);
+    border-radius: 50px;
+    color: var(--accent-violet);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.diagnostic-title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.diagnostic-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.diagnostic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.diagnostic-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: left;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(10px);
+}
+
+.diagnostic-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+}
+
+.diagnostic-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(122, 92, 255, 0.1);
+}
+
+.diagnostic-card:hover::after {
+    opacity: 1;
+    background: linear-gradient(180deg, var(--accent-violet), transparent);
+}
+
+.diagnostic-card-num {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-violet);
+    margin-bottom: 16px;
+    display: inline-block;
+    background: rgba(122, 92, 255, 0.15);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.diagnostic-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.diagnostic-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.diagnostic-cta-wrapper {
+    text-align: center;
+}
+
+.btn-diagnostic-main {
+    font-size: 1.05rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+    color: white;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 10px 30px rgba(122, 92, 255, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-diagnostic-main:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(122, 92, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .diagnostic-title {
+        font-size: 2.2rem;
+    }
+    .diagnostic-section {
+        padding: 80px 0;
+    }
+}
