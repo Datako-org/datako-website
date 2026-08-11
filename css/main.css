@@ -807,12 +807,12 @@ body.nav-open {
 }
 
 .page-home .logo-img {
-    height: 54px !important;
-    filter: brightness(0) saturate(100%) invert(14%) sepia(24%) saturate(1510%) hue-rotate(145deg) brightness(91%);
+    height: 40px !important;
+    filter: none;
 }
 
 html[data-theme="dark"] .page-home .logo-img {
-    filter: none;
+    filter: brightness(0) invert(1);
 }
 
 .page-home .nav-menu {
