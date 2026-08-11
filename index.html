@@ -56,7 +56,7 @@
             <div class="home-container home-hero-grid">
                 <div class="home-hero-copy">
                     <p class="eyebrow">Data & IA · Afrique de l’Ouest + Europe</p>
-                    <h1 id="home-title">Vos données opérationnelles, <em>enfin pilotables.</em></h1>
+                    <h1 id="home-title">Vos données opérationnelles, <span class="hero-resolution">enfin <em>pilotables.</em></span></h1>
                     <p class="home-hero-lead">
                         Datakö structure vos données, met en production des solutions Data & IA et transforme les opérations du terrain en décisions plus claires.
                     </p>
@@ -139,7 +139,7 @@
                             <li>Performance par véhicule</li>
                             <li>Vision financière</li>
                         </ul>
-                        <a href="solution-fleet.html" class="editorial-link">Explorer Fleet <span aria-hidden="true">→</span></a>
+                        <a href="solution-fleet.html" class="editorial-link">Découvrir Datakö Fleet <span aria-hidden="true">→</span></a>
                     </div>
                     <figure class="product-screen product-screen-dark">
                         <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>Vue d’ensemble</span></div>
@@ -159,7 +159,7 @@
                             <li>Suivi finance & stock</li>
                             <li>Contrôle des clôtures</li>
                         </ul>
-                        <a href="solutions.html" class="editorial-link">Découvrir nos solutions <span aria-hidden="true">→</span></a>
+                        <a href="solutions.html" class="editorial-link">Découvrir Datakö Stations <span aria-hidden="true">→</span></a>
                     </div>
                     <figure class="product-screen product-screen-light">
                         <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>Cockpit station</span></div>
@@ -174,32 +174,99 @@
             <div class="home-container">
                 <header class="journey-heading">
                     <p class="eyebrow">Le récit Datakö</p>
-                    <h2 id="journey-title">Une donnée ne crée de valeur que lorsqu’elle <em>éclaire une décision.</em></h2>
+                    <h2 id="journey-title">Une donnée ne crée de valeur que lorsqu’elle éclaire une <em>décision.</em></h2>
                 </header>
                 <div class="journey-dashboard" role="group" aria-label="Information exploitable issue des données opérationnelles">
                     <div class="journey-dashboard-head">
-                        <span>Information exploitable</span>
-                        <strong data-journey-panel-label>Données dispersées</strong>
-                    </div>
-                    <div class="journey-metrics" aria-hidden="true">
-                        <div class="journey-metric journey-metric-volume">
-                            <span>Volume traité</span>
-                            <div class="metric-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        <span>Transformation métier</span>
+                        <div>
+                            <strong data-journey-panel-label>Données dispersées</strong>
+                            <button type="button" data-journey-replay>Rejouer</button>
                         </div>
-                        <div class="journey-metric journey-metric-trend">
-                            <span>Tendance</span>
-                            <svg viewBox="0 0 280 110" preserveAspectRatio="none">
-                                <path class="trend-grid" d="M0 90H280 M0 54H280 M0 18H280"/>
-                                <path class="trend-line" d="M4 92 L44 76 L82 84 L126 56 L168 64 L218 30 L276 18"/>
-                                <circle cx="276" cy="18" r="4"/>
+                    </div>
+
+                    <div class="journey-stage-content">
+                        <div class="journey-scene journey-scene-scatter" data-journey-scene="0" aria-hidden="true">
+                            <span class="scene-label">État initial · dispersé</span>
+                            <div class="scatter-item">ventes.xlsx</div>
+                            <div class="scatter-item">ERP</div>
+                            <div class="scatter-item">export_v3.csv</div>
+                            <div class="scatter-item">relevés terrain</div>
+                            <div class="scatter-item">rapport.pdf</div>
+                            <div class="scatter-item">boîte mail</div>
+                            <div class="scatter-item scatter-warning">suivi.xlsx (2)</div>
+                            <div class="scatter-item">API tierce</div>
+                            <div class="scatter-item">saisie manuelle</div>
+                            <div class="scatter-item scatter-warning">ventes_final.xlsx</div>
+                        </div>
+
+                        <div class="journey-scene journey-scene-central" data-journey-scene="1" aria-hidden="true">
+                            <span class="scene-label">Centralisation</span>
+                            <svg class="central-paths" viewBox="0 0 1200 320" preserveAspectRatio="none">
+                                <path d="M70 55L550 150M250 25L550 150M410 92L550 150M115 272L550 170M355 305L550 170"/>
+                                <path d="M1130 55L650 150M950 25L650 150M1090 272L650 170M845 305L650 170M1035 160L650 160"/>
                             </svg>
+                            <div class="central-source central-source-1">ventes.xlsx</div>
+                            <div class="central-source central-source-2">ERP</div>
+                            <div class="central-source central-source-3">export_v3.csv</div>
+                            <div class="central-source central-source-4">boîte mail</div>
+                            <div class="central-source central-source-5">suivi.xlsx</div>
+                            <div class="central-source central-source-6">relevés terrain</div>
+                            <div class="central-source central-source-7">planning</div>
+                            <div class="central-source central-source-8">API tierce</div>
+                            <div class="central-source central-source-9">saisie manuelle</div>
+                            <div class="central-source central-source-10">rapport.pdf</div>
+                            <div class="central-core">
+                                <img src="images/datako-mark-white.png" alt="" width="220" height="220">
+                                <span>Socle unique</span>
+                            </div>
                         </div>
-                        <div class="journey-metric journey-metric-threshold">
-                            <span>Seuil</span>
-                            <div class="threshold-track"><i></i><b></b></div>
-                            <small>Point d’attention détecté</small>
+
+                        <div class="journey-scene journey-scene-structured" data-journey-scene="2" aria-hidden="true">
+                            <span class="scene-label">Structuration</span>
+                            <div class="structure-table">
+                                <div class="structure-row structure-head"><span>Source</span><span>Période</span><span>Volume</span><span>Statut</span></div>
+                                <div class="structure-row"><b>ERP</b><i></i><span class="structure-volume" style="--row-width:92%"></span><small>Normalisé</small></div>
+                                <div class="structure-row"><b>ventes.xlsx</b><i></i><span class="structure-volume" style="--row-width:74%"></span><small>Normalisé</small></div>
+                                <div class="structure-row"><b>relevés terrain</b><i></i><span class="structure-volume" style="--row-width:54%"></span><small>Normalisé</small></div>
+                                <div class="structure-row"><b>suivi.xlsx</b><i></i><span class="structure-volume" style="--row-width:39%"></span><small class="status-warning">Dédoublonné</small></div>
+                                <div class="structure-row"><b>API tierce</b><i></i><span class="structure-volume" style="--row-width:64%"></span><small>Normalisé</small></div>
+                            </div>
+                        </div>
+
+                        <div class="journey-scene journey-scene-metrics" data-journey-scene="3" aria-hidden="true">
+                            <span class="scene-label">Information exploitable</span>
+                            <div class="journey-metrics">
+                                <div class="journey-metric journey-metric-volume">
+                                    <span>Volume traité</span>
+                                    <div class="metric-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                                </div>
+                                <div class="journey-metric journey-metric-trend">
+                                    <span>Tendance</span>
+                                    <svg viewBox="0 0 280 110" preserveAspectRatio="none">
+                                        <path class="trend-grid" d="M0 90H280 M0 54H280 M0 18H280"/>
+                                        <path class="trend-line" d="M4 92 L44 76 L82 84 L126 56 L168 64 L218 30 L276 18"/>
+                                        <circle cx="276" cy="18" r="4"/>
+                                    </svg>
+                                </div>
+                                <div class="journey-metric journey-metric-threshold">
+                                    <span>Seuil</span>
+                                    <div class="threshold-track"><i></i><b></b></div>
+                                    <small>Limite dépassée sur un poste suivi</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="journey-scene journey-scene-decision" data-journey-scene="4" aria-hidden="true">
+                            <span class="scene-label">Décision</span>
+                            <div class="decision-signal">
+                                <i aria-hidden="true"></i>
+                                <div><span>Signal</span><strong>Un seuil franchi, une décision à prendre.</strong></div>
+                            </div>
+                            <p>De vos fichiers épars à l’arbitrage, sans passer par un reporting manuel.</p>
                         </div>
                     </div>
+                    <p class="sr-only" aria-live="polite" data-journey-live>Étape 1 sur 5 : données dispersées.</p>
                 </div>
                 <ol class="journey-steps">
                     <li data-journey-step><span>01</span><strong>Dispersée</strong><small>Fichiers, outils, terrain</small></li>
@@ -215,7 +282,7 @@
             <div class="home-container essentials-grid">
                 <div class="essentials-copy">
                     <p class="eyebrow">Conseil · Academy · Matching</p>
-                    <h2 id="essentials-title">L’expertise qui fait passer la donnée <em>au réel.</em></h2>
+                    <h2 id="essentials-title">L’expertise qui fait passer la donnée au réel.</h2>
                     <p>De la stratégie à la mise en production, Datakö associe excellence technique, pragmatisme et transmission.</p>
                     <p class="essentials-scope">Data Engineering · Analytics & BI · IA & Automatisation</p>
                 </div>
@@ -230,7 +297,7 @@
         <section class="home-final-cta" aria-labelledby="final-cta-title">
             <div class="home-container">
                 <p class="eyebrow">Votre prochain point de décision</p>
-                <h2 id="final-cta-title">Et si vos données commençaient enfin à <em>travailler ensemble&nbsp;?</em></h2>
+                <h2 id="final-cta-title">Et si vos données commençaient enfin à travailler ensemble&nbsp;?</h2>
                 <div class="home-final-actions">
                     <a href="contact.html#contact-form-container" class="home-btn home-btn-light">Parler de votre projet</a>
                     <a href="https://diagnostic.xn--datak-nua.com/" class="home-btn home-btn-navy-quiet">Lancer le diagnostic</a>

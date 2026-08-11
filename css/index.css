@@ -118,9 +118,9 @@
 
 .home-hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.86fr) minmax(520px, 1.14fr);
+    grid-template-columns: minmax(0, 1fr) minmax(520px, 1fr);
     align-items: center;
-    gap: clamp(56px, 7vw, 120px);
+    gap: clamp(48px, 5vw, 80px);
 }
 
 .home-hero-copy {
@@ -129,18 +129,23 @@
 }
 
 .home-hero h1 {
-    max-width: 790px;
+    max-width: 100%;
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(3.7rem, 6.1vw, 7.3rem);
+    font-size: clamp(3.6rem, 5vw, 5.75rem);
     font-weight: 600;
     letter-spacing: -0.065em;
     line-height: 0.88;
+    overflow-wrap: normal;
     text-wrap: balance;
 }
 
-.home-hero h1 em {
+.hero-resolution {
     display: block;
+}
+
+.home-hero h1 em {
+    display: inline;
     color: var(--color-accent);
     letter-spacing: -0.035em;
     line-height: 1.02;
@@ -836,6 +841,7 @@
 }
 
 .journey-dashboard {
+    position: relative;
     padding: clamp(18px, 3vw, 34px);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 22px;
@@ -844,11 +850,36 @@
 }
 
 .journey-dashboard-head {
-    margin-bottom: 18px;
+    position: relative;
+    z-index: 8;
+    min-height: 30px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
+}
+
+.journey-dashboard-head > div {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.journey-dashboard-head button {
+    padding: 5px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.67rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.journey-dashboard-head button:hover {
+    border-color: #9eb0ff;
+    color: #9eb0ff;
 }
 
 .journey-dashboard-head span,
@@ -868,6 +899,238 @@
 .journey-dashboard-head strong {
     color: #9eb0ff;
     font-weight: 500;
+}
+
+.journey-stage-content {
+    position: relative;
+    height: clamp(320px, 30vw, 390px);
+}
+
+.journey-scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: transform 620ms var(--ease-out);
+}
+
+.decision-journey[data-step="0"] [data-journey-scene="0"],
+.decision-journey[data-step="1"] [data-journey-scene="1"],
+.decision-journey[data-step="2"] [data-journey-scene="2"],
+.decision-journey[data-step="3"] [data-journey-scene="3"],
+.decision-journey[data-step="4"] [data-journey-scene="4"] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.scene-label {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    color: rgba(255, 255, 255, 0.48);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.61rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* 01 — dispersed operational artefacts */
+
+.scatter-item {
+    position: absolute;
+    padding: 9px 12px;
+    border: 1px solid rgba(229, 236, 239, 0.16);
+    border-radius: 5px;
+    background: #07313d;
+    color: #b6cbd1;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(0.58rem, 0.85vw, 0.72rem);
+    font-weight: 500;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    animation: journeyArtifactFloat 5.8s ease-in-out infinite alternate;
+}
+
+.scatter-item:nth-of-type(1) { left: 5%; top: 23%; transform: rotate(-6deg); }
+.scatter-item:nth-of-type(2) { left: 24%; top: 10%; transform: rotate(4deg); animation-delay: -1.4s; }
+.scatter-item:nth-of-type(3) { left: 42%; top: 27%; transform: rotate(-3deg); animation-delay: -2.7s; }
+.scatter-item:nth-of-type(4) { left: 61%; top: 12%; transform: rotate(7deg); animation-delay: -0.8s; }
+.scatter-item:nth-of-type(5) { right: 5%; top: 25%; transform: rotate(-8deg); animation-delay: -3.5s; }
+.scatter-item:nth-of-type(6) { left: 9%; top: 57%; transform: rotate(3deg); animation-delay: -2.1s; }
+.scatter-item:nth-of-type(7) { left: 30%; top: 68%; transform: rotate(-5deg); animation-delay: -4.2s; }
+.scatter-item:nth-of-type(8) { left: 55%; top: 51%; transform: rotate(6deg); animation-delay: -1.8s; }
+.scatter-item:nth-of-type(9) { right: 15%; top: 66%; transform: rotate(2deg); animation-delay: -3.1s; }
+.scatter-item:nth-of-type(10) { left: 16%; bottom: 1%; transform: rotate(-7deg); animation-delay: -0.5s; }
+
+.scatter-warning {
+    border-color: rgba(245, 166, 35, 0.46);
+}
+
+.scatter-warning::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #f5a623;
+    display: inline-block;
+    vertical-align: 1px;
+}
+
+@keyframes journeyArtifactFloat {
+    to { margin-top: -8px; margin-left: 3px; }
+}
+
+/* 02 — convergence toward one Datakö foundation */
+
+.central-paths {
+    position: absolute;
+    inset: 22px 0 0;
+    width: 100%;
+    height: calc(100% - 22px);
+}
+
+.central-paths path {
+    fill: none;
+    stroke: rgba(79, 209, 219, 0.52);
+    stroke-dasharray: 520;
+    stroke-dashoffset: 520;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    transition: stroke-dashoffset 1250ms var(--ease-out) 120ms;
+}
+
+.decision-journey[data-step="1"] .central-paths path {
+    stroke-dashoffset: 0;
+}
+
+.central-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 124px;
+    border: 1px solid rgba(79, 209, 219, 0.42);
+    border-radius: 12px;
+    background: #04222b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transform: translate(-50%, -50%) scale(0.9);
+    transition: transform 700ms var(--ease-out), box-shadow 700ms ease;
+}
+
+.decision-journey[data-step="1"] .central-core {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 9px rgba(79, 209, 219, 0.06), 0 22px 60px rgba(0, 0, 0, 0.30);
+}
+
+.central-core img {
+    width: 39px;
+    height: 39px;
+    object-fit: contain;
+}
+
+.central-core span {
+    color: #4fd1db;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.61rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.central-source {
+    position: absolute;
+    color: #8aa7b0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(0.56rem, 0.8vw, 0.7rem);
+}
+
+.central-source-1 { left: 4%; top: 17%; }
+.central-source-2 { left: 20%; top: 7%; }
+.central-source-3 { left: 34%; top: 25%; }
+.central-source-4 { left: 7%; bottom: 17%; }
+.central-source-5 { left: 27%; bottom: 7%; }
+.central-source-6 { right: 20%; top: 8%; }
+.central-source-7 { right: 4%; top: 17%; }
+.central-source-8 { right: 6%; bottom: 18%; }
+.central-source-9 { right: 25%; bottom: 6%; }
+.central-source-10 { right: 15%; top: 49%; }
+
+/* 03 — governed, normalized structure */
+
+.structure-table {
+    position: absolute;
+    inset: 46px 1% 2%;
+}
+
+.structure-row {
+    min-height: 47px;
+    padding: 10px 4px;
+    border-bottom: 1px solid rgba(229, 236, 239, 0.09);
+    display: grid;
+    grid-template-columns: minmax(120px, 1.3fr) minmax(80px, 0.7fr) minmax(150px, 1.8fr) minmax(100px, 0.7fr);
+    align-items: center;
+    gap: clamp(12px, 2.2vw, 28px);
+}
+
+.structure-row b {
+    color: #e5ecef;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+.structure-row i,
+.structure-volume {
+    height: 5px;
+    border-radius: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 820ms var(--ease-out);
+}
+
+.structure-row i {
+    background: rgba(229, 236, 239, 0.18);
+}
+
+.structure-volume {
+    width: var(--row-width);
+    background: linear-gradient(90deg, #3a7afe, #7a5cff);
+}
+
+.decision-journey[data-step="2"] .structure-row i,
+.decision-journey[data-step="2"] .structure-volume {
+    transform: scaleX(1);
+}
+
+.structure-row small {
+    color: #63d9b8;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.61rem;
+}
+
+.structure-row .status-warning {
+    color: #f5a623;
+}
+
+.structure-head {
+    min-height: 38px;
+    color: #8aa7b0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* 04 — the three decision indicators */
+
+.journey-scene-metrics .journey-metrics {
+    position: absolute;
+    inset: 46px 0 0;
 }
 
 .journey-metrics {
@@ -971,7 +1234,7 @@
 
 .decision-journey[data-step="1"] .trend-line { stroke-dashoffset: 300; }
 .decision-journey[data-step="2"] .trend-line { stroke-dashoffset: 190; }
-.decision-journey[data-step="3"] .trend-line { stroke-dashoffset: 70; }
+.decision-journey[data-step="3"] .trend-line { stroke-dashoffset: 0; }
 .decision-journey[data-step="4"] .trend-line { stroke-dashoffset: 0; }
 .decision-journey[data-step="3"] .journey-metric-trend circle,
 .decision-journey[data-step="4"] .journey-metric-trend circle { opacity: 1; }
@@ -1023,6 +1286,73 @@
     font-size: 0.66rem;
 }
 
+/* 05 — explicit decision signal */
+
+.journey-scene-decision {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.decision-signal {
+    max-width: 760px;
+    padding: 28px 32px;
+    border: 1px solid rgba(79, 209, 219, 0.32);
+    border-radius: 13px;
+    background: linear-gradient(120deg, rgba(58, 122, 254, 0.16), rgba(122, 92, 255, 0.08));
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transform: scale(0.94);
+    transition: transform 720ms var(--ease-out), box-shadow 720ms ease;
+}
+
+.decision-journey[data-step="4"] .decision-signal {
+    transform: scale(1);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24), 0 0 42px rgba(79, 209, 219, 0.08);
+}
+
+.decision-signal > i {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #4fd1db;
+    box-shadow: 0 0 0 8px rgba(79, 209, 219, 0.10);
+    animation: decisionSignalPulse 1.8s ease-in-out infinite;
+}
+
+.decision-signal span {
+    display: block;
+    margin-bottom: 10px;
+    color: #4fd1db;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.decision-signal strong {
+    color: white;
+    font-size: clamp(1.45rem, 3vw, 2.45rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+}
+
+.journey-scene-decision > p {
+    max-width: 600px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.58);
+    text-align: center;
+}
+
+@keyframes decisionSignalPulse {
+    50% { opacity: 0.55; transform: scale(0.78); }
+}
+
 .journey-steps {
     position: relative;
     margin-top: 26px;
@@ -1040,6 +1370,24 @@
     height: 1px;
     background: rgba(255, 255, 255, 0.15);
 }
+
+.journey-steps::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 31px;
+    left: 5%;
+    width: calc(90% * var(--journey-progress, 0));
+    height: 1px;
+    background: linear-gradient(90deg, #4fd1db, #7a5cff);
+    transition: width 900ms var(--ease-out);
+}
+
+.decision-journey[data-step="0"] { --journey-progress: 0; }
+.decision-journey[data-step="1"] { --journey-progress: 0.25; }
+.decision-journey[data-step="2"] { --journey-progress: 0.5; }
+.decision-journey[data-step="3"] { --journey-progress: 0.75; }
+.decision-journey[data-step="4"] { --journey-progress: 1; }
 
 .journey-steps li {
     position: relative;
@@ -1418,7 +1766,7 @@ html[data-theme="dark"] .home-btn-primary:hover {
     }
 
     .home-hero h1 {
-        font-size: clamp(3.6rem, 6.2vw, 5.5rem);
+        font-size: clamp(3.35rem, 5.6vw, 4.8rem);
     }
 
     .data-story {
@@ -1493,12 +1841,19 @@ html[data-theme="dark"] .home-btn-primary:hover {
         gap: 0;
     }
 
-    .journey-steps::before {
+    .journey-steps::before,
+    .journey-steps::after {
         top: 0;
         bottom: 0;
         left: 30px;
         width: 1px;
         height: auto;
+    }
+
+    .journey-steps::after {
+        bottom: auto;
+        height: calc(100% * var(--journey-progress, 0));
+        transition-property: height;
     }
 
     .journey-steps li,
@@ -1718,6 +2073,80 @@ html[data-theme="dark"] .home-btn-primary:hover {
         gap: 6px;
     }
 
+    .journey-dashboard-head > div {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .journey-stage-content {
+        height: 360px;
+    }
+
+    .scatter-item {
+        padding: 7px 8px;
+        font-size: 0.53rem;
+    }
+
+    .scatter-item:nth-of-type(2) { left: 36%; }
+    .scatter-item:nth-of-type(3) { left: 50%; }
+    .scatter-item:nth-of-type(4) { left: 68%; }
+    .scatter-item:nth-of-type(7) { left: 25%; }
+
+    .central-core {
+        width: 112px;
+        height: 98px;
+    }
+
+    .central-core img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .central-source {
+        font-size: 0.49rem;
+    }
+
+    .central-source-3,
+    .central-source-9 {
+        display: none;
+    }
+
+    .structure-table {
+        inset: 38px 0 0;
+    }
+
+    .structure-row {
+        min-height: 48px;
+        grid-template-columns: minmax(82px, 1fr) minmax(48px, 0.45fr) minmax(72px, 0.8fr);
+        gap: 8px;
+    }
+
+    .structure-row > :nth-child(2) {
+        display: none;
+    }
+
+    .structure-row b {
+        font-size: 0.59rem;
+        overflow-wrap: anywhere;
+    }
+
+    .structure-row small {
+        font-size: 0.52rem;
+    }
+
+    .structure-head {
+        font-size: 0.52rem;
+    }
+
+    .decision-signal {
+        padding: 22px 20px;
+        gap: 18px;
+    }
+
+    .journey-scene-decision > p {
+        font-size: 0.88rem;
+    }
+
     .journey-metrics {
         margin-inline: -14px;
         padding-inline: 14px;
@@ -1769,7 +2198,8 @@ html[data-theme="dark"] .home-btn-primary:hover {
 /* Motion is an enhancement; every state remains readable without it. */
 
 @media (prefers-reduced-motion: reduce) {
-    .story-replay {
+    .story-replay,
+    [data-journey-replay] {
         display: none;
     }
 
@@ -1809,5 +2239,16 @@ html[data-theme="dark"] .home-btn-primary:hover {
     .decision-journey .journey-steps li:last-child span {
         border-color: #9eb0ff;
         background: #4058df;
+    }
+
+    .decision-journey .journey-scene-decision {
+        opacity: 1;
+        transform: none;
+    }
+
+    .decision-signal,
+    .decision-signal > i {
+        transform: none;
+        animation: none;
     }
 }

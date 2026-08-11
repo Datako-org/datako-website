@@ -31,6 +31,8 @@
         'Information exploitable',
         'Décision éclairée'
     ];
+    const journeyMessages = journeyLabels.map((label, index) => `Étape ${index + 1} sur 5 : ${label.toLowerCase()}.`);
+    const journeyStepDuration = 1700;
 
     const setStoryStep = step => {
         if (!story) return;
@@ -59,31 +61,50 @@
         journey.classList.add('is-complete');
         journey.dataset.step = '4';
         const panelLabel = journey.querySelector('[data-journey-panel-label]');
+        const liveRegion = journey.querySelector('[data-journey-live]');
         if (panelLabel) panelLabel.textContent = journeyLabels[4];
+        if (liveRegion) liveRegion.textContent = journeyMessages[4];
         journey.dataset.played = 'true';
     };
 
-    const playJourney = () => {
-        if (!journey || journey.dataset.played === 'true') return;
+    const setJourneyStep = (index, steps) => {
+        journey.dataset.step = String(index);
+        const panelLabel = journey.querySelector('[data-journey-panel-label]');
+        const liveRegion = journey.querySelector('[data-journey-live]');
+        if (panelLabel) panelLabel.textContent = journeyLabels[index];
+        if (liveRegion) liveRegion.textContent = journeyMessages[index];
+        steps.forEach((item, itemIndex) => {
+            item.classList.toggle('is-active', itemIndex === index);
+            item.classList.toggle('is-past', itemIndex < index);
+        });
+    };
+
+    const resetJourney = () => {
+        if (!journey) return;
+        journey.classList.remove('is-complete');
+        journey.querySelectorAll('[data-journey-step]').forEach(step => {
+            step.classList.remove('is-active', 'is-past');
+        });
+    };
+
+    const playJourney = ({ replay = false } = {}) => {
+        if (!journey || (journey.dataset.played === 'true' && !replay)) return;
         if (reducedMotion.matches) {
             completeJourney();
             return;
         }
 
+        resetJourney();
         journey.dataset.played = 'true';
         const steps = [...journey.querySelectorAll('[data-journey-step]')];
+        setJourneyStep(0, steps);
         steps.forEach((step, index) => {
+            if (index === 0) return;
             later(() => {
-                journey.dataset.step = String(index);
-                const panelLabel = journey.querySelector('[data-journey-panel-label]');
-                if (panelLabel) panelLabel.textContent = journeyLabels[index];
-                steps.forEach((item, itemIndex) => {
-                    item.classList.toggle('is-active', itemIndex === index);
-                    item.classList.toggle('is-past', itemIndex < index);
-                });
-            }, index * 390);
+                setJourneyStep(index, steps);
+            }, index * journeyStepDuration);
         });
-        later(completeJourney, steps.length * 390 + 260);
+        later(completeJourney, steps.length * journeyStepDuration);
     };
 
     const useStaticState = () => {
@@ -130,6 +151,11 @@
     story?.querySelector('[data-story-replay]')?.addEventListener('click', () => {
         clearTimers();
         playStory({ replay: true });
+    });
+
+    journey?.querySelector('[data-journey-replay]')?.addEventListener('click', () => {
+        clearTimers();
+        playJourney({ replay: true });
     });
 
     reducedMotion.addEventListener?.('change', event => {
