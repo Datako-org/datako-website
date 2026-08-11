@@ -104,7 +104,7 @@
     "Deduplicated",
     "third-party API",
     "Normalized",
-    "Actionable information",
+    "Readable information",
     "Processed volume",
     "Trend",
     "Threshold",
@@ -121,11 +121,11 @@
     "Centralized",
     "One shared source",
     "03",
-    "Organized",
-    "Reliable rules",
+    "Structured",
+    "Shared rules",
     "04",
-    "Actionable",
-    "Useful indicators",
+    "Readable",
+    "The gap appears",
     "05",
     "Decided",
     "An informed action",
@@ -157,6 +157,8 @@
     "Actionable information produced from operational data",
     "",
     "Datakö expertise",
-    "Submit your project"
+    "Submit your project",
+    "Step {step} of {total}: {label}.",
+    "Step {step} of {total}: {label}."
   ]
 }

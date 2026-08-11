@@ -104,7 +104,7 @@
     "Dédoublonné",
     "API tierce",
     "Normalisé",
-    "Information exploitable",
+    "Information lisible",
     "Volume traité",
     "Tendance",
     "Seuil",
@@ -121,11 +121,11 @@
     "Centralisée",
     "Une source commune",
     "03",
-    "Organisée",
-    "Des règles fiables",
+    "Structurée",
+    "Des règles communes",
     "04",
-    "Exploitable",
-    "Des indicateurs utiles",
+    "Lisible",
+    "L’écart apparaît",
     "05",
     "Décidée",
     "Une action éclairée",
@@ -157,6 +157,8 @@
     "Information exploitable issue des données opérationnelles",
     "",
     "Expertises Datakö",
-    "Soumettre votre projet"
+    "Soumettre votre projet",
+    "Étape {step} sur {total} : {label}.",
+    "Étape {step} sur {total} : {label}."
   ]
 }

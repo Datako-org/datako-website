@@ -4,7 +4,6 @@
     const journey = document.querySelector('[data-decision-journey]');
     const revealItems = document.querySelectorAll('[data-reveal]');
     const timers = new Set();
-    const isEnglish = document.documentElement.lang === 'en';
 
     const later = (callback, delay) => {
         const timer = window.setTimeout(() => {
@@ -20,23 +19,29 @@
         timers.clear();
     };
 
-    const storyMessages = isEnglish
-        ? [
-            'Step 1 of 3: scattered data.',
-            'Step 2 of 3: structured information.',
-            'Step 3 of 3: informed decision.'
-        ]
-        : [
-            'Étape 1 sur 3 : données dispersées.',
-            'Étape 2 sur 3 : information structurée.',
-            'Étape 3 sur 3 : décision éclairée.'
-        ];
-    const journeyLabels = isEnglish
-        ? ['Scattered data', 'Centralized data', 'Organized data', 'Actionable information', 'Informed decision']
-        : ['Données dispersées', 'Données centralisées', 'Données organisées', 'Information exploitable', 'Décision éclairée'];
-    const journeyMessages = journeyLabels.map((label, index) => isEnglish
-        ? `Step ${index + 1} of 5: ${label.toLowerCase()}.`
-        : `Étape ${index + 1} sur 5 : ${label.toLowerCase()}.`);
+    // Step labels are read from the markup and the announcement wording comes from
+    // data-step-message, so src/locales stays the single source of truth for both the
+    // visible steps and what screen readers hear.
+    const ownText = element => [...element.childNodes]
+        .filter(node => node.nodeType === Node.TEXT_NODE)
+        .map(node => node.textContent)
+        .join('')
+        .trim();
+
+    const announcements = (host, labels) => {
+        const pattern = host?.dataset.stepMessage || '';
+        const locale = document.documentElement.lang || 'fr';
+        return labels.map((label, index) => pattern
+            .replace('{step}', String(index + 1))
+            .replace('{total}', String(labels.length))
+            .replace('{label}', label.toLocaleLowerCase(locale)));
+    };
+
+    const storyLabels = [...document.querySelectorAll('[data-story-label]')].map(ownText);
+    const storyMessages = announcements(story, storyLabels);
+    const journeyLabels = [...document.querySelectorAll('[data-journey-step] strong')]
+        .map(element => element.textContent.trim());
+    const journeyMessages = announcements(journey, journeyLabels);
     const journeyStepDuration = 1700;
 
     const setStoryStep = step => {
