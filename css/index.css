@@ -17,18 +17,6 @@
     display: none;
 }
 
-.page-home .whatsapp-float-btn.home-delayed {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(12px);
-}
-
-.page-home .whatsapp-float-btn.home-delayed.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
 .home-container {
     width: min(100%, var(--container-wide));
     margin-inline: auto;

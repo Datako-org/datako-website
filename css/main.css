@@ -420,6 +420,18 @@ p {
     box-shadow: 0 5px 25px rgba(37, 211, 102, 0.2);
 }
 
+.whatsapp-float-btn.hero-delayed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+}
+
+.whatsapp-float-btn.hero-delayed.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
 .whatsapp-float-btn svg {
     width: 28px;
     height: 28px;

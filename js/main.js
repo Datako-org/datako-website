@@ -435,14 +435,14 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     document.body.appendChild(waBtn);
-    const homeHero = document.querySelector('.home-hero');
-    if (homeHero && 'IntersectionObserver' in window) {
-        waBtn.classList.add('home-delayed');
+    const contactHero = document.querySelector('.home-hero, .fleet-hero, .stations-hero');
+    if (contactHero && 'IntersectionObserver' in window) {
+        waBtn.classList.add('hero-delayed');
         const waObserver = new IntersectionObserver(entries => {
             const heroVisible = entries.some(entry => entry.isIntersecting);
             waBtn.classList.toggle('is-visible', !heroVisible);
         }, { threshold: 0.08 });
-        waObserver.observe(homeHero);
+        waObserver.observe(contactHero);
     }
     // --- WHATSAPP FLOATING BUTTON END ---
 
