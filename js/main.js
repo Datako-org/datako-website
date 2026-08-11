@@ -227,41 +227,84 @@ document.addEventListener('DOMContentLoaded', () => {
     const modals = document.querySelectorAll('.modal-overlay');
 
     if (openModalBtns.length > 0) {
+        let modalTrigger = null;
+        const modalFocusable = 'button:not([disabled]), a[href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+        modals.forEach((modal, index) => {
+            const dialog = modal.querySelector('.modal-container');
+            const title = dialog?.querySelector('h2');
+            if (dialog) {
+                dialog.setAttribute('role', 'dialog');
+                dialog.setAttribute('aria-modal', 'true');
+                dialog.setAttribute('tabindex', '-1');
+            }
+            if (title && dialog) {
+                title.id ||= `modal-title-${index + 1}`;
+                dialog.setAttribute('aria-labelledby', title.id);
+            }
+            modal.setAttribute('aria-hidden', 'true');
+        });
+
+        const closeModal = (modal, restoreFocus = true) => {
+            if (!modal) return;
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('no-scroll');
+            if (restoreFocus && modalTrigger instanceof HTMLElement) modalTrigger.focus();
+            modalTrigger = null;
+        };
+
+        const openModal = (modal, trigger) => {
+            modalTrigger = trigger;
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('no-scroll');
+            requestAnimationFrame(() => {
+                const initialFocus = modal.querySelector('.modal-close, input:not([type="hidden"]), select, textarea, button');
+                initialFocus?.focus();
+            });
+        };
+
         openModalBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const modalId = btn.getAttribute('data-open-modal');
                 const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.add('active');
-                    document.body.classList.add('no-scroll');
-                }
+                if (modal) openModal(modal, btn);
             });
         });
 
         closeModalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modal = btn.closest('.modal-overlay');
-                modal.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-            });
+            btn.addEventListener('click', () => closeModal(btn.closest('.modal-overlay')));
         });
 
         modals.forEach(modal => {
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                }
+                if (e.target === modal) closeModal(modal);
             });
         });
 
         document.addEventListener('keydown', (e) => {
+            const activeModal = document.querySelector('.modal-overlay.active');
+            if (!activeModal) return;
+
             if (e.key === 'Escape') {
-                const activeModal = document.querySelector('.modal-overlay.active');
-                if (activeModal) {
-                    activeModal.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
+                e.preventDefault();
+                closeModal(activeModal);
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                const focusable = [...activeModal.querySelectorAll(modalFocusable)];
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (!first || !last) return;
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
                 }
             }
         });
@@ -301,14 +344,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const formAction = isEnglish ? '/en/thanks' : '/merci';
 
         const contactFormHTML = `
-        <form 
+        <form
             name="${formName}" 
             method="POST" 
             data-netlify="true"
             action="${formAction}"
             netlify-honeypot="bot-field"
             id="contactForm"
-            style="display: flex; flex-direction: column; gap: 20px;">
+            class="modal-form">
             
             <!-- Champ caché obligatoire pour Netlify -->
             <input type="hidden" name="form-name" value="${formName}" />
@@ -319,24 +362,19 @@ document.addEventListener('DOMContentLoaded', () => {
             </p>
             
             <div class="form-row">
-                <input type="text" name="prenom" placeholder="${t.ph_firstname}" required
-                    style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white;">
-                <input type="text" name="nom" placeholder="${t.ph_lastname}" required
-                    style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white;">
+                <label class="form-field"><span>${t.ph_firstname}</span><input type="text" name="prenom" autocomplete="given-name" placeholder="${t.ph_firstname}" required></label>
+                <label class="form-field"><span>${t.ph_lastname}</span><input type="text" name="nom" autocomplete="family-name" placeholder="${t.ph_lastname}" required></label>
             </div>
-            <input type="email" name="email" placeholder="${t.ph_email}" required
-                style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white;">
-            <select name="sujet" required
-                style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white;">
+            <label class="form-field"><span>${t.ph_email}</span><input type="email" name="email" autocomplete="email" placeholder="${t.ph_email}" required></label>
+            <label class="form-field"><span>${t.opt_default}</span><select name="sujet" required>
                 <option value="" disabled selected>${t.opt_default}</option>
-                <option value="consulting" style="color: black;">${t.opt_1}</option>
-                <option value="formation" style="color: black;">${t.opt_2}</option>
-                <option value="recrutement" style="color: black;">${t.opt_3}</option>
-                <option value="autre" style="color: black;">${t.opt_4}</option>
-            </select>
-            <textarea name="message" rows="5" placeholder="${t.ph_message}" required
-                style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white;"></textarea>
-            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">${t.btn}</button>
+                <option value="consulting">${t.opt_1}</option>
+                <option value="formation">${t.opt_2}</option>
+                <option value="recrutement">${t.opt_3}</option>
+                <option value="autre">${t.opt_4}</option>
+            </select></label>
+            <label class="form-field"><span>${t.ph_message}</span><textarea name="message" rows="5" placeholder="${t.ph_message}" required></textarea></label>
+            <button type="submit" class="site-btn site-btn-primary">${t.btn}</button>
             <div class="form-reassurance-text">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 ${t.privacy}

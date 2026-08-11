@@ -1121,15 +1121,22 @@ html[data-theme="dark"] .page-2026 .logo-img {
 }
 
 .site-editorial-link {
+    appearance: none;
     width: fit-content;
-    padding-bottom: 4px;
+    padding: 0 0 4px;
+    border: 0;
     border-bottom: 1px solid var(--color-line-strong);
+    background: transparent;
     color: var(--color-ink);
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    font-family: inherit;
     font-size: 0.94rem;
     font-weight: 700;
+    line-height: inherit;
+    text-align: left;
+    cursor: pointer;
 }
 
 .site-editorial-link span {
@@ -1203,6 +1210,74 @@ html[data-theme="dark"] .page-2026 .logo-img {
 [data-page-reveal].is-visible {
     opacity: 1;
     transform: none;
+}
+
+/* The first screen is content, not an intro: it must remain immediately readable. */
+.page-2026 main > section:first-child [data-page-reveal] {
+    opacity: 1;
+    transform: none;
+}
+
+/* Shared accessible project modal. Kept navy in both themes as a focused moment. */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(1, 20, 26, .78);
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 240ms ease, visibility 240ms ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-container {
+    position: relative;
+    width: min(100%, 620px);
+    max-height: min(90vh, 820px);
+    padding: clamp(28px, 5vw, 48px);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 18px;
+    background: #062a35;
+    color: white;
+    box-shadow: 0 30px 90px rgba(1,20,26,.46);
+    overflow-y: auto;
+    transform: translateY(16px) scale(.98);
+    transition: transform 320ms var(--ease-out);
+}
+
+.modal-overlay.active .modal-container { transform: none; }
+.modal-container h2 { margin: 0 48px 28px 0; color: white; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
+.modal-close { position: absolute; top: 22px; right: 22px; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; background: transparent; color: white; cursor: pointer; }
+.modal-close:hover { background: rgba(255,255,255,.1); }
+body.no-scroll { overflow: hidden; }
+
+.modal-form { display: flex; flex-direction: column; gap: 17px; }
+.modal-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.modal-form .form-field { display: grid; gap: 7px; color: rgba(255,255,255,.76); font-size: .82rem; }
+.modal-form input,
+.modal-form select,
+.modal-form textarea { width: 100%; padding: 13px 14px; border: 1px solid rgba(255,255,255,.17); border-radius: 6px; background: rgba(255,255,255,.07); color: white; font: inherit; }
+.modal-form input::placeholder,
+.modal-form textarea::placeholder { color: rgba(255,255,255,.45); }
+.modal-form select option { color: #062a35; background: white; }
+.modal-form .site-btn { width: 100%; border-color: transparent; background: linear-gradient(105deg, var(--color-accent), var(--color-violet)); color: white; justify-content: center; }
+.modal-form .site-btn:hover { filter: brightness(1.08); }
+.modal-form .form-reassurance-text { color: rgba(255,255,255,.62); }
+
+@media (max-width: 560px) {
+    .modal-overlay { padding: 12px; align-items: end; }
+    .modal-container { max-height: 94vh; padding: 28px 20px; border-radius: 18px 18px 8px 8px; }
+    .modal-form .form-row { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 1080px) {
