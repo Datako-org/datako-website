@@ -67,7 +67,7 @@
  .path-row { grid-template-columns:120px 1fr; }
  .path-detail { grid-column:2; }
 }
-@media(max-width:760px){
+@media(max-width:768px){
  .academy-hero { min-height:auto; padding-top:132px; }
  .academy-hero h1 { font-size:clamp(4rem,20vw,6.2rem); }
  .profile-grid,.format-grid { grid-template-columns:1fr; }
