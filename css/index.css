@@ -9,8 +9,24 @@
     overflow: clip;
 }
 
+.page-home [id] {
+    scroll-margin-top: calc(var(--home-header) + 24px);
+}
+
 .page-home .floating-btn {
     display: none;
+}
+
+.page-home .whatsapp-float-btn.home-delayed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+}
+
+.page-home .whatsapp-float-btn.home-delayed.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 .home-container {

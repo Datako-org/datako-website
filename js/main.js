@@ -122,11 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(backdrop);
 
         let focusBeforeMenu = null;
+        const mobileMenuQuery = window.matchMedia('(max-width: 1080px)');
         const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
         const menuIsOpen = () => navMenu.classList.contains('active');
+        const setMenuAvailability = available => {
+            navMenu.inert = !available;
+            if (available) navMenu.removeAttribute('aria-hidden');
+            else navMenu.setAttribute('aria-hidden', 'true');
+        };
+
+        const syncMenuMode = () => {
+            if (mobileMenuQuery.matches) setMenuAvailability(menuIsOpen());
+            else setMenuAvailability(true);
+        };
 
         const openMenu = () => {
             focusBeforeMenu = document.activeElement;
+            setMenuAvailability(true);
             hamburger.classList.add('active');
             navMenu.classList.add('active');
             backdrop.classList.add('active');
@@ -141,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.remove('active');
             backdrop.classList.remove('active');
             document.body.classList.remove('nav-open');
+            setMenuAvailability(!mobileMenuQuery.matches);
             hamburger.setAttribute('aria-expanded', 'false');
             hamburger.setAttribute('aria-label', isEnglish ? 'Open menu' : 'Ouvrir le menu');
             if (restoreFocus && focusBeforeMenu instanceof HTMLElement) focusBeforeMenu.focus();
@@ -182,7 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 1080 && menuIsOpen()) closeMenu({ restoreFocus: false });
+            syncMenuMode();
         });
+
+        mobileMenuQuery.addEventListener?.('change', syncMenuMode);
+        syncMenuMode();
     }
 
     // Active Link Highlighting
@@ -196,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isMatch) {
             link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
         }
     });
 
@@ -379,6 +397,15 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     document.body.appendChild(waBtn);
+    const homeHero = document.querySelector('.home-hero');
+    if (homeHero && 'IntersectionObserver' in window) {
+        waBtn.classList.add('home-delayed');
+        const waObserver = new IntersectionObserver(entries => {
+            const heroVisible = entries.some(entry => entry.isIntersecting);
+            waBtn.classList.toggle('is-visible', !heroVisible);
+        }, { threshold: 0.08 });
+        waObserver.observe(homeHero);
+    }
     // --- WHATSAPP FLOATING BUTTON END ---
 
 });
