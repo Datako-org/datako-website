@@ -1,0 +1,11 @@
+{
+  "name": "datako-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "i18n:extract": "node scripts/i18n.mjs extract",
+    "i18n:seed": "node scripts/i18n.mjs seed",
+    "i18n:build": "node scripts/i18n.mjs build",
+    "i18n:check": "node scripts/i18n.mjs check"
+  }
+}

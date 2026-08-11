@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{t.0}}</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Page-scoped styles for minimalist success page */
+        .page-merci {
+            padding-top: calc(var(--header-height) + 40px);
+            padding-bottom: 80px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .merci-content {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 60px 40px;
+            max-width: 640px;
+            width: 100%;
+            text-align: center;
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(58, 122, 254, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(58, 122, 254, 0.2);
+        }
+
+        .merci-title {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .merci-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .next-steps {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .next-steps h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .steps-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .steps-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .steps-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .privacy-note {
+            margin-top: 32px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .merci-title {
+                font-size: 1.8rem;
+            }
+
+            .merci-content {
+                padding: 40px 24px;
+            }
+
+            .actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- Header (Identical to index.html) -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="{{a.0}}" class="logo-img" style="height: 150px; width: auto;">
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="prestations.html" class="nav-link">{{t.1}}</a></li>
+                    <li class="nav-item"><a href="formations.html" class="nav-link">{{t.2}}</a></li>
+                    <li class="nav-item"><a href="matching.html" class="nav-link">{{t.3}}</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">{{t.4}}</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">{{t.5}}</a></li>
+                    <li class="nav-item"><a href="https://diagnostic.xn--datak-nua.com/" class="nav-btn-diagnostic">{{t.6}}</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-merci container">
+        <div class="merci-content">
+            <div class="success-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+
+            <h1 class="merci-title">{{t.7}}</h1>
+            <p class="merci-text">{{t.8}}</p>
+
+            <div class="next-steps">
+                <h3>{{t.9}}</h3>
+                <ul class="steps-list">
+                    <li>{{t.10}}</li>
+                    <li>{{t.11}}</li>
+                    <li>{{t.12}}</li>
+                </ul>
+            </div>
+
+            <div class="actions">
+                <a href="index.html" class="btn btn-primary">{{t.13}}</a>
+                <a href="prestations.html" class="btn btn-outline">{{t.14}}</a>
+            </div>
+
+            <p class="privacy-note">
+                {{t.15}}
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer (Identical to index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Identity -->
+                <div class="footer-col footer-identity">
+                    <img src="images/logo.png" style="height: 80px; width: auto;" alt="{{a.1}}" class="footer-logo">
+                    <p class="footer-desc">
+                        {{t.16}}
+                    </p>
+                </div>
+
+                <!-- Column 2: Navigation / Expertise -->
+                <div class="footer-col footer-nav">
+                    <ul class="footer-links">
+                        <li><a href="prestations.html">{{t.17}}</a></li>
+                        <li><a href="prestations.html">{{t.18}}</a></li>
+                        <li><a href="prestations.html">{{t.19}}</a></li>
+                        <li><a href="formations.html">{{t.20}}</a></li>
+                        <li><a href="matching.html">{{t.21}}</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div class="footer-col footer-contact">
+                    <ul class="footer-links-contact">
+                        <li><a href="mailto:contact@datakö.com">{{t.22}}</a></li>
+                        <li>{{t.23}}</li>
+                    </ul>
+                    <p class="footer-tagline">
+                        {{t.24}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    {{t.25}}
+                </div>
+                <div class="footer-legal">
+                    <a href="mentions-legales.html">{{t.26}}</a>
+                    <a href="politique-confidentialite.html">{{t.27}}</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js?v=20260811-6"></script>
+</body>
+
+</html>

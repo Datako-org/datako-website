@@ -4,6 +4,7 @@
     const journey = document.querySelector('[data-decision-journey]');
     const revealItems = document.querySelectorAll('[data-reveal]');
     const timers = new Set();
+    const isEnglish = document.documentElement.lang === 'en';
 
     const later = (callback, delay) => {
         const timer = window.setTimeout(() => {
@@ -19,19 +20,23 @@
         timers.clear();
     };
 
-    const storyMessages = [
-        'Étape 1 sur 3 : données dispersées.',
-        'Étape 2 sur 3 : information structurée.',
-        'Étape 3 sur 3 : décision éclairée.'
-    ];
-    const journeyLabels = [
-        'Données dispersées',
-        'Données centralisées',
-        'Données organisées',
-        'Information exploitable',
-        'Décision éclairée'
-    ];
-    const journeyMessages = journeyLabels.map((label, index) => `Étape ${index + 1} sur 5 : ${label.toLowerCase()}.`);
+    const storyMessages = isEnglish
+        ? [
+            'Step 1 of 3: scattered data.',
+            'Step 2 of 3: structured information.',
+            'Step 3 of 3: informed decision.'
+        ]
+        : [
+            'Étape 1 sur 3 : données dispersées.',
+            'Étape 2 sur 3 : information structurée.',
+            'Étape 3 sur 3 : décision éclairée.'
+        ];
+    const journeyLabels = isEnglish
+        ? ['Scattered data', 'Centralized data', 'Organized data', 'Actionable information', 'Informed decision']
+        : ['Données dispersées', 'Données centralisées', 'Données organisées', 'Information exploitable', 'Décision éclairée'];
+    const journeyMessages = journeyLabels.map((label, index) => isEnglish
+        ? `Step ${index + 1} of 5: ${label.toLowerCase()}.`
+        : `Étape ${index + 1} sur 5 : ${label.toLowerCase()}.`);
     const journeyStepDuration = 1700;
 
     const setStoryStep = step => {

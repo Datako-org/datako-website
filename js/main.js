@@ -5,14 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('datako_lang');
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index.html';
+    const frToEnRoutes = {
+        'mentions-legales.html': 'legal.html',
+        'politique-confidentialite.html': 'privacy.html',
+        'merci.html': 'thanks.html'
+    };
+    const enToFrRoutes = Object.fromEntries(Object.entries(frToEnRoutes).map(([fr, en]) => [en, fr]));
+    const localizedFilename = targetLanguage => targetLanguage === 'en'
+        ? (frToEnRoutes[filename] || filename)
+        : (enToFrRoutes[filename] || filename);
     const WHATSAPP_PHONE = "+224612434545";
     // Auto-Redirect based on preference (only if explicitly saved)
     if (savedLang === 'en' && !isEnglish) {
         // Redirect to EN
-        window.location.href = 'en/' + filename;
+        window.location.href = 'en/' + localizedFilename('en');
     } else if (savedLang === 'fr' && isEnglish) {
         // Redirect to FR (Root)
-        window.location.href = '../' + filename;
+        window.location.href = '../' + localizedFilename('fr');
     }
 
     // Language Switcher Injection
@@ -39,10 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('datako_lang', lang);
 
                 if (lang === 'en') {
-                    window.location.href = isEnglish ? '#' : 'en/' + (filename === '' ? 'index.html' : filename);
-                    // Special case for root / -> en/index.html
+                    window.location.href = isEnglish ? '#' : 'en/' + localizedFilename('en');
                 } else {
-                    window.location.href = isEnglish ? '../' + filename : '#';
+                    window.location.href = isEnglish ? '../' + localizedFilename('fr') : '#';
                 }
             });
         });
