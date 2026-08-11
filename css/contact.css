@@ -1,410 +1,61 @@
-/* Scoped to Contact Page - Premium Data & AI Consulting Style */
-
-/* --- 1. HERO SECTION --- */
-/* Subtle premium background gradient for Hero (extends existing hero styles) */
-.hero {
-    position: relative;
-    background: radial-gradient(circle at 80% 20%, rgba(58, 122, 254, 0.08), transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(122, 92, 255, 0.05), transparent 50%);
+.page-contact { background:var(--color-canvas); }
+.page-contact .whatsapp-float-btn { display:none; }
+.contact-main { padding:150px 0 100px; }
+.contact-grid { display:grid; grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr); gap:clamp(50px,7vw,95px); align-items:start; }
+.contact-intro h1 { margin:18px 0 0; color:var(--color-ink); font-size:clamp(4rem,6.2vw,6.4rem); font-weight:600; letter-spacing:-.06em; line-height:.94; }
+.contact-intro .site-lead { margin:24px 0 0; }
+.contact-reassurance { margin:30px 0 40px; padding-top:20px; border-top:1px solid var(--color-line-strong); display:flex; flex-wrap:wrap; gap:11px 30px; }
+.contact-reassurance span { display:flex; align-items:center; gap:10px; color:var(--color-ink-soft); font-size:.9rem; }
+.contact-reassurance span::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--color-accent); }
+.contact-card { padding:clamp(26px,4vw,40px); border:1px solid var(--color-line); border-radius:16px; background:var(--color-surface); box-shadow:var(--shadow-soft); }
+.contact-card h2 { margin:0 0 26px; color:var(--color-ink); font-size:1.65rem; }
+.contact-form { display:grid; gap:20px; }
+.contact-form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.contact-field { display:grid; gap:8px; color:var(--color-ink); font-size:.86rem; font-weight:500; }
+.contact-field input,.contact-field select,.contact-field textarea { width:100%; padding:14px 15px; border:1px solid var(--color-line-strong); border-radius:8px; background:var(--color-surface); color:var(--color-ink); font:inherit; font-weight:400; transition:border-color 180ms ease,box-shadow 180ms ease,background 180ms ease; }
+.contact-field textarea { resize:vertical; min-height:140px; }
+.contact-field input:focus-visible,.contact-field select:focus-visible,.contact-field textarea:focus-visible { outline:0; border-color:var(--color-accent); box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 22%,transparent); }
+.contact-field input:user-invalid,.contact-field select:user-invalid,.contact-field textarea:user-invalid { border-color:#c6401f; background:color-mix(in srgb,#c6401f 5%,var(--color-surface)); }
+.contact-form-foot { display:flex; align-items:center; justify-content:space-between; gap:22px; }
+.contact-form-foot small { max-width:260px; color:var(--color-ink-muted); }
+.contact-form[aria-busy="true"] .site-btn { opacity:.7; pointer-events:none; }
+.contact-form[aria-busy="true"]::after { content:""; height:3px; border-radius:3px; background:linear-gradient(90deg,var(--color-accent),var(--color-violet)); transform-origin:left; animation:contact-progress 1.2s ease-out infinite alternate; }
+.contact-success { padding:34px; border:1px solid color-mix(in srgb,var(--color-success) 40%,var(--color-line)); border-radius:12px; background:color-mix(in srgb,var(--color-success) 8%,var(--color-surface)); }
+.contact-success h2 { margin:0 0 10px; }
+@keyframes contact-progress { from{transform:scaleX(.22)} to{transform:scaleX(1)} }
+.contact-aside { display:grid; gap:22px; }
+.contact-side-card { padding:30px; border:1px solid var(--color-line); border-radius:14px; background:var(--color-surface); }
+.contact-side-card > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.11em; text-transform:uppercase; }
+.office { padding:21px 0; border-bottom:1px solid var(--color-line); }
+.office:last-of-type { border-bottom:0; }
+.office h3 { margin:0 0 7px; color:var(--color-ink); font-size:1.2rem; }
+.office p { margin:0; }
+.contact-direct { padding-top:18px; border-top:1px solid var(--color-line); display:grid; gap:12px; }
+.contact-direct a { width:max-content; color:var(--color-ink); border-bottom:1px solid var(--color-line-strong); }
+.contact-how { margin-top:20px; }
+.contact-how li { padding:18px 0; border-bottom:1px solid var(--color-line); display:grid; grid-template-columns:35px 1fr; gap:15px; }
+.contact-how li:last-child { border-bottom:0; }
+.contact-how li > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.66rem; }
+.contact-how h3 { margin:0 0 7px; color:var(--color-ink); font-size:1rem; }
+.contact-how p { margin:0; font-size:.9rem; }
+.contact-form-states { background:var(--color-canvas-soft); }
+.contact-form-states h2 { margin:0; color:var(--color-ink); font-size:clamp(2.8rem,4.4vw,4.4rem); letter-spacing:-.05em; }
+.form-state-grid { margin-top:42px; display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.form-state { min-height:220px; padding:24px; border:1px solid var(--color-line); border-radius:13px; background:var(--color-surface); }
+.form-state > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.61rem; letter-spacing:.1em; text-transform:uppercase; }
+.form-state-demo { margin-top:25px; }
+.form-state-demo label { display:block; margin-bottom:8px; color:var(--color-ink); font-size:.82rem; font-weight:500; }
+.state-input { padding:13px 14px; border:1px solid var(--color-line-strong); border-radius:7px; color:var(--color-ink-soft); }
+.state-input.focus { border-color:var(--color-accent); box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 22%,transparent); }
+.state-input.valid { border-color:color-mix(in srgb,var(--color-success) 55%,var(--color-line)); }
+.state-input.error { border-color:#c6401f; color:#c6401f; }
+.state-button { padding:14px; border-radius:7px; background:linear-gradient(96deg,var(--color-accent),var(--color-violet)); color:#fff; text-align:center; font-weight:600; opacity:.72; }
+.state-success { padding:18px; border:1px solid color-mix(in srgb,var(--color-success) 45%,var(--color-line)); border-radius:8px; background:color-mix(in srgb,var(--color-success) 8%,var(--color-surface)); color:var(--color-ink); }
+@media(max-width:1050px){ .contact-grid { grid-template-columns:1fr; } .form-state-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:768px){
+  .contact-main { padding-top:125px; }
+  .contact-intro h1 { font-size:clamp(3.7rem,16vw,5.3rem); }
+  .contact-form-row,.form-state-grid { grid-template-columns:1fr; }
+  .contact-form-foot { align-items:stretch; flex-direction:column; }
 }
-
-/* Text spacing & animation */
-.hero-content h1 {
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
-}
-
-.hero-content p {
-    max-width: 600px;
-    margin-bottom: 0;
-    line-height: 1.7;
-    opacity: 0.9;
-}
-
-/* Hero Entrance Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hero-tag {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.hero-content h1 {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 0.1s forwards;
-}
-
-.hero-content p {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 0.2s forwards;
-}
-
-.hero-reassurance {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 0.3s forwards;
-}
-
-
-/* --- 2. TRUST INDICATORS (Reassurance) --- */
-.hero-reassurance {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    /* Improved spacing */
-    margin-top: 48px;
-    /* Breathing room */
-}
-
-.reassurance-card {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    /* Subtle border */
-    padding: 12px 24px;
-    border-radius: 100px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    cursor: default;
-}
-
-.reassurance-card:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(58, 122, 254, 0.4);
-    /* Glow border on hover */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.reassurance-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    color: var(--accent-blue);
-    transition: transform 0.3s ease;
-}
-
-.reassurance-card:hover .reassurance-icon {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 8px rgba(58, 122, 254, 0.4));
-}
-
-.reassurance-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-
-/* --- 3. PROCESS SECTION --- */
-.process-section {
-    padding: 100px 0;
-    position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
-}
-
-.process-header {
-    max-width: 600px;
-    margin-bottom: 60px;
-}
-
-.process-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
-    /* Increased gap */
-}
-
-.process-step {
-    position: relative;
-    padding-top: 24px;
-    /* Animation initial state */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.process-step.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.process-step-number {
-    font-size: 4rem;
-    /* Larger */
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-    /* Outline style */
-    position: absolute;
-    top: -30px;
-    left: 0;
-    z-index: 0;
-    line-height: 1;
-    opacity: 0.6;
-    font-family: var(--font-heading, sans-serif);
-}
-
-.process-content {
-    position: relative;
-    z-index: 1;
-}
-
-.process-title {
-    font-size: 1.35rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.process-title::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: var(--accent-blue);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent-blue);
-}
-
-.process-desc {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    opacity: 0.85;
-    line-height: 1.7;
-}
-
-
-/* --- 4. CONTACT FORM --- */
-.contact-form-card {
-    background: rgba(5, 49, 61, 0.6);
-    /* Slightly more transparent secondary */
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
-    /* softer corners */
-    padding: 48px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-form-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-.contact-form-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet));
-}
-
-/* Override JS-injected form styles for premium feel */
-#contactForm {
-    gap: 24px !important;
-    /* Visually consistent gap */
-}
-
-#contactForm input,
-#contactForm select,
-#contactForm textarea {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 8px !important;
-    padding: 16px 20px !important;
-    font-size: 1rem !important;
-    transition: all 0.3s ease !important;
-    color: var(--text-primary) !important;
-}
-
-#contactForm input:focus,
-#contactForm select:focus,
-#contactForm textarea:focus {
-    background: rgba(255, 255, 255, 0.06) !important;
-    border-color: var(--accent-blue) !important;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(58, 122, 254, 0.15) !important;
-    transform: translateY(-1px);
-}
-
-#contactForm button {
-    margin-top: 10px;
-    height: 54px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border-radius: 8px !important;
-    background: linear-gradient(135deg, var(--accent-blue), #2a5ec7) !important;
-    /* Gradient button */
-    border: none !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(58, 122, 254, 0.3);
-}
-
-#contactForm button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(58, 122, 254, 0.4);
-    filter: brightness(1.1);
-}
-
-#contactForm button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(58, 122, 254, 0.3);
-    filter: brightness(0.95);
-}
-
-.form-reassurance-text {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    opacity: 0.6;
-    margin-top: 24px;
-    letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.form-reassurance-text svg {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    /* prevent shrinking */
-}
-
-
-/* --- 5. OFFICES SECTION --- */
-.offices-container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    height: 100%;
-    /* Stretch to fill if needed */
-}
-
-.office-card {
-    padding: 28px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-    /* for pseudo-elements */
-    overflow: hidden;
-    /* clip highlight */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* Gradient border effect via pseudo-element or easier box-shadow inset hack 
-   User wants "Soft gradient border accent" - simpler to do left border accent styled nicely */
-.office-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: transparent;
-    transition: width 0.3s ease;
-}
-
-.office-card.guinea::before {
-    background: var(--accent-blue);
-}
-
-.office-card.france::before {
-    background: var(--accent-violet);
-}
-
-.office-card.email::before {
-    background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5));
-}
-
-.office-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    transform: translateX(6px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.office-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
-
-.office-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.office-details {
-    color: #b0c4cd;
-    /* Softer secondary */
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.office-flag {
-    font-size: 1.4rem;
-    filter: grayscale(0.3);
-    transition: filter 0.3s;
-}
-
-.office-card:hover .office-flag {
-    filter: grayscale(0);
-    transform: scale(1.1);
-}
-
-
-/* Responsive */
-@media (max-width: 900px) {
-    .hero {
-        text-align: center;
-    }
-
-    .hero-reassurance {
-        justify-content: center;
-    }
-
-    .process-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .process-step {
-        text-align: left;
-        /* Keep steps readable */
-        padding-left: 10px;
-    }
-
-    .contact-form-card {
-        padding: 30px 20px;
-    }
-}
+@media(prefers-reduced-motion:reduce){ .contact-form[aria-busy="true"]::after { animation:none; transform:none; } }
