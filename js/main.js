@@ -21,18 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.className = 'nav-item';
 
-        // Determine target URLs for buttons
-        // If we are in EN (subdirectory), FR link is '../filename'
-        // If we are in FR (root), EN link is 'en/filename'
-
-        const frLink = isEnglish ? '../' + filename : '#';
-        const enLink = isEnglish ? '#' : 'en/' + filename;
-
         li.innerHTML = `
-            <div class="lang-switcher">
-                <span class="lang-opt ${!isEnglish ? 'active' : ''}" data-lang="fr">FR</span>
-                <span class="lang-divider">|</span>
-                <span class="lang-opt ${isEnglish ? 'active' : ''}" data-lang="en">EN</span>
+            <div class="lang-switcher" aria-label="${isEnglish ? 'Language' : 'Langue'}">
+                <button type="button" class="lang-opt ${!isEnglish ? 'active' : ''}" data-lang="fr" lang="fr" aria-pressed="${!isEnglish}">FR</button>
+                <span class="lang-divider" aria-hidden="true">/</span>
+                <button type="button" class="lang-opt ${isEnglish ? 'active' : ''}" data-lang="en" lang="en" aria-pressed="${isEnglish}">EN</button>
             </div>
         `;
         navMenu.appendChild(li);
@@ -56,21 +49,140 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- LANGUAGE LOGIC END ---
 
+    // Theme control — system preference by default, explicit choice persisted.
+    const root = document.documentElement;
+    const themeStorageKey = 'datako_theme';
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const getTheme = () => localStorage.getItem(themeStorageKey) || (systemTheme.matches ? 'dark' : 'light');
+    const setTheme = (theme, persist = true) => {
+        root.dataset.theme = theme;
+        if (persist) localStorage.setItem(themeStorageKey, theme);
 
-    // Hamburger Menu Logic
-    const hamburger = document.querySelector(".hamburger");
-    // navMenu already selected above
+        document.querySelectorAll('.theme-toggle').forEach(button => {
+            const nextTheme = theme === 'dark' ? 'light' : 'dark';
+            const label = isEnglish
+                ? `Use ${nextTheme} theme`
+                : `Activer le thème ${nextTheme === 'dark' ? 'sombre' : 'clair'}`;
+            button.setAttribute('aria-label', label);
+            button.setAttribute('title', label);
+            button.setAttribute('aria-pressed', String(theme === 'dark'));
+            button.dataset.themeCurrent = theme;
+        });
+    };
+
+    let themeToggle = document.querySelector('.theme-toggle');
+    const headerNav = document.querySelector('.header nav');
+    if (!themeToggle && headerNav) {
+        themeToggle = document.createElement('button');
+        themeToggle.type = 'button';
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = `
+            <span class="theme-icon theme-icon-sun" aria-hidden="true"></span>
+            <span class="theme-icon theme-icon-moon" aria-hidden="true"></span>
+        `;
+        headerNav.appendChild(themeToggle);
+    }
+    setTheme(getTheme(), false);
+
+    themeToggle?.addEventListener('click', () => {
+        setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+
+    systemTheme.addEventListener?.('change', event => {
+        if (!localStorage.getItem(themeStorageKey)) {
+            setTheme(event.matches ? 'dark' : 'light', false);
+        }
+    });
+
+    // Accessible mobile navigation. Legacy div toggles are upgraded to real buttons.
+    let hamburger = document.querySelector('.hamburger');
+    if (hamburger && hamburger.tagName !== 'BUTTON') {
+        const menuButton = document.createElement('button');
+        menuButton.type = 'button';
+        menuButton.className = hamburger.className;
+        menuButton.innerHTML = hamburger.innerHTML;
+        hamburger.replaceWith(menuButton);
+        hamburger = menuButton;
+    }
 
     if (hamburger && navMenu) {
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
+        const menuId = navMenu.id || 'primary-navigation';
+        const menuLabel = isEnglish ? 'Main navigation' : 'Navigation principale';
+        navMenu.id = menuId;
+        navMenu.setAttribute('aria-label', menuLabel);
+        hamburger.setAttribute('aria-controls', menuId);
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', isEnglish ? 'Open menu' : 'Ouvrir le menu');
+
+        const backdrop = document.createElement('button');
+        backdrop.type = 'button';
+        backdrop.className = 'nav-backdrop';
+        backdrop.tabIndex = -1;
+        backdrop.setAttribute('aria-label', isEnglish ? 'Close menu' : 'Fermer le menu');
+        document.body.appendChild(backdrop);
+
+        let focusBeforeMenu = null;
+        const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        const menuIsOpen = () => navMenu.classList.contains('active');
+
+        const openMenu = () => {
+            focusBeforeMenu = document.activeElement;
+            hamburger.classList.add('active');
+            navMenu.classList.add('active');
+            backdrop.classList.add('active');
+            document.body.classList.add('nav-open');
+            hamburger.setAttribute('aria-expanded', 'true');
+            hamburger.setAttribute('aria-label', isEnglish ? 'Close menu' : 'Fermer le menu');
+            requestAnimationFrame(() => navMenu.querySelector(focusableSelector)?.focus());
+        };
+
+        const closeMenu = ({ restoreFocus = true } = {}) => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            backdrop.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', isEnglish ? 'Open menu' : 'Ouvrir le menu');
+            if (restoreFocus && focusBeforeMenu instanceof HTMLElement) focusBeforeMenu.focus();
+        };
+
+        hamburger.addEventListener('click', () => menuIsOpen() ? closeMenu() : openMenu());
+        backdrop.addEventListener('click', () => closeMenu());
+
+        navMenu.querySelectorAll('a, .lang-opt').forEach(item => {
+            item.addEventListener('click', () => closeMenu({ restoreFocus: false }));
         });
 
-        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
+        document.addEventListener('keydown', event => {
+            if (!menuIsOpen()) return;
+
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeMenu();
+                return;
+            }
+
+            if (event.key !== 'Tab') return;
+            const focusableItems = [
+                ...navMenu.querySelectorAll(focusableSelector),
+                ...(themeToggle ? [themeToggle] : []),
+                hamburger
+            ];
+            const firstItem = focusableItems[0];
+            const lastItem = focusableItems[focusableItems.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstItem) {
+                event.preventDefault();
+                lastItem.focus();
+            } else if (!event.shiftKey && document.activeElement === lastItem) {
+                event.preventDefault();
+                firstItem.focus();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1080 && menuIsOpen()) closeMenu({ restoreFocus: false });
+        });
     }
 
     // Active Link Highlighting
