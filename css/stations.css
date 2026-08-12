@@ -193,17 +193,27 @@
     font-variant-numeric: tabular-nums;
 }
 
-.station-tanks {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: clamp(20px, 3vw, 40px);
+/* Le produit code ses indicateurs par couleur : l'encaissé en vert, le
+   chiffre d'affaires en bleu, le crédit en ambre, les dépenses en rouge.
+   Le cockpit du site reprend ce codage — c'est ce qui fait qu'on reconnaît
+   l'application plutôt qu'un tableau générique. */
+.station-cockpit-kpis .kpi-cash b { color: #63d9b8; }
+.station-cockpit-kpis .kpi-revenue b { color: #7fa4ff; }
+.station-cockpit-kpis .kpi-credit b { color: #e8b45f; }
+.station-cockpit-kpis .kpi-cost b { color: #e8846c; }
+
+/* Santé de la journée — repris tel quel du produit. Les jauges de cuve que
+   j'avais dessinées ici n'existaient pas sur cet écran : c'était une
+   invention plausible mais fausse. Ce bloc-là est réel, et il dit quelque
+   chose qu'aucun indicateur ne dit : ce qui n'a PAS eu lieu. */
+.station-health {
     padding: clamp(20px, 2.4vw, 28px);
     border-top: 1px solid rgba(255, 255, 255, .12);
 }
 
-.station-tank span {
+.station-health > span {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     font-family: "IBM Plex Mono", monospace;
     font-size: var(--type-label);
     letter-spacing: .1em;
@@ -211,38 +221,46 @@
     color: rgba(255, 255, 255, .5);
 }
 
-/* La jauge se remplit a l arrivee de la section : le niveau de cuve est
-   la premiere chose que regarde un gerant. */
-.station-tank i {
+.station-health > b {
     display: block;
-    height: 6px;
-    border-radius: 99px;
-    background: rgba(255, 255, 255, .12);
-    overflow: hidden;
-    position: relative;
+    margin-bottom: 16px;
+    color: #63d9b8;
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
-.station-tank i::after {
-    content: "";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: var(--fill);
-    border-radius: 99px;
-    background: linear-gradient(90deg, #4fd1db, #7a5cff);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1100ms var(--ease-out);
+.station-health ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
 }
 
-.station-cockpit.is-visible .station-tank i::after { transform: scaleX(1); }
-
-.station-tank b {
-    display: block;
-    margin-top: 10px;
-    font-weight: 400;
-    font-variant-numeric: tabular-nums;
+.station-health li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 12px;
+    align-items: start;
+    color: rgba(255, 255, 255, .68);
+    font-size: .9rem;
+    line-height: 1.5;
 }
+
+/* La coche se dessine à l'arrivée : un contrôle qui passe est un événement,
+   pas un décor. */
+.station-health li::before {
+    content: "✓";
+    color: #63d9b8;
+    font-size: .85rem;
+    opacity: 0;
+    transform: scale(.7);
+    transition: opacity 420ms ease, transform 520ms var(--ease-out);
+}
+
+.station-cockpit.is-visible .station-health li::before { opacity: 1; transform: none; }
+.station-cockpit.is-visible .station-health li:nth-child(2)::before { transition-delay: 140ms; }
 
 @media (prefers-reduced-motion: reduce) {
-    .station-tank i::after { transform: scaleX(1); transition: none; }
+    .station-health li::before { opacity: 1; transform: none; transition: none; }
 }
