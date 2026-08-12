@@ -76,6 +76,24 @@ et les modifications semblent sans effet.
   restent statiques — les zones calmes sont un choix.
 - **Toute animation permanente doit avoir un bouton pause** avec libellé descriptif.
 
+### Règle d'exactitude (2026-08-12) — s'applique à tout le site
+
+**Dès qu'on touche à des concepts techniques, réglementaires ou métier : pas de formulation
+spectaculaire au prix de l'exactitude.** Datakö doit donner l'impression que ceux qui ont construit le
+site maîtrisent les sujets qu'ils vendent.
+
+Cas d'école, et erreur commise puis corrigée : sur Prestations, un mapping *expertise → étapes de la
+chaîne* avait été proposé (Data Engineering = 02–03, IA = 05…). **Rejeté.** La chaîne
+`Dispersée → Centralisée → Structurée → Lisible → Décidée` est un **récit de transformation**, pas une
+taxonomie des métiers de la Data. Assigner un segment exclusif à une discipline est réducteur et
+immédiatement contestable par un praticien : le Data Engineering couvre aussi qualité, observabilité,
+orchestration et serving ; l'IA peut intervenir partout dans la chaîne.
+
+La règle qui en découle : **présenter chaque expertise par ce que Datakö réalise concrètement**, avec
+des capacités associées, jamais par une classification normative de la discipline. Quelqu'un qui
+travaille en Data Engineering, Data Science, BI ou IA doit pouvoir lire la page sans avoir envie de
+débattre du classement.
+
 ### Discipline motion
 Beaucoup de calme éditorial autour de **2 moments au niveau site + 1 patron produit** :
 
