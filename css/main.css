@@ -37,6 +37,41 @@
     --space-section: clamp(5rem, 10vw, 9rem);
     --container-wide: 1360px;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* ── Design system 2026 · validé au Jalon 1 ─────────────────────────
+       Ces tokens s'ajoutent aux précédents ; aucune valeur existante n'est
+       modifiée, donc les pages déjà en ligne ne bougent pas.               */
+
+    /* Respiration entre le clair et le navy. À utiliser avec parcimonie :
+       une bande par page, pas une couleur de fond récurrente. */
+    --color-bone: #ece6dd;
+
+    /* Échelle typographique. La hiérarchie passe par la taille et le
+       tracking, plus par la graisse : les grands titres sont en 400.
+       Les graisses 500/600 restent disponibles sur les petits éléments
+       quand la lisibilité ou la hiérarchie l'exige. */
+    --type-display: clamp(3.4rem, 7.2vw, 5.75rem);
+    --type-h1: clamp(2.9rem, 5.4vw, 4.5rem);
+    --type-h2: clamp(2.1rem, 3.6vw, 3.25rem);
+    --type-h3: clamp(1.35rem, 1.8vw, 1.75rem);
+    --type-lead: clamp(1.1rem, 1.3vw, 1.3rem);
+    --type-body: 1.0625rem;
+    --type-label: 0.6875rem;
+
+    --tracking-display: -0.03em;
+    --tracking-h1: -0.028em;
+    --tracking-h2: -0.024em;
+    --tracking-h3: -0.01em;
+    --tracking-label: 0.14em;
+
+    /* Rythme vertical : trois valeurs, pas douze. C'est la régularité qui
+       produit le calme. */
+    --sp-3: 24px;
+    --sp-4: 32px;
+    --sp-6: 48px;
+    --sp-8: 64px;
+    --sp-12: 96px;
+    --sp-16: 128px;
 }
 
 html[data-theme="dark"] {
@@ -59,6 +94,10 @@ html[data-theme="dark"] {
     --color-success: #63d9b8;
     --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.28);
     --shadow-raised: 0 28px 90px rgba(0, 0, 0, 0.42);
+
+    /* En sombre, la respiration ne peut pas être une teinte claire : c'est un
+       navy légèrement réchauffé qui joue le même rôle de bande intercalaire. */
+    --color-bone: #102a2f;
 }
 
 * {
@@ -107,6 +146,134 @@ button {
 
 .skip-link:focus {
     transform: translateY(0);
+}
+
+/* ── Footer · curtain reveal + mot-géant (Jalon 2) ──────────────────────
+   Le contenu de la page remonte et découvre le footer, au lieu de le
+   pousser devant lui.
+
+   Mécanique : clip-path sur le conteneur. Un ancêtre porteur de clip-path
+   devient bloc conteneur pour ses descendants en position: fixed —
+   l'effet reste donc confiné au footer et ne touche à aucune autre page.
+
+   Volontairement sobre : rideau + mot-géant, rien d'autre. Pas de marquee,
+   pas de halo animé, rien qui tourne en boucle.                          */
+.footer-reveal {
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.footer-reveal > .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-wordmark {
+    position: absolute;
+    left: 50%;
+    /* Calé juste au-dessus du filet de copyright : le mot tient entier dans
+       le footer et remplit la respiration du bas au lieu de la laisser vide. */
+    bottom: 0.04em;
+    transform: translateX(-50%);
+    z-index: 0;
+    font-size: clamp(6rem, 27vw, 23rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    /* 0.75 rognait la boîte du glyphe : les lettres étaient coupées en haut
+       comme en bas. À 1 elles se déploient entières et viennent occuper le
+       vide au-dessus de la barre de copyright. */
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    color: transparent;
+    /* Le dégradé descend jusqu'à 82 % pour que le bas des lettres reste
+       perceptible — sinon on retrouve un mot tronqué, cette fois par la
+       couleur au lieu du cadrage. Il reste faible : un filigrane se sent,
+       il ne se lit pas. */
+    background: linear-gradient(180deg, rgba(247, 251, 250, 0.075) 0%, rgba(247, 251, 250, 0.02) 55%, rgba(247, 251, 250, 0) 82%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Le contenu du footer repasse au-dessus du filigrane. */
+.footer-reveal > .footer > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Le rideau ne se déploie qu'à partir du moment où la hauteur d'écran le
+   permet : sur mobile, un plein écran de vide avant le copyright ne sert
+   personne, et 100dvh évite en prime le bug de la barre d'URL. */
+@media (min-width: 900px) and (min-height: 640px) {
+    .footer-reveal {
+        min-height: min(100dvh, 760px);
+    }
+}
+
+@media (max-width: 899px), (max-height: 639px) {
+    .footer-reveal {
+        clip-path: none;
+    }
+
+    .footer-reveal > .footer {
+        position: static;
+    }
+}
+
+/* ── Caméra produit · valeurs par défaut ────────────────────────────────
+   Les défauts vivent sur [data-camera] et nulle part ailleurs : JS écrit ces
+   variables sur ce même élément, et une redéclaration plus bas dans l'arbre
+   masquerait la valeur héritée — la parallaxe n'arriverait jamais à la cible. */
+[data-camera] {
+    --cam-x: 0;
+    --cam-y: 0;
+}
+
+/* ── cover-reveal · primitive signature (Jalon 1) ───────────────────────
+   Le texte n'apparaît pas en fondu : il est découvert par un cache qui se
+   retire. Volontairement opt-in — réservé aux H1 et aux quelques moments
+   structurants, jamais appliqué à tous les titres, pour préserver les
+   zones calmes.
+
+   Balisage :
+       <h1><span class="reveal"><span>Une ligne</span></span></h1>
+   La classe .is-revealed est posée par l'observateur de page-motion.js.   */
+.reveal {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.reveal > span {
+    display: inline-block;
+    transform: translateY(105%);
+    transition: transform 760ms var(--ease-out);
+}
+
+.reveal.is-revealed > span {
+    transform: translateY(0);
+}
+
+/* Variante bloc : sur un titre qui court sur plusieurs lignes, un .reveal
+   en inline-block rognerait les lignes suivantes. Le bloc entier est alors
+   découvert d'un seul tenant. */
+.reveal-block {
+    display: block;
+}
+
+/* Lignes successives d'un même bloc : léger décalage, pas une cascade. */
+.reveal:nth-of-type(2) > span { transition-delay: 90ms; }
+.reveal:nth-of-type(3) > span { transition-delay: 180ms; }
+.reveal:nth-of-type(4) > span { transition-delay: 270ms; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal > span {
+        transform: none;
+        transition: none;
+    }
 }
 
 .sr-only {
@@ -834,7 +1001,7 @@ html[data-theme="dark"] .page-2026 .logo-img {
 
 .page-2026 .nav-link {
     color: var(--color-ink-soft);
-    font-size: 0.88rem;
+    font-size: 0.93rem;
 }
 
 .page-2026 .nav-link:hover,
@@ -846,11 +1013,16 @@ html[data-theme="dark"] .page-2026 .logo-img {
     background: var(--color-accent);
 }
 
+/* Les trois controles de droite (diagnostic, langue, theme) portent l action.
+   Ils sont dimensionnes ensemble pour partager la meme hauteur optique — 46px,
+   au-dessus du seuil tactile de 44px. */
 .page-2026 .nav-btn-diagnostic {
     border-color: var(--color-line-strong);
     background: var(--color-ink);
     color: var(--color-canvas) !important;
     box-shadow: none;
+    padding: 13px 24px;
+    font-size: 0.9rem;
 }
 
 .page-2026 .nav-btn-diagnostic:hover {
@@ -862,6 +1034,8 @@ html[data-theme="dark"] .page-2026 .logo-img {
     color: var(--color-ink);
     border-color: var(--color-line);
     background: var(--color-surface);
+    width: 50px;
+    height: 50px;
 }
 
 .page-2026 .theme-toggle:hover {
@@ -873,6 +1047,8 @@ html[data-theme="dark"] .page-2026 .logo-img {
     margin-left: 0;
     border-color: var(--color-line);
     background: var(--color-surface);
+    padding: 11px 20px;
+    font-size: 0.88rem;
 }
 
 .page-2026 .lang-opt {
@@ -1586,3 +1762,9 @@ body.no-scroll { overflow: hidden; }
         padding: 80px 0;
     }
 }
+
+/* ── Captures produit : une variante par theme ────────────────────────
+   Le basculement se fait en JS (main.js, swapShots) et non en CSS : une
+   image en display:none est quand meme telechargee, meme en loading="lazy",
+   donc empiler deux <img> doublait le poids reseau. Une seule balise porte
+   les deux sources dans des data-attributs. */

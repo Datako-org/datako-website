@@ -53,10 +53,13 @@
 .why-datako h2 {
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(2.6rem, 5vw, 5.25rem);
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    line-height: 0.99;
+    /* Jalon 1 : grands titres en 400, et sur l'échelle des tokens plutôt
+       que sur des clamps maison qui montaient jusqu'à 84px. Le 600 subsiste
+       ailleurs, mais uniquement sur les petits éléments. */
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
 }
 
 .editorial-heading h2 em,
@@ -120,9 +123,13 @@
     max-width: 100%;
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(3.6rem, 5vw, 5.75rem);
-    font-weight: 600;
-    letter-spacing: -0.065em;
+    /* Jalon 1 : la hiérarchie passe par la taille et le tracking, pas par
+       la graisse. Le 600 criait ; le 400 impose sans hausser le ton.
+       --type-h1 et non --type-display : à 92px le titre hurlait autant que
+       le gras qu'on venait de retirer. */
+    font-size: var(--type-h1);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h1);
     line-height: 0.88;
     overflow-wrap: normal;
     text-wrap: balance;
@@ -337,7 +344,11 @@
 .data-source-a { top: 9%; left: 2%; transform: rotate(-5deg); }
 .data-source-b { top: 10%; right: 1%; transform: rotate(4deg); }
 .data-source-c { bottom: 8%; left: 1%; transform: rotate(4deg); }
-.data-source-d { right: 2%; bottom: 8%; transform: rotate(-4deg); }
+/* La carte Décision occupe le coin bas-droit (right 4%, 164px). Cette
+   source y était ancrée aussi et passait dessous : invisible en sombre,
+   sale et bien visible en clair. Elle rejoint le bas-centre, où elle reste
+   dans la logique « sources éparses » sans chevaucher l'aboutissement. */
+.data-source-d { left: 31%; bottom: 2%; transform: rotate(-4deg); }
 
 .data-paths {
     position: absolute;
@@ -680,10 +691,12 @@
 .product-copy h3 {
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(2.2rem, 4vw, 4.35rem);
+    /* Les blocs produits sont larges : le titre y tient le rôle d'accroche,
+       pas de sous-titre. Un cran au-dessus de --type-h3 pour qu'il porte. */
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
     font-weight: 500;
-    letter-spacing: -0.055em;
-    line-height: 1.02;
+    letter-spacing: var(--tracking-h3);
+    line-height: 1.14;
 }
 
 .product-copy > p:not(.product-kicker) {
@@ -742,6 +755,35 @@
 .product-feature.is-revealed .product-screen,
 .product-feature-stations.is-revealed .product-screen {
     transform: perspective(1500px) rotateY(0) translateY(0);
+}
+
+/* Le produit déborde du cadre (principe Databricks) : une interface coupée
+   par le bord suggère qu'il reste à voir, là où une interface encadrée dit
+   qu'on a tout montré. Le côté qui sort perd son arrondi, sinon la capture
+   a l'air posée plutôt que continuée.
+
+   Réservé aux écrans larges : sous 1100px la colonne est déjà étroite, et
+   overflow-x sur la section garantit qu'aucun débordement ne crée de
+   défilement horizontal. */
+@media (min-width: 1100px) {
+    .product-proof {
+        overflow-x: clip;
+    }
+
+    .product-feature .product-screen {
+        margin-right: calc(-1 * clamp(28px, 6vw, 104px));
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .product-feature-stations .product-screen {
+        margin-right: 0;
+        margin-left: calc(-1 * clamp(28px, 6vw, 104px));
+        border-right: 1px solid var(--color-line);
+        border-left: 0;
+        border-radius: 0 22px 22px 0;
+    }
 }
 
 .product-screen img {
@@ -818,10 +860,10 @@
 .journey-heading h2 {
     margin: 0;
     color: var(--color-on-navy);
-    font-size: clamp(3rem, 6vw, 6.4rem);
-    font-weight: 500;
-    letter-spacing: -0.06em;
-    line-height: 0.94;
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
 }
 
 .journey-heading h2 em {
@@ -911,6 +953,22 @@
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+}
+
+/* L'aboutissement était l'écran le plus vide de la séquence : après quatre
+   états denses, la décision arrivait seule au milieu d'un grand panneau.
+   Les états traversés restent désormais en trace derrière elle — assez
+   pour qu'on voie le chemin entier d'un coup d'œil, assez peu pour ne
+   jamais concurrencer la décision. Le climax devient le moment le plus
+   riche, plus le plus vide. */
+.decision-journey[data-step="4"] [data-journey-scene="0"],
+.decision-journey[data-step="4"] [data-journey-scene="1"],
+.decision-journey[data-step="4"] [data-journey-scene="2"],
+.decision-journey[data-step="4"] [data-journey-scene="3"] {
+    opacity: 0.08;
+    transform: translateY(0) scale(0.985);
+    filter: blur(1.5px);
+    transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
 }
 
 .scene-label {
@@ -1436,9 +1494,16 @@
     box-shadow: 0 0 0 8px rgba(94, 116, 245, 0.13), 0 0 42px rgba(94, 116, 245, 0.32);
 }
 
+/* Une étape franchie ne se distinguait que par une nuance de bordure : à
+   l'œil, elle était indistinguable d'une étape à venir, et le stepper ne
+   racontait donc aucune progression. Trois états désormais lisibles —
+   à venir : contour seul · franchie : pastille remplie, sobre ·
+   active : remplie, vive, avec halo. */
 .journey-steps li.is-past span,
 .decision-journey.is-complete .journey-steps li:not(:last-child) span {
-    border-color: rgba(158, 176, 255, 0.46);
+    border-color: rgba(158, 176, 255, 0.55);
+    background: rgba(94, 116, 245, 0.2);
+    color: rgba(255, 255, 255, 0.88);
 }
 
 .journey-signal {
@@ -1470,9 +1535,13 @@
 
 /* Compact bridge to the existing service pages */
 
+/* La respiration bone, une seule fois sur la page. Elle s'intercale entre
+   le récit en navy et l'appel final, ce qui donne le rythme
+   clair → navy → bone → final au lieu d'une bascule brutale clair/navy.
+   Une bande par page : c'est ce qui la garde efficace. */
 .home-essentials {
     border-bottom: 1px solid var(--color-line);
-    background: var(--color-surface);
+    background: var(--color-bone);
 }
 
 .essentials-grid {
@@ -1486,10 +1555,10 @@
     max-width: 650px;
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(2.8rem, 5vw, 5.2rem);
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    line-height: 0.98;
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
 }
 
 .essentials-copy h2 em {
@@ -1671,10 +1740,10 @@
 .home-final-cta h2 {
     margin: 0;
     color: var(--color-on-navy);
-    font-size: clamp(3.1rem, 7vw, 7.2rem);
-    font-weight: 500;
-    letter-spacing: -0.065em;
-    line-height: 0.92;
+    font-size: var(--type-h1);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h1);
+    line-height: 1.02;
 }
 
 .home-final-cta h2 em {
@@ -1775,7 +1844,28 @@ html[data-theme="dark"] .home-btn-primary:hover {
         grid-template-columns: 1fr;
     }
 
+    /* En une colonne, le visuel se retrouvait après les CTA : la première
+       impression mobile était donc du texte pur, sans rien de l'univers
+       Data & IA. display: contents promeut les enfants de la copie au rang
+       d'éléments de grille, ce qui permet d'intercaler la scène entre
+       l'accroche et les boutons — le titre reste lu en premier, le visuel
+       est vu avant l'appel à l'action. */
     .home-hero-copy {
+        display: contents;
+    }
+
+    .home-hero-copy > .eyebrow { order: 1; }
+    .home-hero h1 { order: 2; }
+    .home-hero-lead { order: 3; }
+    .data-story { order: 4; }
+    .home-hero-actions { order: 5; }
+    .home-diagnostic-link { order: 6; }
+
+    .home-hero-copy > .eyebrow,
+    .home-hero h1,
+    .home-hero-lead,
+    .home-hero-actions,
+    .home-diagnostic-link {
         max-width: 780px;
     }
 
@@ -2240,3 +2330,4 @@ html[data-theme="dark"] .home-btn-primary:hover {
         animation: none;
     }
 }
+

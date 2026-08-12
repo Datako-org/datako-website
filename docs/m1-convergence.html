@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M1 · Convergence — prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   M1 — Convergence · prototype isolé (Jalon 6)
+
+   Adapté de la Réf 01 (21st.dev, cercles en orbite). Ce qu'on en garde :
+   les anneaux concentriques comme profondeur, et surtout la
+   CONTRE-ROTATION — l'anneau tourne, la pastille tourne à l'inverse, donc
+   l'étiquette reste droite. Indispensable ici : nos sources sont des noms
+   de fichiers, pas des logos ronds.
+
+   Ce qu'on change : l'orbite devient une SPIRALE ENTRANTE. Une orbite est
+   perpétuelle, elle ne converge jamais — elle contredirait la promesse
+   « dispersé → décidé ». Séquence unique, jamais en boucle.
+
+   Ce qu'on rejette : la sphère de particules et les logos de marques.
+   ══════════════════════════════════════════════════════════════════════ */
+:root {
+  --navy: #071f27;
+  --navy-deep: #02181f;
+  --surface: #0d3039;
+  --on-navy: #f7fbfa;
+  --ink-soft: #c7d4d6;
+  --ink-muted: #91a7ab;
+  --line: rgba(231,242,241,.14);
+  --accent: #88a0ff;
+  --success: #63d9b8;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --label: .6875rem;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--navy);
+  color: var(--on-navy);
+  font-family: "Familjen Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px,4vw,56px); }
+
+.note {
+  padding-block: 40px 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: var(--label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* La scène prend la plus grande part : c'est elle qu'on vient regarder. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr);
+  gap: clamp(40px,5vw,80px);
+  align-items: center;
+  padding-block: clamp(30px,4vw,60px) clamp(60px,8vw,110px);
+}
+
+h1 {
+  margin: 0 0 22px;
+  font-size: clamp(2.4rem,3.6vw,3.5rem);
+  font-weight: 400;
+  letter-spacing: -.028em;
+  line-height: 1.02;
+}
+h1 em { font-family: "Instrument Serif", serif; font-style: italic; color: var(--accent); }
+
+.lead { margin: 0 0 30px; max-width: 46ch; color: var(--ink-soft); line-height: 1.65; }
+
+/* ── La scène ────────────────────────────────────────────────────── */
+.m1 {
+  position: relative;
+  aspect-ratio: 1 / .82;
+  /* la masse centrale est coupée par le bas : elle paraît plus grande que
+     le cadre, astuce d'échelle reprise de la référence */
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: radial-gradient(120% 90% at 50% 108%, #0c2b34 0%, var(--navy-deep) 70%);
+}
+
+.m1-stage {
+  position: absolute;
+  /* Le point de convergence est bas mais dans le cadre : les anneaux
+     débordent par le bas — l'effet d'échelle recherché — sans emporter le
+     socle avec eux. */
+  left: 50%;
+  bottom: 30%;
+  width: 0;
+  height: 0;
+}
+
+/* Anneaux : ils tournent lentement pendant la convergence puis s'arrêtent. */
+.m1-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transform: translate(-50%,-50%) rotate(0deg);
+  transition: transform 4200ms var(--ease), opacity 1400ms ease;
+}
+.m1-ring-1 { width: 300px; height: 300px; }
+.m1-ring-2 { width: 460px; height: 460px; }
+.m1-ring-3 { width: 640px; height: 640px; opacity: .55; }
+
+.m1.is-converged .m1-ring-1 { transform: translate(-50%,-50%) rotate(26deg); }
+.m1.is-converged .m1-ring-2 { transform: translate(-50%,-50%) rotate(-20deg); }
+.m1.is-converged .m1-ring-3 { transform: translate(-50%,-50%) rotate(14deg); opacity: .25; }
+
+/* ── Les sources ─────────────────────────────────────────────────── */
+.m1-node {
+  position: absolute;
+  top: 0; left: 0;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .64rem;
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  opacity: 0;
+  /* rotate(a) translateX(r) rotate(-a) : le second rotate annule le premier,
+     donc l'étiquette reste horizontale quelle que soit sa position. */
+  transform:
+    translate(-50%,-50%)
+    rotate(var(--a))
+    translateX(var(--r))
+    rotate(calc(-1 * var(--a)));
+  transition: transform 2400ms var(--ease), opacity 700ms ease, border-color 900ms ease;
+}
+
+/* Les sources n'arrivent pas d'un bloc : elles se posent une par une, ce qui
+   laisse le temps de lire les noms de fichiers. C'est l'état « dispersé »
+   qui doit s'installer avant que la convergence ait un sens. */
+.m1.is-in .m1-node { opacity: 1; }
+.m1.is-in .m1-node:nth-of-type(1)  { transition-delay: 0ms; }
+.m1.is-in .m1-node:nth-of-type(2)  { transition-delay: 70ms; }
+.m1.is-in .m1-node:nth-of-type(3)  { transition-delay: 140ms; }
+.m1.is-in .m1-node:nth-of-type(4)  { transition-delay: 210ms; }
+.m1.is-in .m1-node:nth-of-type(5)  { transition-delay: 280ms; }
+.m1.is-in .m1-node:nth-of-type(6)  { transition-delay: 350ms; }
+.m1.is-in .m1-node:nth-of-type(7)  { transition-delay: 420ms; }
+.m1.is-in .m1-node:nth-of-type(8)  { transition-delay: 490ms; }
+.m1.is-in .m1-node:nth-of-type(9)  { transition-delay: 560ms; }
+.m1.is-in .m1-node:nth-of-type(10) { transition-delay: 630ms; }
+
+/* La spirale part elle aussi en décalé : les sources proches s'amarrent en
+   premier, les lointaines suivent. Le socle se remplit progressivement au
+   lieu de tout absorber d'un coup. */
+.m1.is-converged .m1-node:nth-of-type(2n)  { transition-delay: 180ms; }
+.m1.is-converged .m1-node:nth-of-type(3n)  { transition-delay: 360ms; }
+.m1.is-converged .m1-node:nth-of-type(5n)  { transition-delay: 520ms; }
+
+/* Le rayon tombe à zéro ET l'angle avance : la trajectoire interpolée
+   entre les deux états n'est pas une ligne droite, c'est une spirale. */
+.m1.is-converged .m1-node {
+  opacity: .85;
+  border-color: rgba(136,160,255,.3);
+  transform:
+    translate(-50%,-50%)
+    rotate(calc(var(--a) + 110deg))
+    translateX(0px)
+    rotate(calc(-1 * var(--a) - 110deg));
+}
+
+.m1.is-docked .m1-node { opacity: 0; transition-duration: 500ms; }
+
+/* ── Le socle ────────────────────────────────────────────────────── */
+.m1-core {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 168px;
+  padding: 18px;
+  border: 1px solid rgba(136,160,255,.28);
+  border-radius: 18px;
+  background: linear-gradient(160deg,#123943,#0a2a33);
+  transform: translate(-50%,-50%) scale(.86);
+  opacity: 0;
+  transition: transform 900ms var(--ease), opacity 700ms ease;
+}
+.m1.is-converged .m1-core { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+.m1-core span {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.m1-core b { display: block; margin-top: 5px; font-size: .98rem; font-weight: 500; }
+.m1-core i {
+  display: block;
+  height: 4px;
+  margin-top: 9px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.16);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms var(--ease);
+}
+.m1.is-structured .m1-core i { transform: scaleX(1); }
+.m1.is-structured .m1-core i:nth-of-type(2) { transition-delay: 90ms; transform: scaleX(.72); }
+.m1.is-structured .m1-core i:nth-of-type(3) { transition-delay: 170ms; transform: scaleX(.88); }
+
+/* ── La décision ─────────────────────────────────────────────────── */
+.m1-decision {
+  position: absolute;
+  right: 6%;
+  bottom: 12%;
+  width: 176px;
+  padding: 16px;
+  border: 1px solid rgba(99,217,184,.34);
+  border-radius: 14px;
+  background: rgba(9,45,54,.94);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translate(14px,12px) scale(.95);
+  transition: transform 800ms var(--ease), opacity 600ms ease;
+}
+.m1.is-decided .m1-decision { opacity: 1; transform: none; }
+
+.m1-decision span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.m1-decision b { display: block; margin: 8px 0 4px; font-size: 1.6rem; font-weight: 400; letter-spacing: -.03em; color: var(--success); }
+.m1-decision small { color: var(--ink-muted); font-size: .68rem; }
+
+/* ── Légende ─────────────────────────────────────────────────────── */
+.m1-legend {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  padding: 14px clamp(14px,2vw,22px);
+  border-top: 1px solid var(--line);
+  background: rgba(2,24,31,.72);
+  backdrop-filter: blur(4px);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.m1-legend b { display: block; color: rgba(247,251,250,.42); font-weight: 500; transition: color 500ms ease; }
+.m1.is-converged .m1-legend b:nth-of-type(1),
+.m1.is-structured .m1-legend li:nth-child(2) b,
+.m1.is-decided .m1-legend li:nth-child(3) b { color: var(--on-navy); }
+.m1-legend li { list-style: none; }
+.m1-legend ol, .m1-legend ul { margin: 0; padding: 0; }
+
+.controls { display: flex; gap: 12px; align-items: center; padding-bottom: 60px; }
+button {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: var(--label);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 11px 22px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--on-navy);
+  cursor: pointer;
+  transition: background 220ms var(--ease);
+}
+button:hover { background: rgba(255,255,255,.06); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .m1-ring-3 { display: none; }
+}
+
+/* Mouvement réduit : l'état d'arrivée, tout de suite, sans trajet. */
+@media (prefers-reduced-motion: reduce) {
+  .m1-node, .m1-ring, .m1-core, .m1-decision, .m1-core i { transition: none !important; }
+  .m1-node { opacity: 0 !important; }
+  .m1-core, .m1-decision { opacity: 1 !important; transform: translate(-50%,-50%) !important; }
+  .m1-decision { transform: none !important; }
+  .m1-core i { transform: scaleX(1) !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="note">Datakö · M1 Convergence · prototype isolé — Jalon 6</p>
+
+  <div class="hero">
+    <div>
+      <h1>Vos données opérationnelles, enfin <em>pilotables.</em></h1>
+      <p class="lead">Le titre et les actions sont lisibles dès la première image. La mise en scène se joue à côté, jamais devant : c'est une ouverture, pas une intro.</p>
+      <div class="controls">
+        <button type="button" data-play>Rejouer la convergence</button>
+      </div>
+    </div>
+
+    <div class="m1" id="scene">
+      <div class="m1-stage">
+        <div class="m1-ring m1-ring-1"></div>
+        <div class="m1-ring m1-ring-2"></div>
+        <div class="m1-ring m1-ring-3"></div>
+
+        <div class="m1-node" style="--a:-108deg; --r:150px">ventes_final.xlsx</div>
+        <div class="m1-node" style="--a:-64deg;  --r:230px">WhatsApp terrain</div>
+        <div class="m1-node" style="--a:-140deg; --r:228px">ERP</div>
+        <div class="m1-node" style="--a:-32deg;  --r:150px">relevé pompe</div>
+        <div class="m1-node" style="--a:-92deg;  --r:318px">bon de livraison</div>
+        <div class="m1-node" style="--a:-158deg; --r:150px">suivi.xlsx (2)</div>
+        <div class="m1-node" style="--a:-8deg;   --r:230px">saisie manuelle</div>
+        <div class="m1-node" style="--a:-172deg; --r:316px">index cuve</div>
+        <div class="m1-node" style="--a:-48deg;  --r:318px">facture SONAP</div>
+        <div class="m1-node" style="--a:-124deg; --r:318px">API tierce</div>
+
+        <div class="m1-core">
+          <span>01</span><b>Structurer</b>
+          <i></i><i></i><i></i>
+        </div>
+      </div>
+
+      <div class="m1-decision">
+        <span>Décision</span>
+        <b>+18 %</b>
+        <small>Capacité optimisée</small>
+      </div>
+
+      <ol class="m1-legend">
+        <li><b>Dispersée</b>01</li>
+        <li><b>Structurée</b>02</li>
+        <li><b>Décidée</b>03</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+  const scene = document.getElementById('scene');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const timers = new Set();
+  const later = (fn, ms) => { const t = setTimeout(() => { timers.delete(t); fn(); }, ms); timers.add(t); };
+  const clear = () => { timers.forEach(clearTimeout); timers.clear(); };
+
+  const states = ['is-in', 'is-converged', 'is-structured', 'is-decided', 'is-docked'];
+
+  const play = () => {
+    clear();
+    states.forEach(s => scene.classList.remove(s));
+
+    if (reduced.matches) {
+      scene.classList.add('is-converged', 'is-structured', 'is-decided', 'is-docked');
+      return;
+    }
+
+    // Rythme du prototype, volontairement contemplatif : il faut pouvoir
+    // LIRE les noms de fichiers avant qu'ils partent, sinon la dispersion ne
+    // veut rien dire et on ne voit qu'un mouvement.
+    //
+    //   0,4 s  les sources se posent une à une (dispersion lisible à ~1 s)
+    //   2,0 s  la spirale démarre — 2,4 s de trajet, en décalé
+    //   3,8 s  le socle se structure pendant que les dernières s'amarrent
+    //   4,9 s  la décision émerge
+    //
+    // La version embarquée sur la home sera plus serrée : ici on regarde,
+    // là-bas on lit un titre pendant que ça se joue à côté.
+    later(() => scene.classList.add('is-in'), 400);
+    later(() => scene.classList.add('is-converged'), 2000);
+    later(() => scene.classList.add('is-structured'), 3800);
+    later(() => scene.classList.add('is-docked'), 4900);
+    later(() => scene.classList.add('is-decided'), 4960);
+  };
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); play(); } });
+  }, { threshold: .4 });
+  io.observe(scene);
+
+  document.querySelector('[data-play]').addEventListener('click', play);
+</script>
+</body>
+</html>

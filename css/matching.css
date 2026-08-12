@@ -1,16 +1,29 @@
 .page-matching { background:var(--color-canvas); }
-.matching-hero { padding:150px 0 88px; }
-.matching-hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(60px,8vw,120px); align-items:end; }
+/* Pas de border-bottom ici : la section suivante ouvre déjà sur un filet
+   (.site-container, border-top), et en ajouter un donnait deux traits
+   parallèles à 144px l'un de l'autre. Le padding bas seul suffit à
+   resserrer l'intervalle. */
+.matching-hero { padding:150px 0 52px; }
+/* align-items:start plutôt que end : les deux colonnes partagent la même
+   ligne haute, et la composition asymétrique se lit comme un choix au lieu
+   d'un décalage. */
+.matching-hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(60px,8vw,120px); align-items:start; }
 .matching-hero h1,.matching-intro h2,.matching-process h2,.matching-path h2 { margin:0; color:var(--color-ink); font-weight:600; letter-spacing:-.055em; line-height:.96; }
-.matching-hero h1 { font-size:clamp(4rem,7vw,7.2rem); }
+.matching-hero h1 { font-size: var(--type-h1); font-weight: 400; }
 .matching-hero .site-lead { margin-top:28px; }
 .matching-difference { padding-top:25px; border-top:1px solid var(--color-line-strong); }
 .matching-difference > span,.funnel-label,.matching-path > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.11em; text-transform:uppercase; }
 .matching-difference ul { margin-top:20px; }
-.matching-difference li { padding:17px 0; border-bottom:1px solid var(--color-line); color:var(--color-ink); }
+/* Sélecteur d'enfant direct, pas descendant : « .matching-difference li »
+   attrapait aussi les li du tunnel plus bas et posait un filet gris sous
+   chaque barre de progression. Et le dernier de la liste perd le sien —
+   .matching-shortlist ouvre déjà sur un border-top 28px plus bas, les deux
+   traits se suivaient. */
+.matching-difference > ul > li { padding:17px 0; border-bottom:1px solid var(--color-line); color:var(--color-ink); }
+.matching-difference > ul > li:last-child { border-bottom:0; }
 
 .matching-intro-grid { padding-top:44px; border-top:1px solid var(--color-line-strong); display:grid; grid-template-columns:1fr 1fr; gap:clamp(60px,8vw,120px); align-items:center; }
-.matching-intro h2 { font-size:clamp(2.8rem,4.5vw,4.6rem); }
+.matching-intro h2 { font-size: var(--type-h2); font-weight: 400; }
 .matching-intro p { max-width:580px; margin-top:24px; }
 .matching-funnel { padding:32px; border:1px solid var(--color-line); border-radius:16px; background:var(--color-surface); box-shadow:var(--shadow-soft); }
 .funnel-stage { margin-top:14px; display:grid; grid-template-columns:1fr auto; gap:15px; align-items:center; transform-origin:left; opacity:.35; transition:opacity 420ms ease,transform 620ms var(--ease-out); }
@@ -29,7 +42,7 @@
 .profile-line + .profile-line { width:62%; margin-top:8px; }
 .matching-funnel-note { margin:16px 0 0; color:var(--color-ink-muted); font-size:.82rem; }
 
-.matching-process h2 { color:#fff; font-size:clamp(2.8rem,4.6vw,4.6rem); }
+.matching-process h2 { color:#fff; font-size: var(--type-h2); font-weight: 400; }
 .matching-process-head { margin-bottom:48px; display:grid; grid-template-columns:1.15fr .85fr; gap:70px; align-items:end; }
 .matching-process-head p { margin:0; color:#a8bec4; }
 .matching-process-flow { position:relative; display:grid; grid-template-columns:repeat(4,1fr); border-top:2px solid rgba(229,236,239,.18); }
@@ -46,7 +59,7 @@
 .matching-paths { background:var(--color-canvas-soft); }
 .matching-path-grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; }
 .matching-path { padding:clamp(32px,4vw,48px); border:1px solid var(--color-line); border-radius:16px; background:var(--color-surface); display:flex; flex-direction:column; }
-.matching-path h2 { margin-top:20px; font-size:clamp(2.4rem,3.4vw,3.4rem); }
+.matching-path h2 { margin-top:20px; font-size: var(--type-h2); font-weight: 400; }
 .matching-path > p { margin:18px 0 28px; }
 .matching-path ol { margin-top:auto; counter-reset:path; }
 .matching-path li { padding:15px 0; border-top:1px solid var(--color-line); display:grid; grid-template-columns:34px 1fr; color:var(--color-ink); }
@@ -61,7 +74,7 @@
 }
 @media(max-width:768px){
   .matching-hero { padding-top:125px; }
-  .matching-hero h1 { font-size:clamp(3.7rem,16vw,5.4rem); }
+  .matching-hero h1 { font-size: var(--type-h1); font-weight: 400; }
   .matching-path-grid,.matching-process-flow { grid-template-columns:1fr; }
   .matching-process-step,.matching-process-step + .matching-process-step { min-height:auto; padding:28px 0; border-right:0; border-top:1px solid rgba(229,236,239,.14); }
   .matching-process-step h3 { margin-top:24px; }
@@ -72,3 +85,116 @@
   .funnel-stage,.anonymous-profiles,.matching-process-step { opacity:1!important; transform:none!important; }
   .matching-process-flow::before { width:100%; transition:none; }
 }
+
+/* --- Le hero disait ce que Matching est, pas ce qui le distingue ------
+   La colonne droite s arretait apres trois lignes et laissait une bande
+   vide sous le hero. Elle porte desormais l argument reel du service : on
+   ne renvoie pas une liste, on presente un ou deux profils.
+
+   Les trois etapes portaient 47 / 6 / 2. Retires le 12/08/2026 : ces
+   chiffres etaient inventes, codes en dur hors dictionnaire, et se lisaient
+   comme une performance mesuree sur une page publique. L entonnoir garde sa
+   forme — trois etapes, des barres qui retrecissent — sans rien affirmer. */
+.matching-shortlist {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-line);
+}
+
+.matching-shortlist-label {
+    display: block;
+    margin-bottom: 20px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.matching-funnel-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 16px;
+}
+
+.matching-funnel-steps li {
+    display: grid;
+    gap: 7px;
+    opacity: .32;
+    transform: translateY(6px);
+    transition: opacity 460ms ease, transform 560ms var(--ease-out);
+}
+
+.matching-funnel-steps li.is-current,
+.matching-funnel-steps li.is-complete,
+.matching-shortlist .is-complete li { opacity: 1; transform: none; }
+
+.matching-funnel-steps span { color: var(--color-ink-soft); font-size: .92rem; }
+
+/* La barre retrecit a chaque etape : l entonnoir se voit avant de se lire.
+   Les proportions sont schematiques et le resteront tant qu il n y aura pas
+   de mesure reelle a afficher. Elles ne portent aucun chiffre : le seul
+   engagement chiffre du site est « un ou deux profils presentes », qui vit
+   dans la phrase sous l entonnoir. */
+.matching-funnel-steps i {
+    display: block;
+    height: 3px;
+    border-radius: 99px;
+    background: var(--color-line-strong);
+    position: relative;
+    overflow: hidden;
+}
+
+.matching-funnel-steps i::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--w);
+    border-radius: 99px;
+    background: var(--color-ink-muted);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 820ms var(--ease-out);
+}
+
+.matching-funnel-steps li.is-current i::after,
+.matching-funnel-steps li.is-complete i::after { transform: scaleX(1); }
+
+
+.matching-funnel-steps .is-final i::after { background: var(--color-accent); }
+
+.matching-shortlist p {
+    margin: 22px 0 0;
+    color: var(--color-ink-muted);
+    font-size: .86rem;
+    line-height: 1.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .matching-funnel-steps li { opacity: 1; transform: none; transition: none; }
+    .matching-funnel-steps i::after { transform: scaleX(1); transition: none; }
+}
+
+/* Entonnoir en trois colonnes : empile en vertical, il rendait la colonne
+   droite deux fois plus haute que la gauche et deplacait le vide au lieu
+   de le combler. */
+@media (min-width: 700px) {
+    .matching-funnel-steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .matching-funnel-steps li {
+        grid-template-columns: 1fr;
+        align-content: start;
+        gap: 4px;
+    }
+
+    .matching-funnel-steps span { font-size: .78rem; }
+    .matching-funnel-steps i { margin-top: 8px; }
+}
+
+.matching-shortlist { margin-top: 26px; padding-top: 24px; }
+.matching-shortlist p { margin-top: 18px; }

@@ -6,6 +6,9 @@ const root = process.cwd();
 const pages = [
   { route: 'index', fr: 'index.html', en: 'index.html' },
   { route: 'blog', fr: 'blog.html', en: 'blog.html' },
+  { route: 'article-ia-pme', fr: 'blog-ia-generative-pme.html', en: 'blog-ia-generative-pme.html' },
+  { route: 'article-data-stack', fr: 'blog-modern-data-stack.html', en: 'blog-modern-data-stack.html' },
+  { route: 'article-equipe-data', fr: 'blog-equipe-data-pme.html', en: 'blog-equipe-data-pme.html' },
   { route: 'solutions', fr: 'solutions.html', en: 'solutions.html' },
   { route: 'prestations', fr: 'prestations.html', en: 'prestations.html' },
   { route: 'formations', fr: 'formations.html', en: 'formations.html' },
@@ -13,6 +16,7 @@ const pages = [
   { route: 'matching', fr: 'matching.html', en: 'matching.html' },
   { route: 'contact', fr: 'contact.html', en: 'contact.html' },
   { route: 'solution-fleet', fr: 'solution-fleet.html', en: 'solution-fleet.html' },
+  { route: 'solution-distribution', fr: 'solution-distribution.html', en: 'solution-distribution.html' },
   { route: 'solution-stations', fr: 'solution-stations.html', en: 'solution-stations.html' },
   { route: 'legal', fr: 'mentions-legales.html', en: 'legal.html' },
   { route: 'privacy', fr: 'politique-confidentialite.html', en: 'privacy.html' },
@@ -21,6 +25,59 @@ const pages = [
 
 const templatePath = page => join(root, 'src', 'pages', `${page.route}.html`);
 const localePath = (locale, page) => join(root, 'src', 'locales', locale, `${page.route}.json`);
+const partialPath = name => join(root, 'src', 'partials', `${name}.html`);
+const partialLocalePath = locale => join(root, 'src', 'locales', locale, '_partials.json');
+
+// Shared header/footer live in src/partials/ so the navigation and the footer exist
+// once per locale instead of once per route. Includes look like:
+//   {{> header active="solutions" }}
+//   {{> footer class="home-footer" }}
+// Partial dictionaries use the pt./pa. namespace so their indices never collide with
+// the page-level t./a. arrays.
+const includePattern = /\{\{>\s*([\w-]+)([^}]*)\}\}/g;
+
+function parseIncludeParams(raw) {
+  const params = {};
+  for (const [, key, value] of raw.matchAll(/([\w-]+)="([^"]*)"/g)) params[key] = value;
+  return params;
+}
+
+function renderPartialPlaceholders(template, dictionary) {
+  return template
+    .replace(/\{\{pt\.(\d+)\}\}/g, (_, index) => dictionary.text[Number(index)] ?? '')
+    .replace(/\{\{pa\.(\d+)\}\}/g, (_, index) => dictionary.attributes[Number(index)] ?? '');
+}
+
+// {{navattrs:route}} becomes the anchor's class plus, for the current page, aria-current.
+function renderNavState(html, active) {
+  return html.replace(/\{\{navattrs:([\w-]+)\}\}/g, (_, route) => route === active
+    ? 'class="nav-link active" aria-current="page"'
+    : 'class="nav-link"');
+}
+
+async function loadPartials(locale) {
+  const dictionary = JSON.parse(await readFile(partialLocalePath(locale), 'utf8'));
+  const cache = new Map();
+  return async name => {
+    if (!cache.has(name)) cache.set(name, await readFile(partialPath(name), 'utf8'));
+    const entry = dictionary[name];
+    if (!entry) throw new Error(`_partials.json (${locale}) has no dictionary for partial "${name}".`);
+    return renderPartialPlaceholders(cache.get(name), entry);
+  };
+}
+
+async function expandIncludes(template, readPartial) {
+  const includes = [...template.matchAll(includePattern)];
+  let html = template;
+  for (const [token, name, rawParams] of includes) {
+    const params = parseIncludeParams(rawParams);
+    let partial = await readPartial(name);
+    partial = renderNavState(partial, params.active ?? '');
+    partial = partial.replace(/\{\{class\}\}/g, params.class ?? 'site-footer');
+    html = html.replace(token, () => partial);
+  }
+  return html;
+}
 
 function textParts(html) {
   let skipped = 0;
@@ -100,6 +157,18 @@ function generatedBanner(html, page) {
 }
 
 async function extract() {
+  // extract() rebuilds every template from the generated HTML, which would inline the
+  // shared header and footer back into each route and silently undo src/partials/.
+  // It was a one-time bootstrap; refuse to run once partials are the source of truth.
+  try {
+    await readFile(partialPath('header'), 'utf8');
+    throw new Error(
+      'extract is disabled: src/partials/ is now the source of truth for the shared header and footer.\n' +
+      'Running it would inline them back into every route. Edit src/pages/, src/partials/ and src/locales/ directly, then run npm run i18n:build.'
+    );
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
   for (const page of pages) {
     const frHtml = await readFile(join(root, page.fr), 'utf8');
     const enHtml = await readFile(join(root, 'en', page.en), 'utf8');
@@ -140,12 +209,16 @@ async function seed(route) {
   }
 }
 
-async function renderPage(page, locale) {
+async function renderPage(page, locale, readPartial) {
   const [template, dictionary] = await Promise.all([
     readFile(templatePath(page), 'utf8'),
     readFile(localePath(locale, page), 'utf8').then(JSON.parse)
   ]);
-  let html = renderPlaceholders(template, dictionary);
+  // Partials are expanded before the page dictionary and before the English path
+  // rewrite, so shared navigation links get the same ../ and route mapping treatment
+  // as page-level links.
+  let html = await expandIncludes(template, readPartial);
+  html = renderPlaceholders(html, dictionary);
   if (locale === 'en') html = localizeEnglishPaths(html);
   html = injectSeoLinks(html, page, locale);
   return generatedBanner(html, page);
@@ -153,9 +226,12 @@ async function renderPage(page, locale) {
 
 async function build({ check = false } = {}) {
   const mismatches = [];
+  const readPartial = Object.fromEntries(await Promise.all(
+    ['fr', 'en'].map(async locale => [locale, await loadPartials(locale)])
+  ));
   for (const page of pages) {
     for (const locale of ['fr', 'en']) {
-      const html = await renderPage(page, locale);
+      const html = await renderPage(page, locale, readPartial[locale]);
       const output = locale === 'fr' ? join(root, page.fr) : join(root, 'en', page.en);
       if (check) {
         const current = await readFile(output, 'utf8');

@@ -8,9 +8,8 @@
     <title>{{t.0}}</title>
     <script>
         try {
-            const savedTheme = localStorage.getItem('datako_theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.dataset.theme = savedTheme || (systemDark ? 'dark' : 'light');
+            // Clair par defaut. Un visiteur qui a deja choisi le sombre le garde.
+            document.documentElement.dataset.theme = localStorage.getItem('datako_theme') || 'light';
         } catch (error) {
             document.documentElement.dataset.theme = 'light';
         }
@@ -18,72 +17,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/main.css?v=20260812-6">
+    <link rel="stylesheet" href="css/index.css?v=20260812-7">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="page-2026 page-home">
     <a class="skip-link" href="#main-content">{{t.1}}</a>
 
-    <header class="header" data-site-header>
-        <div class="container">
-            <a href="index.html" class="logo" aria-label="{{a.1}}">
-                <img src="images/logo-2026-navy.png" alt="{{a.2}}" class="logo-img" width="835" height="253">
-            </a>
-
-            <nav aria-label="{{a.3}}">
-                <ul class="nav-menu" id="primary-navigation">
-                    <li class="nav-item"><a href="prestations.html" class="nav-link">{{t.2}}</a></li>
-                    <li class="nav-item"><a href="solutions.html" class="nav-link">{{t.3}}</a></li>
-                    <li class="nav-item"><a href="formations.html" class="nav-link">{{t.4}}</a></li>
-                    <li class="nav-item"><a href="matching.html" class="nav-link">{{t.5}}</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">{{t.6}}</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">{{t.7}}</a></li>
-                    <li class="nav-item"><a href="https://diagnostic.xn--datak-nua.com/" class="nav-btn-diagnostic">{{t.8}}</a></li>
-                </ul>
-                <button class="hamburger" type="button" aria-label="{{a.4}}" aria-controls="primary-navigation" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </nav>
-        </div>
-    </header>
+    {{> header }}
 
     <main id="main-content">
         <section class="home-hero" aria-labelledby="home-title">
             <div class="home-container home-hero-grid">
                 <div class="home-hero-copy">
-                    <p class="eyebrow">{{t.9}}</p>
-                    <h1 id="home-title">{{t.10}} <span class="hero-resolution">{{t.11}} <em>{{t.12}}</em></span></h1>
+                    <p class="eyebrow">{{t.2}}</p>
+                    <h1 id="home-title"><span class="reveal reveal-block"><span>{{t.3}} <span class="hero-resolution">{{t.4}} <em>{{t.5}}</em></span></span></span></h1>
                     <p class="home-hero-lead">
-                        {{t.13}}
+                        {{t.6}}
                     </p>
                     <div class="home-hero-actions">
                         <a href="solutions.html" class="home-btn home-btn-primary">
-                            {{t.14}}
+                            {{t.7}}
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </a>
-                        <a href="contact.html#contact-form-container" class="home-btn home-btn-quiet">{{t.15}}</a>
+                        <a href="contact.html#contact-form-container" class="home-btn home-btn-quiet">{{t.8}}</a>
                     </div>
                     <a class="home-diagnostic-link" href="https://diagnostic.xn--datak-nua.com/">
-                        {{t.16}}
-                        <span aria-hidden="true">{{t.17}}</span>
+                        {{t.9}}
+                        <span aria-hidden="true">{{t.10}}</span>
                     </a>
                 </div>
 
-                <div class="data-story" data-data-story data-step="0" role="group" aria-label="{{a.5}}">
+                <div class="data-story" data-data-story data-step="0" role="group" aria-label="{{a.1}}" data-step-message="{{a.9}}">
                     <div class="data-story-topline">
-                        <span class="data-story-status"><i></i> {{t.18}}</span>
-                        <button type="button" class="story-replay" data-story-replay aria-label="{{a.6}}">{{t.19}}</button>
+                        <span class="data-story-status"><i></i> {{t.11}}</span>
+                        <button type="button" class="story-replay" data-story-replay aria-label="{{a.2}}">{{t.12}}</button>
                     </div>
 
                     <div class="data-story-scene" aria-hidden="true">
-                        <div class="data-source data-source-a"><span>{{t.20}}</span><b>{{t.21}}</b></div>
-                        <div class="data-source data-source-b"><span>{{t.22}}</span><b>{{t.23}}</b></div>
-                        <div class="data-source data-source-c"><span>{{t.24}}</span><b>{{t.25}}</b></div>
-                        <div class="data-source data-source-d"><span>{{t.26}}</span><b>{{t.27}}</b></div>
+                        <div class="data-source data-source-a"><span>{{t.13}}</span><b>{{t.14}}</b></div>
+                        <div class="data-source data-source-b"><span>{{t.15}}</span><b>{{t.16}}</b></div>
+                        <div class="data-source data-source-c"><span>{{t.17}}</span><b>{{t.18}}</b></div>
+                        <div class="data-source data-source-d"><span>{{t.19}}</span><b>{{t.20}}</b></div>
 
                         <svg class="data-paths" viewBox="0 0 640 390" preserveAspectRatio="none">
                             <path d="M105 82 C215 82 210 190 312 190"/>
@@ -95,154 +71,154 @@
 
                         <div class="data-core">
                             <div class="data-core-ring"></div>
-                            <div class="data-core-copy"><span>{{t.28}}</span><b>{{t.29}}</b></div>
+                            <div class="data-core-copy"><span>{{t.21}}</span><b>{{t.22}}</b></div>
                             <div class="data-core-rows"><i></i><i></i><i></i><i></i></div>
                         </div>
 
                         <div class="decision-card">
-                            <span class="decision-label">{{t.30}}</span>
-                            <div class="decision-value">{{t.31}}</div>
+                            <span class="decision-label">{{t.23}}</span>
+                            <div class="decision-value">{{t.24}}</div>
                             <div class="decision-chart"><i></i><i></i><i></i><i></i><i></i></div>
-                            <strong>{{t.32}}</strong>
+                            <strong>{{t.25}}</strong>
                         </div>
                     </div>
 
                     <ol class="data-story-legend">
-                        <li data-story-label="0"><span>{{t.33}}</span>{{t.34}}</li>
-                        <li data-story-label="1"><span>{{t.35}}</span>{{t.36}}</li>
-                        <li data-story-label="2"><span>{{t.37}}</span>{{t.38}}</li>
+                        <li data-story-label="0"><span>{{t.26}}</span>{{t.27}}</li>
+                        <li data-story-label="1"><span>{{t.28}}</span>{{t.29}}</li>
+                        <li data-story-label="2"><span>{{t.30}}</span>{{t.31}}</li>
                     </ol>
-                    <p class="sr-only" aria-live="polite" data-story-live>{{t.39}}</p>
+                    <p class="sr-only" aria-live="polite" data-story-live>{{t.32}}</p>
                 </div>
             </div>
-            <div class="home-hero-index" aria-hidden="true">{{t.40}}</div>
+            <div class="home-hero-index" aria-hidden="true">{{t.33}}</div>
         </section>
 
         <section class="home-section product-proof" aria-labelledby="solutions-preview-title">
             <div class="home-container">
                 <header class="editorial-heading editorial-heading-split">
                     <div>
-                        <p class="eyebrow">{{t.41}}</p>
-                        <h2 id="solutions-preview-title">{{t.42}} <em>{{t.43}}</em></h2>
+                        <p class="eyebrow">{{t.34}}</p>
+                        <h2 id="solutions-preview-title">{{t.35}} <em>{{t.36}}</em></h2>
                     </div>
-                    <p>{{t.44}}</p>
+                    <p>{{t.37}}</p>
                 </header>
 
                 <article class="product-feature product-feature-fleet" data-reveal>
                     <div class="product-copy">
-                        <span class="product-number">{{t.45}}</span>
-                        <p class="product-kicker">{{t.46}}</p>
-                        <h3>{{t.47}}</h3>
-                        <p>{{t.48}}</p>
+                        <span class="product-number">{{t.38}}</span>
+                        <p class="product-kicker">{{t.39}}</p>
+                        <h3>{{t.40}}</h3>
+                        <p>{{t.41}}</p>
                         <ul class="product-points">
-                            <li>{{t.49}}</li>
-                            <li>{{t.50}}</li>
-                            <li>{{t.51}}</li>
+                            <li>{{t.42}}</li>
+                            <li>{{t.43}}</li>
+                            <li>{{t.44}}</li>
                         </ul>
-                        <a href="solution-fleet.html" class="editorial-link">{{t.52}} <span aria-hidden="true">{{t.53}}</span></a>
+                        <a href="solution-fleet.html" class="editorial-link">{{t.45}} <span aria-hidden="true">{{t.46}}</span></a>
                     </div>
                     <figure class="product-screen product-screen-dark">
-                        <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>{{t.54}}</span></div>
-                        <img src="images/home-fleet-anonymized.webp" alt="{{a.7}}" width="1742" height="903" loading="lazy">
-                        <figcaption>{{t.55}}</figcaption>
+                        <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>{{t.47}}</span></div>
+                        <img alt="{{a.3}}" src="images/home-fleet-light.webp" data-shot-light-size="2048x1137" data-shot-light="images/home-fleet-light.webp" data-shot-dark="images/home-fleet-anonymized.webp" width="2048" height="1137" data-shot-dark-size="1742x903" loading="lazy">
+                        <figcaption>{{t.48}}</figcaption>
                     </figure>
                 </article>
 
                 <article class="product-feature product-feature-stations" data-reveal>
                     <div class="product-copy">
-                        <span class="product-number">{{t.56}}</span>
-                        <p class="product-kicker">{{t.57}}</p>
-                        <h3>{{t.58}}</h3>
-                        <p>{{t.59}}</p>
+                        <span class="product-number">{{t.49}}</span>
+                        <p class="product-kicker">{{t.50}}</p>
+                        <h3>{{t.51}}</h3>
+                        <p>{{t.52}}</p>
                         <ul class="product-points">
-                            <li>{{t.60}}</li>
-                            <li>{{t.61}}</li>
-                            <li>{{t.62}}</li>
+                            <li>{{t.53}}</li>
+                            <li>{{t.54}}</li>
+                            <li>{{t.55}}</li>
                         </ul>
-                        <a href="solutions.html" class="editorial-link">{{t.63}} <span aria-hidden="true">{{t.64}}</span></a>
+                        <a href="solutions.html" class="editorial-link">{{t.56}} <span aria-hidden="true">{{t.57}}</span></a>
                     </div>
-                    <figure class="product-screen product-screen-light">
-                        <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>{{t.65}}</span></div>
-                        <img src="images/home-stations-demo.webp" alt="{{a.8}}" width="2048" height="1139" loading="lazy">
-                        <figcaption>{{t.66}}</figcaption>
+                    <figure class="product-screen product-screen-dark">
+                        <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>{{t.58}}</span></div>
+                        <img alt="{{a.4}}" src="images/home-stations-light.webp" data-shot-light-size="2048x1147" data-shot-light="images/home-stations-light.webp" data-shot-dark="images/home-stations-demo.webp" width="2048" height="1147" data-shot-dark-size="2048x1131" loading="lazy">
+                        <figcaption>{{t.59}}</figcaption>
                     </figure>
                 </article>
             </div>
         </section>
 
-        <section class="decision-journey" data-decision-journey data-step="0" aria-labelledby="journey-title">
+        <section class="decision-journey" data-decision-journey data-step="0" aria-labelledby="journey-title" data-step-message="{{a.10}}">
             <div class="home-container">
                 <header class="journey-heading">
-                    <p class="eyebrow">{{t.67}}</p>
-                    <h2 id="journey-title">{{t.68}} <em>{{t.69}}</em></h2>
+                    <p class="eyebrow">{{t.60}}</p>
+                    <h2 id="journey-title">{{t.61}} <em>{{t.62}}</em></h2>
                 </header>
-                <div class="journey-dashboard" role="group" aria-label="{{a.9}}">
+                <div class="journey-dashboard" role="group" aria-label="{{a.5}}">
                     <div class="journey-dashboard-head">
-                        <span>{{t.70}}</span>
+                        <span>{{t.63}}</span>
                         <div>
-                            <strong data-journey-panel-label>{{t.71}}</strong>
-                            <button type="button" data-journey-replay>{{t.72}}</button>
+                            <strong data-journey-panel-label>{{t.64}}</strong>
+                            <button type="button" data-journey-replay>{{t.65}}</button>
                         </div>
                     </div>
 
                     <div class="journey-stage-content">
                         <div class="journey-scene journey-scene-scatter" data-journey-scene="0" aria-hidden="true">
-                            <span class="scene-label">{{t.73}}</span>
+                            <span class="scene-label">{{t.66}}</span>
+                            <div class="scatter-item">{{t.67}}</div>
+                            <div class="scatter-item">{{t.68}}</div>
+                            <div class="scatter-item">{{t.69}}</div>
+                            <div class="scatter-item">{{t.70}}</div>
+                            <div class="scatter-item">{{t.71}}</div>
+                            <div class="scatter-item">{{t.72}}</div>
+                            <div class="scatter-item scatter-warning">{{t.73}}</div>
                             <div class="scatter-item">{{t.74}}</div>
                             <div class="scatter-item">{{t.75}}</div>
-                            <div class="scatter-item">{{t.76}}</div>
-                            <div class="scatter-item">{{t.77}}</div>
-                            <div class="scatter-item">{{t.78}}</div>
-                            <div class="scatter-item">{{t.79}}</div>
-                            <div class="scatter-item scatter-warning">{{t.80}}</div>
-                            <div class="scatter-item">{{t.81}}</div>
-                            <div class="scatter-item">{{t.82}}</div>
-                            <div class="scatter-item scatter-warning">{{t.83}}</div>
+                            <div class="scatter-item scatter-warning">{{t.76}}</div>
                         </div>
 
                         <div class="journey-scene journey-scene-central" data-journey-scene="1" aria-hidden="true">
-                            <span class="scene-label">{{t.84}}</span>
+                            <span class="scene-label">{{t.77}}</span>
                             <svg class="central-paths" viewBox="0 0 1200 320" preserveAspectRatio="none">
                                 <path d="M70 55L550 150M250 25L550 150M410 92L550 150M115 272L550 170M355 305L550 170"/>
                                 <path d="M1130 55L650 150M950 25L650 150M1090 272L650 170M845 305L650 170M1035 160L650 160"/>
                             </svg>
-                            <div class="central-source central-source-1">{{t.85}}</div>
-                            <div class="central-source central-source-2">{{t.86}}</div>
-                            <div class="central-source central-source-3">{{t.87}}</div>
-                            <div class="central-source central-source-4">{{t.88}}</div>
-                            <div class="central-source central-source-5">{{t.89}}</div>
-                            <div class="central-source central-source-6">{{t.90}}</div>
-                            <div class="central-source central-source-7">{{t.91}}</div>
-                            <div class="central-source central-source-8">{{t.92}}</div>
-                            <div class="central-source central-source-9">{{t.93}}</div>
-                            <div class="central-source central-source-10">{{t.94}}</div>
+                            <div class="central-source central-source-1">{{t.78}}</div>
+                            <div class="central-source central-source-2">{{t.79}}</div>
+                            <div class="central-source central-source-3">{{t.80}}</div>
+                            <div class="central-source central-source-4">{{t.81}}</div>
+                            <div class="central-source central-source-5">{{t.82}}</div>
+                            <div class="central-source central-source-6">{{t.83}}</div>
+                            <div class="central-source central-source-7">{{t.84}}</div>
+                            <div class="central-source central-source-8">{{t.85}}</div>
+                            <div class="central-source central-source-9">{{t.86}}</div>
+                            <div class="central-source central-source-10">{{t.87}}</div>
                             <div class="central-core">
-                                <img src="images/datako-mark-white.png" alt="{{a.10}}" width="220" height="220">
-                                <span>{{t.95}}</span>
+                                <img src="images/datako-mark-white.png" alt="{{a.6}}" width="220" height="220">
+                                <span>{{t.88}}</span>
                             </div>
                         </div>
 
                         <div class="journey-scene journey-scene-structured" data-journey-scene="2" aria-hidden="true">
-                            <span class="scene-label">{{t.96}}</span>
+                            <span class="scene-label">{{t.89}}</span>
                             <div class="structure-table">
-                                <div class="structure-row structure-head"><span>{{t.97}}</span><span>{{t.98}}</span><span>{{t.99}}</span><span>{{t.100}}</span></div>
-                                <div class="structure-row"><b>{{t.101}}</b><i></i><span class="structure-volume" style="--row-width:92%"></span><small>{{t.102}}</small></div>
-                                <div class="structure-row"><b>{{t.103}}</b><i></i><span class="structure-volume" style="--row-width:74%"></span><small>{{t.104}}</small></div>
-                                <div class="structure-row"><b>{{t.105}}</b><i></i><span class="structure-volume" style="--row-width:54%"></span><small>{{t.106}}</small></div>
-                                <div class="structure-row"><b>{{t.107}}</b><i></i><span class="structure-volume" style="--row-width:39%"></span><small class="status-warning">{{t.108}}</small></div>
-                                <div class="structure-row"><b>{{t.109}}</b><i></i><span class="structure-volume" style="--row-width:64%"></span><small>{{t.110}}</small></div>
+                                <div class="structure-row structure-head"><span>{{t.90}}</span><span>{{t.91}}</span><span>{{t.92}}</span><span>{{t.93}}</span></div>
+                                <div class="structure-row"><b>{{t.94}}</b><i></i><span class="structure-volume" style="--row-width:92%"></span><small>{{t.95}}</small></div>
+                                <div class="structure-row"><b>{{t.96}}</b><i></i><span class="structure-volume" style="--row-width:74%"></span><small>{{t.97}}</small></div>
+                                <div class="structure-row"><b>{{t.98}}</b><i></i><span class="structure-volume" style="--row-width:54%"></span><small>{{t.99}}</small></div>
+                                <div class="structure-row"><b>{{t.100}}</b><i></i><span class="structure-volume" style="--row-width:39%"></span><small class="status-warning">{{t.101}}</small></div>
+                                <div class="structure-row"><b>{{t.102}}</b><i></i><span class="structure-volume" style="--row-width:64%"></span><small>{{t.103}}</small></div>
                             </div>
                         </div>
 
                         <div class="journey-scene journey-scene-metrics" data-journey-scene="3" aria-hidden="true">
-                            <span class="scene-label">{{t.111}}</span>
+                            <span class="scene-label">{{t.104}}</span>
                             <div class="journey-metrics">
                                 <div class="journey-metric journey-metric-volume">
-                                    <span>{{t.112}}</span>
+                                    <span>{{t.105}}</span>
                                     <div class="metric-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
                                 </div>
                                 <div class="journey-metric journey-metric-trend">
-                                    <span>{{t.113}}</span>
+                                    <span>{{t.106}}</span>
                                     <svg viewBox="0 0 280 110" preserveAspectRatio="none">
                                         <path class="trend-grid" d="M0 90H280 M0 54H280 M0 18H280"/>
                                         <path class="trend-line" d="M4 92 L44 76 L82 84 L126 56 L168 64 L218 30 L276 18"/>
@@ -250,30 +226,30 @@
                                     </svg>
                                 </div>
                                 <div class="journey-metric journey-metric-threshold">
-                                    <span>{{t.114}}</span>
+                                    <span>{{t.107}}</span>
                                     <div class="threshold-track"><i></i><b></b></div>
-                                    <small>{{t.115}}</small>
+                                    <small>{{t.108}}</small>
                                 </div>
                             </div>
                         </div>
 
                         <div class="journey-scene journey-scene-decision" data-journey-scene="4" aria-hidden="true">
-                            <span class="scene-label">{{t.116}}</span>
+                            <span class="scene-label">{{t.109}}</span>
                             <div class="decision-signal">
                                 <i aria-hidden="true"></i>
-                                <div><span>{{t.117}}</span><strong>{{t.118}}</strong></div>
+                                <div><span>{{t.110}}</span><strong>{{t.111}}</strong></div>
                             </div>
-                            <p>{{t.119}}</p>
+                            <p>{{t.112}}</p>
                         </div>
                     </div>
-                    <p class="sr-only" aria-live="polite" data-journey-live>{{t.120}}</p>
+                    <p class="sr-only" aria-live="polite" data-journey-live>{{t.113}}</p>
                 </div>
                 <ol class="journey-steps">
-                    <li data-journey-step><span>{{t.121}}</span><strong>{{t.122}}</strong><small>{{t.123}}</small></li>
-                    <li data-journey-step><span>{{t.124}}</span><strong>{{t.125}}</strong><small>{{t.126}}</small></li>
-                    <li data-journey-step><span>{{t.127}}</span><strong>{{t.128}}</strong><small>{{t.129}}</small></li>
-                    <li data-journey-step><span>{{t.130}}</span><strong>{{t.131}}</strong><small>{{t.132}}</small></li>
-                    <li data-journey-step><span>{{t.133}}</span><strong>{{t.134}}</strong><small>{{t.135}}</small></li>
+                    <li data-journey-step><span>{{t.114}}</span><strong>{{t.115}}</strong><small>{{t.116}}</small></li>
+                    <li data-journey-step><span>{{t.117}}</span><strong>{{t.118}}</strong><small>{{t.119}}</small></li>
+                    <li data-journey-step><span>{{t.120}}</span><strong>{{t.121}}</strong><small>{{t.122}}</small></li>
+                    <li data-journey-step><span>{{t.123}}</span><strong>{{t.124}}</strong><small>{{t.125}}</small></li>
+                    <li data-journey-step><span>{{t.126}}</span><strong>{{t.127}}</strong><small>{{t.128}}</small></li>
                 </ol>
             </div>
         </section>
@@ -281,76 +257,42 @@
         <section class="home-section home-essentials" aria-labelledby="essentials-title">
             <div class="home-container essentials-grid">
                 <div class="essentials-copy">
-                    <p class="eyebrow">{{t.136}}</p>
-                    <h2 id="essentials-title">{{t.137}}</h2>
-                    <p>{{t.138}}</p>
-                    <p class="essentials-scope">{{t.139}}</p>
+                    <p class="eyebrow">{{t.129}}</p>
+                    <h2 id="essentials-title">{{t.130}}</h2>
+                    <p>{{t.131}}</p>
+                    <p class="essentials-scope">{{t.132}}</p>
                 </div>
-                <nav class="essentials-links" aria-label="{{a.11}}">
-                    <a href="prestations.html"><span>{{t.140}}</span><small>{{t.141}}</small><i aria-hidden="true">{{t.142}}</i></a>
-                    <a href="formations.html"><span>{{t.143}}</span><small>{{t.144}}</small><i aria-hidden="true">{{t.145}}</i></a>
-                    <a href="matching.html"><span>{{t.146}}</span><small>{{t.147}}</small><i aria-hidden="true">{{t.148}}</i></a>
+                <nav class="essentials-links" aria-label="{{a.7}}">
+                    <a href="prestations.html"><span>{{t.133}}</span><small>{{t.134}}</small><i aria-hidden="true">{{t.135}}</i></a>
+                    <a href="formations.html"><span>{{t.136}}</span><small>{{t.137}}</small><i aria-hidden="true">{{t.138}}</i></a>
+                    <a href="matching.html"><span>{{t.139}}</span><small>{{t.140}}</small><i aria-hidden="true">{{t.141}}</i></a>
                 </nav>
             </div>
         </section>
 
         <section class="home-final-cta" aria-labelledby="final-cta-title">
             <div class="home-container">
-                <p class="eyebrow">{{t.149}}</p>
-                <h2 id="final-cta-title">{{t.150}}</h2>
+                <p class="eyebrow">{{t.142}}</p>
+                <h2 id="final-cta-title">{{t.143}}</h2>
                 <div class="home-final-actions">
-                    <a href="contact.html#contact-form-container" class="home-btn home-btn-light">{{t.151}}</a>
-                    <a href="https://diagnostic.xn--datak-nua.com/" class="home-btn home-btn-navy-quiet">{{t.152}}</a>
+                    <a href="contact.html#contact-form-container" class="home-btn home-btn-light">{{t.144}}</a>
+                    <a href="https://diagnostic.xn--datak-nua.com/" class="home-btn home-btn-navy-quiet">{{t.145}}</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer home-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col footer-identity">
-                    <img src="images/logo-2026-white.png" alt="{{a.12}}" class="footer-logo" width="835" height="253">
-                    <p class="footer-desc">{{t.153}}</p>
-                </div>
-                <div class="footer-col footer-nav">
-                    <p class="footer-title">{{t.154}}</p>
-                    <ul class="footer-links">
-                        <li><a href="solutions.html">{{t.155}}</a></li>
-                        <li><a href="prestations.html">{{t.156}}</a></li>
-                        <li><a href="formations.html">{{t.157}}</a></li>
-                        <li><a href="matching.html">{{t.158}}</a></li>
-                        <li><a href="blog.html">{{t.159}}</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col footer-contact">
-                    <p class="footer-title">{{t.160}}</p>
-                    <ul class="footer-links-contact">
-                        <li><a href="mailto:contact@datakö.com">{{t.161}}</a></li>
-                        <li>{{t.162}}</li>
-                    </ul>
-                    <p class="footer-tagline">{{t.163}}</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-copyright">{{t.164}}</div>
-                <div class="footer-legal">
-                    <a href="mentions-legales.html">{{t.165}}</a>
-                    <a href="politique-confidentialite.html">{{t.166}}</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    {{> footer class="home-footer" }}
 
-    <a href="contact.html" class="floating-btn" aria-label="{{a.13}}">
-        <span class="btn-text">{{t.167}}</span>
+    <a href="contact.html" class="floating-btn" aria-label="{{a.8}}">
+        <span class="btn-text">{{t.146}}</span>
         <span class="btn-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </span>
     </a>
 
-    <script src="js/main.js?v=20260811-6"></script>
-    <script src="js/home-motion.js?v=20260811-2"></script>
+    <script src="js/main.js?v=20260812-2"></script>
+    <script src="js/home-motion.js?v=20260812-1"></script>
 </body>
 
 </html>

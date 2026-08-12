@@ -2,6 +2,25 @@
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const sequences = [...document.querySelectorAll('[data-product-sequence]')];
 
+    // Un pas de séquence peut déclarer la donnée qu'il produit via
+    // data-fills="nom" ; la cible correspondante porte data-slot="nom" et se
+    // remplit au moment exact où le pas apparaît. C'est ce lien qui fait la
+    // démonstration : le cockpit se complète parce que le terrain a répondu,
+    // pas en parallèle. La portée est le plus proche [data-sequence-scope],
+    // pour que la cible puisse vivre hors de la séquence.
+    const scopeOf = sequence => sequence.closest('[data-sequence-scope]') || document;
+
+    const applyFills = (sequence, upTo) => {
+        const scope = scopeOf(sequence);
+        [...sequence.querySelectorAll('[data-sequence-step]')].forEach((step, index) => {
+            const name = step.dataset.fills;
+            if (!name) return;
+            scope.querySelectorAll(`[data-slot="${name}"]`).forEach(target => {
+                target.classList.toggle('is-filled', index <= upTo);
+            });
+        });
+    };
+
     const finish = sequence => {
         const steps = [...sequence.querySelectorAll('[data-sequence-step]')];
         sequence.dataset.step = String(Math.max(0, steps.length - 1));
@@ -10,6 +29,7 @@
             step.classList.remove('is-current');
             step.classList.add('is-complete');
         });
+        applyFills(sequence, steps.length - 1);
     };
 
     const play = sequence => {
@@ -25,6 +45,7 @@
                     candidate.classList.toggle('is-current', candidateIndex === index);
                     candidate.classList.toggle('is-complete', candidateIndex < index);
                 });
+                applyFills(sequence, index);
             }, index * delay);
         });
         window.setTimeout(() => finish(sequence), steps.length * delay);

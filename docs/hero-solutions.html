@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Solutions · proposition — prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Hero Solutions — proposition · prototype isolé
+
+   Reprend l'INTENTION de 1a : un hub qui montre sa gamme vaut mieux qu'un
+   hub qui la compte. « 03 / 01 / 03 » n'annonçait rien qu'on ne relise
+   trois écrans plus bas.
+
+   La composition suit 1a : rotation automatique, et panneau redessiné pour
+   Stations plutôt qu'une capture — à cette largeur, une capture réduite
+   devient illisible. Décidé par Abdoulaye le 12/08/2026, contre mon avis
+   sur le mouvement perpétuel ; sa règle, sa décision.
+
+   CE QUI NE SUIT PAS 1a : LES CHIFFRES. La maquette portait 57 480 000
+   d'encaissé, 6 000 000 de crédits, 1 700 000 de charges, des cuves à
+   62 % et 78 % et « 2 points demandent votre attention ». Le cockpit réel
+   affiche 47 640 000, 1 800 000, 200 000 et « Rien à signaler ». Le dessin
+   est celui de la maquette, les montants sont ceux du produit.
+
+   Deux éléments de 1a n'ont aucune source et ne sont donc pas repris : les
+   pourcentages de remplissage (aucune capacité de cuve n'existe nulle part)
+   et la ventilation par pistolet (absente de toutes les captures reçues).
+   Ils sont remplacés par le stock théorique en litres et par les quatre
+   chiffres d'« Activité de la journée ».
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --color-canvas: #f3f6f5;
+    --color-canvas-soft: #e9efed;
+    --color-surface: #ffffff;
+    --color-ink: #062f3a;
+    --color-ink-soft: #3d5961;
+    --color-ink-muted: #64777c;
+    --color-line: rgba(6, 47, 58, .14);
+    --color-line-strong: rgba(6, 47, 58, .28);
+    --color-navy: #032e3a;
+    --color-accent: #3457e8;
+    --color-success: #168f70;
+    --shadow-raised: 0 28px 90px rgba(4, 38, 48, .16);
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink-soft);
+    font-family: "Familjen Grotesk", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Cartouche de lecture, hors maquette ─────────────────────────────── */
+.note {
+    padding: 26px clamp(20px, 5vw, 72px);
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-canvas-soft);
+}
+
+.note h1 {
+    margin: 0 0 10px;
+    color: var(--color-ink);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.note p { max-width: 82ch; margin: 0 0 8px; font-size: .89rem; }
+.note p:last-child { margin-bottom: 0; }
+.note b { color: var(--color-ink); font-weight: 500; }
+.note code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(6, 47, 58, .08);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .84em;
+}
+
+.note-warn { border-left: 3px solid #c6401f; padding-left: 14px; margin-top: 14px; }
+
+/* ── Hero ────────────────────────────────────────────────────────────── */
+.hero {
+    padding: clamp(64px, 8vw, 104px) clamp(20px, 5vw, 72px) clamp(56px, 7vw, 92px);
+    overflow: hidden;
+}
+
+.hero-grid {
+    max-width: 1360px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+    gap: clamp(40px, 5vw, 84px);
+    align-items: center;
+}
+
+.kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 26px;
+    color: var(--color-accent);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.kicker::before {
+    content: "";
+    width: 38px;
+    height: 1px;
+    background: currentColor;
+}
+
+.hero h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(2.5rem, 4.4vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+}
+
+.hero h2 em {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.lead { max-width: 52ch; margin: 30px 0 0; font-size: 1.04rem; }
+.lead + .lead { margin-top: 18px; }
+
+.actions { margin-top: 38px; display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+
+.btn {
+    padding: 15px 30px;
+    border: 0;
+    border-radius: 99px;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    font: inherit;
+    font-weight: 500;
+    font-size: .95rem;
+    cursor: pointer;
+    transition: background 220ms ease;
+}
+
+.btn:hover { background: var(--color-accent); }
+
+.link {
+    color: var(--color-ink);
+    font-weight: 500;
+    font-size: .95rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line-strong);
+    padding-bottom: 3px;
+    transition: border-color 220ms ease;
+}
+
+.link:hover { border-color: var(--color-accent); }
+
+/* ── Rail de modules ─────────────────────────────────────────────────── */
+.rail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(12px, 1.6vw, 26px);
+    margin-bottom: 26px;
+}
+
+.rail button {
+    position: relative;
+    padding: 17px 0 0;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    /* Ouverture : chaque colonne monte une fois, puis c'est fini. */
+    opacity: 0;
+    transform: translateY(9px);
+    transition: opacity 520ms var(--ease-out), transform 520ms var(--ease-out);
+}
+
+.rail button:disabled { cursor: default; }
+
+/* Le filet actif se dessine de gauche à droite : il désigne, il ne clignote pas. */
+.rail button::after {
+    content: "";
+    position: absolute;
+    inset: -1px auto auto 0;
+    height: 2px;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 620ms var(--ease-out);
+}
+
+.rail button[aria-selected="true"]::after { transform: scaleX(1); }
+
+.rail strong {
+    display: block;
+    color: var(--color-ink);
+    font-size: 1.06rem;
+    font-weight: 500;
+    letter-spacing: -.015em;
+}
+
+.rail span {
+    color: var(--color-ink-muted);
+    font-size: .84rem;
+}
+
+.rail button:disabled strong,
+.rail button:disabled span { opacity: .48; }
+
+.rail em {
+    font-style: normal;
+    color: var(--color-success);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .62rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.is-open .rail button { opacity: 1; transform: none; }
+.is-open .rail button:nth-child(2) { transition-delay: 90ms; }
+.is-open .rail button:nth-child(3) { transition-delay: 180ms; }
+.is-open .rail button:nth-child(4) { transition-delay: 270ms; }
+.is-open .rail button[aria-selected="true"]::after { transition-delay: 340ms; }
+
+/* ── Écran ───────────────────────────────────────────────────────────── */
+.screen {
+    position: relative;
+    margin: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    background: #071116;
+    box-shadow: var(--shadow-raised);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+    transition-delay: 260ms;
+}
+
+.is-open .screen { opacity: 1; transform: none; }
+
+.screen-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, .09);
+    background: rgba(255, 255, 255, .04);
+}
+
+.screen-bar i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .2);
+}
+
+.screen-bar span {
+    margin-left: 8px;
+    color: rgba(255, 255, 255, .5);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .6rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.screen-stack { position: relative; aspect-ratio: 1.82 / 1; }
+
+.screen-stack img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.screen-stack img.is-active,
+.screen-stack .panel.is-active { opacity: 1; }
+
+/* ── Panneau Stations redessiné ──────────────────────────────────────────
+   Une capture réduite à cette largeur devient illisible : le panneau
+   redessiné reste net. Les montants sont ceux du cockpit réel — 47 640 000
+   encaissé, 1 800 000 à crédit, 200 000 de dépenses — pas ceux de la
+   maquette. Les cuves portent le stock théorique de l'écran Clôture, en
+   litres : aucune capacité n'existe, donc aucun pourcentage n'est calculable. */
+.panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+    padding: clamp(16px, 2vw, 26px);
+    background: #f6f8f8;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.panel-top { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.panel-card {
+    padding: clamp(13px, 1.5vw, 20px);
+    border: 1px solid rgba(6, 47, 58, .13);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.panel-card > span {
+    color: var(--color-ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .58rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.panel-big {
+    display: block;
+    margin: 8px 0 14px;
+    color: var(--color-ink);
+    font-size: clamp(1.5rem, 2.7vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.panel-big i { font-style: normal; font-size: .48em; color: var(--color-ink-muted); margin-left: 5px; }
+
+.panel-pair { display: flex; gap: clamp(16px, 2.4vw, 34px); }
+.panel-pair div span { display: block; color: var(--color-ink-muted); font-family: "IBM Plex Mono", monospace; font-size: .55rem; letter-spacing: .13em; text-transform: uppercase; }
+.panel-pair div b { color: var(--color-ink); font-family: "IBM Plex Mono", monospace; font-size: .92rem; font-weight: 500; }
+
+.tank-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 11px; font-size: .78rem; }
+.tank-row span { color: var(--color-ink-soft); font-family: "IBM Plex Mono", monospace; font-size: .72rem; }
+.tank-row b { color: var(--color-ink); font-family: "IBM Plex Mono", monospace; font-size: .72rem; font-weight: 500; }
+
+.tank-bar { height: 7px; margin-top: 5px; border-radius: 99px; background: rgba(6, 47, 58, .1); overflow: hidden; }
+.tank-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: var(--c); }
+
+.panel-note { margin: 14px 0 0; color: var(--color-ink-muted); font-size: .72rem; }
+
+/* Bandeau : les quatre chiffres de « Activité de la journée » défilent. */
+.marquee {
+    align-self: end;
+    border: 1px solid rgba(6, 47, 58, .13);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.marquee > span {
+    display: block;
+    padding: 11px 16px 0;
+    color: var(--color-ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .55rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    padding: 9px 0 13px;
+    animation: slide 22s linear infinite;
+}
+
+.screen:hover .marquee-track,
+.screen:focus-within .marquee-track { animation-play-state: paused; }
+
+.marquee-track div {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 0 22px;
+    white-space: nowrap;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+}
+
+.marquee-track div span { color: var(--color-ink-muted); }
+.marquee-track div b { color: var(--color-ink); font-weight: 500; }
+
+@keyframes slide { to { transform: translateX(-50%); } }
+
+.screen figcaption {
+    padding: 13px 16px;
+    border-top: 1px solid rgba(255, 255, 255, .09);
+    color: rgba(255, 255, 255, .46);
+    font-size: .76rem;
+}
+
+/* ── Rejouer ─────────────────────────────────────────────────────────── */
+.replay {
+    max-width: 1360px;
+    margin: 26px auto 0;
+    padding: 0 clamp(20px, 5vw, 72px);
+}
+
+.replay button {
+    padding: 9px 17px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 99px;
+    background: none;
+    color: var(--color-ink-soft);
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+@media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .rail { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+}
+
+/* L'ouverture est un confort, pas le message : sans elle, tout est là. */
+@media (prefers-reduced-motion: reduce) {
+    .rail button, .screen { opacity: 1; transform: none; transition: none; }
+    .rail button::after { transform: scaleX(1); transition: none; }
+    .screen-stack img { transition: none; }
+    .replay { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="note">
+    <h1>Hero Solutions — proposition</h1>
+    <p>Reprend l'intention de <b>1a</b> : le hub montre sa gamme au lieu de la compter. Le compteur « 03 / 01 / 03 » annonçait des chiffres qu'on relit trois écrans plus bas.</p>
+    <p><b>Rotation automatique</b> toutes les 4 s, fondu de 300 ms. Elle marque une pause au survol et au focus clavier, s'arrête définitivement au premier clic sur un module, et ne démarre pas sous <code>prefers-reduced-motion</code>.</p>
+    <p><b>Le dessin vient de 1a, les chiffres viennent du produit.</b> La maquette portait <code>57 480 000</code> d'encaissé, <code>6 000 000</code> de crédits et <code>1 700 000</code> de charges ; le cockpit réel affiche <code>47 640 000</code>, <code>1 800 000</code> et <code>200 000</code>.</p>
+    <p><b>Deux éléments de 1a n'ont aucune source</b> et sont remplacés : les cuves à 62 % et 78 % (aucune capacité de cuve n'existe, donc aucun pourcentage n'est calculable) laissent place au stock théorique en litres de l'écran Clôture ; la ventilation par pistolet, absente de toutes les captures reçues, laisse place aux quatre chiffres d'« Activité de la journée » dans le bandeau.</p>
+    <p class="note-warn"><b>Ce que ce prototype rend visible :</b> Distribution est la seule capture en thème clair. Dans un cadre unique où les écrans se remplacent, le passage de Fleet à Distribution produit un flash blanc. C'est l'argument le plus net pour la recapturer en sombre.</p>
+</div>
+
+<section class="hero" id="hero">
+    <div class="hero-grid">
+        <div>
+            <p class="kicker">La plateforme Datakö</p>
+            <h2>Des solutions métier pour piloter vos opérations et votre <em>rentabilité.</em></h2>
+            <p class="lead">Au-delà du conseil, Datakö édite des applications métier conçues pour le terrain. Nos solutions structurent vos opérations, suivent vos performances et vous redonnent le contrôle sur vos marges.</p>
+            <p class="lead">Moins de complexité, plus de visibilité, et des décisions prises au bon moment.</p>
+            <div class="actions">
+                <button class="btn" type="button">Demander une démo</button>
+                <a class="link" href="#hero">Voir les modules</a>
+            </div>
+        </div>
+
+        <div>
+            <div class="rail" role="tablist" aria-label="Modules Datakö">
+                <button type="button" role="tab" aria-selected="true" data-screen="fleet">
+                    <strong>Datakö Fleet</strong><span>Transport</span>
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-screen="distribution">
+                    <strong>Datakö Distribution</strong><span>Distribution carburant</span>
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-screen="stations">
+                    <strong>Datakö Stations</strong><span>Stations-service</span>
+                </button>
+                <button type="button" role="tab" aria-selected="false" disabled>
+                    <strong>Datakö HR</strong><em>En préparation</em>
+                </button>
+            </div>
+
+            <figure class="screen">
+                <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span data-label>Fleet · Vue d'ensemble</span></div>
+                <div class="screen-stack">
+                    <img class="is-active" data-screen="fleet" src="../images/home-fleet-anonymized.webp" alt="Vue d'ensemble anonymisée de Datakö Fleet">
+                    <img data-screen="distribution" src="../images/home-distribution-anonymized.webp" alt="Tableau de bord Datakö Distribution">
+                    <div class="panel" data-screen="stations" role="img" aria-label="Cockpit de démonstration Datakö Stations : 47 640 000 GNF encaissés">
+                        <div class="panel-top">
+                            <div class="panel-card">
+                                <span>Encaissé aujourd'hui</span>
+                                <b class="panel-big">47 640 000<i>GNF</i></b>
+                                <div class="panel-pair">
+                                    <div><span>Crédits</span><b>1 800 000</b></div>
+                                    <div><span>Charges</span><b>200 000</b></div>
+                                </div>
+                            </div>
+                            <div class="panel-card">
+                                <span>Stock théorique</span>
+                                <div class="tank-row"><span>Cuve 1 · Gasoil</span><b>33 160 L</b></div>
+                                <div class="tank-bar"><i style="--w:100%;--c:#c9973c"></i></div>
+                                <div class="tank-row"><span>Cuve Essence</span><b>18 500 L</b></div>
+                                <div class="tank-bar"><i style="--w:56%;--c:#31788a"></i></div>
+                                <p class="panel-note">Relevé physique non mesuré.</p>
+                            </div>
+                        </div>
+                        <div class="marquee">
+                            <span>Activité de la journée</span>
+                            <div class="marquee-track">
+                                <div><span>Chiffre d'affaires</span><b>48 000 000</b></div>
+                                <div><span>Vendus à crédit</span><b>1 800 000</b></div>
+                                <div><span>Remboursés</span><b>1 440 000</b></div>
+                                <div><span>Dépenses du jour</span><b>200 000</b></div>
+                                <div aria-hidden="true"><span>Chiffre d'affaires</span><b>48 000 000</b></div>
+                                <div aria-hidden="true"><span>Vendus à crédit</span><b>1 800 000</b></div>
+                                <div aria-hidden="true"><span>Remboursés</span><b>1 440 000</b></div>
+                                <div aria-hidden="true"><span>Dépenses du jour</span><b>200 000</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <figcaption data-caption>Captures produit · environnement de démonstration</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<div class="replay"><button type="button" id="replay">Rejouer l'ouverture</button></div>
+
+<script>
+const hero   = document.getElementById('hero');
+const rail   = document.querySelector('.rail');
+const panes  = [...document.querySelectorAll('.screen-stack [data-screen]')];
+const tabs   = [...rail.querySelectorAll('button[data-screen]')];
+const label  = document.querySelector('[data-label]');
+const screen = document.querySelector('.screen');
+
+const labels = {
+    fleet:        "Fleet · Vue d'ensemble",
+    distribution: "Distribution · Tableau de bord",
+    stations:     "Stations · Cockpit du jour"
+};
+
+/* L'ouverture ne se joue qu'une fois, quand la composition entre dans le
+   champ. Pas d'intervalle, pas de reprise au scroll suivant. */
+const open = () => { hero.classList.add('is-open'); startRotation(); };
+
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    open();
+} else {
+    new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            setTimeout(open, 220);
+            obs.disconnect();
+        });
+    }, { threshold: .3 }).observe(hero);
+}
+
+const show = name => {
+    tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.screen === name)));
+    panes.forEach(p => p.classList.toggle('is-active', p.dataset.screen === name));
+    label.textContent = labels[name];
+};
+
+/* Rotation automatique, 5 s. La pause est évaluée AU MOMENT du tick plutôt
+   que pilotée par mouseenter/mouseleave : une paire d'événements manquée
+   suffisait à figer la rotation pour de bon. */
+let timer   = null;
+let stopped = false;
+
+const advance = () => {
+    const current = tabs.findIndex(b => b.getAttribute('aria-selected') === 'true');
+    show(tabs[(current + 1) % tabs.length].dataset.screen);
+};
+
+const startRotation = () => {
+    if (timer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(() => {
+        if (stopped) return;
+        // Survol ou focus clavier : on saute le tour, on ne tue pas la boucle.
+        if (screen.matches(':hover') || rail.matches(':hover') || screen.contains(document.activeElement)) return;
+        advance();
+    }, 4000);
+};
+
+/* Un clic reprend la main : la rotation s'arrête pour de bon. */
+rail.addEventListener('click', event => {
+    const tab = event.target.closest('button[data-screen]');
+    if (!tab) return;
+    stopped = true;
+    show(tab.dataset.screen);
+});
+
+document.getElementById('replay').addEventListener('click', () => {
+    hero.classList.remove('is-open');
+    requestAnimationFrame(() => setTimeout(open, 60));
+});
+</script>
+</body>
+</html>

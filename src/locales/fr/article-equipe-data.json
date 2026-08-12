@@ -1,0 +1,37 @@
+{
+  "text": [
+    "Structurer une équipe data dans une PME — Datakö",
+    "Aller au contenu principal",
+    "Blog",
+    "/ Équipe data",
+    "PME & Organisation Data",
+    "Structurer une équipe data",
+    "dans une PME.",
+    "Le premier recrutement data d’une entreprise détermine souvent les cinq années suivantes. Voici les arbitrages qui reviennent le plus, et ceux qui coûtent le plus cher quand on les tranche mal.",
+    "14 mai 2026",
+    "6 min de lecture",
+    "Le profil unique est une impasse",
+    "Le réflexe le plus courant est de chercher une personne capable de tenir l’infrastructure, de produire les analyses et de construire les modèles. Ce profil existe, mais il est rare, cher, et surtout il ne peut pas exceller partout en même temps : les compétences d’ingénierie et d’analyse ne se pratiquent pas au même rythme ni sur les mêmes objets.",
+    "Le risque concret n’est pas l’échec du recrutement. C’est la dépendance : au bout de deux ans, une seule personne connaît les règles de calcul, et son départ arrête l’entreprise.",
+    "Commencer par le besoin, pas par l’organigramme",
+    "Avant de définir un poste, il vaut mieux répondre à trois questions : de quoi manque-t-on aujourd’hui pour décider, à quelle fréquence ce manque se manifeste, et qui utilisera le résultat. La réponse oriente vers un premier profil très différent selon les cas.",
+    "Une entreprise qui n’arrive pas à consolider ses chiffres a un problème d’ingénierie. Une entreprise qui a les chiffres mais n’en tire rien a un problème d’analyse et de restitution. Les deux se recrutent différemment.",
+    "Les chiffres existent mais ne se rassemblent pas → besoin d’ingénierie.",
+    "Les chiffres se rassemblent mais personne ne s’en sert → besoin d’analyse.",
+    "Les chiffres circulent mais on ne sait plus lesquels sont justes → besoin de gouvernance.",
+    "Recrutez pour le problème que vous avez cette année, pas pour l’organisation que vous espérez dans cinq ans.",
+    "Ce qui doit exister avant la deuxième personne",
+    "Trois choses évitent qu’une équipe naissante devienne une dépendance : les définitions métier écrites ailleurs que dans la tête de quelqu’un, le code versionné dans un dépôt partagé, et une procédure connue pour reprendre la main si une chaîne s’arrête.",
+    "Ce ne sont pas des exigences de grande entreprise. C’est ce qui distingue une compétence installée d’un savoir personnel.",
+    "Internaliser, externaliser, ou les deux",
+    "Certaines compétences gagnent à rester dedans : celles qui touchent au métier, aux définitions, aux arbitrages. D’autres se louent utilement au démarrage, quand le besoin est ponctuel ou très technique — poser une chaîne d’ingestion, cadrer une gouvernance, industrialiser un modèle.",
+    "Le partage raisonnable est souvent celui-là : on garde la connaissance métier, on achète l’accélération technique — et on écrit ce qui a été fait pour ne pas racheter deux fois la même chose.",
+    "Une équipe data à construire ou à consolider ?",
+    "On regarde vos besoins réels avant de parler de postes, et on vous dit franchement ce qui n’a pas besoin d’être internalisé.",
+    "Parler de votre projet",
+    "← Tous les articles"
+  ],
+  "attributes": [
+    "Structurer une équipe data en PME : pourquoi le profil unique est une impasse, comment partir du besoin réel, et ce qui doit exister avant le deuxième recrutement."
+  ]
+}

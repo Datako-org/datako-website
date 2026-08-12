@@ -9,9 +9,8 @@
     <title>Datakö — Your operational data, finally under control</title>
     <script>
         try {
-            const savedTheme = localStorage.getItem('datako_theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.dataset.theme = savedTheme || (systemDark ? 'dark' : 'light');
+            // Clair par defaut. Un visiteur qui a deja choisi le sombre le garde.
+            document.documentElement.dataset.theme = localStorage.getItem('datako_theme') || 'light';
         } catch (error) {
             document.documentElement.dataset.theme = 'light';
         }
@@ -19,45 +18,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/main.css?v=20260812-6">
+    <link rel="stylesheet" href="../css/index.css?v=20260812-7">
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="alternate" hreflang="fr" href="../index.html"><link rel="alternate" hreflang="en" href="index.html"><link rel="alternate" hreflang="x-default" href="../index.html"></head>
 
 <body class="page-2026 page-home">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="header" data-site-header>
-        <div class="container">
-            <a href="index.html" class="logo" aria-label="Datakö — Home">
-                <img src="../images/logo-2026-navy.png" alt="Datakö" class="logo-img" width="835" height="253">
-            </a>
-
-            <nav aria-label="Main navigation">
-                <ul class="nav-menu" id="primary-navigation">
-                    <li class="nav-item"><a href="prestations.html" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="solutions.html" class="nav-link">Solutions</a></li>
-                    <li class="nav-item"><a href="formations.html" class="nav-link">Academy</a></li>
-                    <li class="nav-item"><a href="matching.html" class="nav-link">Matching</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="https://diagnostic.xn--datak-nua.com/" class="nav-btn-diagnostic">Data &amp; AI diagnostic</a></li>
-                </ul>
-                <button class="hamburger" type="button" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </nav>
-        </div>
-    </header>
+    <header class="header" data-site-header><div class="container"><a href="index.html" class="logo" aria-label="Datakö — Home"><img src="../images/logo-2026-navy.png" alt="Datakö" class="logo-img" width="835" height="253"></a><nav aria-label="Main navigation"><ul class="nav-menu" id="primary-navigation"><li class="nav-item"><a href="prestations.html" class="nav-link">Services</a></li><li class="nav-item"><a href="solutions.html" class="nav-link">Solutions</a></li><li class="nav-item"><a href="formations.html" class="nav-link">Academy</a></li><li class="nav-item"><a href="matching.html" class="nav-link">Matching</a></li><li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li><li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li><li class="nav-item"><a href="https://diagnostic.xn--datak-nua.com/" class="nav-btn-diagnostic">Data &amp; AI diagnostic</a></li></ul><button class="hamburger" type="button" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button></nav></div></header>
 
     <main id="main-content">
         <section class="home-hero" aria-labelledby="home-title">
             <div class="home-container home-hero-grid">
                 <div class="home-hero-copy">
                     <p class="eyebrow">Data &amp; AI · West Africa + Europe</p>
-                    <h1 id="home-title">Your operational data, <span class="hero-resolution">finally <em>under control.</em></span></h1>
+                    <h1 id="home-title"><span class="reveal reveal-block"><span>Your operational data, <span class="hero-resolution">finally <em>under control.</em></span></span></span></h1>
                     <p class="home-hero-lead">
                         Datakö structures your data, deploys Data &amp; AI solutions into production and turns field operations into clearer decisions.
                     </p>
@@ -74,7 +50,7 @@
                     </a>
                 </div>
 
-                <div class="data-story" data-data-story data-step="0" role="group" aria-label="From scattered data to an informed decision">
+                <div class="data-story" data-data-story data-step="0" role="group" aria-label="From scattered data to an informed decision" data-step-message="Step {step} of {total}: {label}.">
                     <div class="data-story-topline">
                         <span class="data-story-status"><i></i> Active business flow</span>
                         <button type="button" class="story-replay" data-story-replay aria-label="Replay the data transformation">Replay</button>
@@ -144,7 +120,7 @@
                     </div>
                     <figure class="product-screen product-screen-dark">
                         <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>Overview</span></div>
-                        <img src="../images/home-fleet-anonymized.webp" alt="Anonymized Datakö Fleet interface showing fleet performance indicators" width="1742" height="903" loading="lazy">
+                        <img alt="Anonymized Datakö Fleet interface showing fleet performance indicators" src="../images/home-fleet-light.webp" data-shot-light-size="2048x1137" data-shot-light="images/home-fleet-light.webp" data-shot-dark="images/home-fleet-anonymized.webp" width="2048" height="1137" data-shot-dark-size="1742x903" loading="lazy">
                         <figcaption>Product screenshot · anonymized data</figcaption>
                     </figure>
                 </article>
@@ -162,16 +138,16 @@
                         </ul>
                         <a href="solutions.html" class="editorial-link">Discover Datakö Stations <span aria-hidden="true">→</span></a>
                     </div>
-                    <figure class="product-screen product-screen-light">
+                    <figure class="product-screen product-screen-dark">
                         <div class="screen-chrome" aria-hidden="true"><i></i><i></i><i></i><span>Station cockpit</span></div>
-                        <img src="../images/home-stations-demo.webp" alt="Datakö Stations demo interface showing a station cockpit" width="2048" height="1139" loading="lazy">
+                        <img alt="Datakö Stations demo interface showing a station cockpit" src="../images/home-stations-light.webp" data-shot-light-size="2048x1147" data-shot-light="images/home-stations-light.webp" data-shot-dark="images/home-stations-demo.webp" width="2048" height="1147" data-shot-dark-size="2048x1131" loading="lazy">
                         <figcaption>Product screenshot · demo environment</figcaption>
                     </figure>
                 </article>
             </div>
         </section>
 
-        <section class="decision-journey" data-decision-journey data-step="0" aria-labelledby="journey-title">
+        <section class="decision-journey" data-decision-journey data-step="0" aria-labelledby="journey-title" data-step-message="Step {step} of {total}: {label}.">
             <div class="home-container">
                 <header class="journey-heading">
                     <p class="eyebrow">The Datakö story</p>
@@ -236,7 +212,7 @@
                         </div>
 
                         <div class="journey-scene journey-scene-metrics" data-journey-scene="3" aria-hidden="true">
-                            <span class="scene-label">Actionable information</span>
+                            <span class="scene-label">Readable information</span>
                             <div class="journey-metrics">
                                 <div class="journey-metric journey-metric-volume">
                                     <span>Processed volume</span>
@@ -272,8 +248,8 @@
                 <ol class="journey-steps">
                     <li data-journey-step><span>01</span><strong>Scattered</strong><small>Files, tools, field</small></li>
                     <li data-journey-step><span>02</span><strong>Centralized</strong><small>One shared source</small></li>
-                    <li data-journey-step><span>03</span><strong>Organized</strong><small>Reliable rules</small></li>
-                    <li data-journey-step><span>04</span><strong>Actionable</strong><small>Useful indicators</small></li>
+                    <li data-journey-step><span>03</span><strong>Structured</strong><small>Shared rules</small></li>
+                    <li data-journey-step><span>04</span><strong>Readable</strong><small>The gap appears</small></li>
                     <li data-journey-step><span>05</span><strong>Decided</strong><small>An informed action</small></li>
                 </ol>
             </div>
@@ -307,41 +283,8 @@
         </section>
     </main>
 
-    <footer class="footer home-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col footer-identity">
-                    <img src="../images/logo-2026-white.png" alt="Datakö" class="footer-logo" width="835" height="253">
-                    <p class="footer-desc">Consulting firm specialized in Data, Analytics &amp; Artificial Intelligence.</p>
-                </div>
-                <div class="footer-col footer-nav">
-                    <p class="footer-title">Explore</p>
-                    <ul class="footer-links">
-                        <li><a href="solutions.html">Solutions</a></li>
-                        <li><a href="prestations.html">Services</a></li>
-                        <li><a href="formations.html">Academy</a></li>
-                        <li><a href="matching.html">Matching</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col footer-contact">
-                    <p class="footer-title">Contact</p>
-                    <ul class="footer-links-contact">
-                        <li><a href="mailto:contact@datakö.com">contact@datakö.com</a></li>
-                        <li>Guinea &amp; France</li>
-                    </ul>
-                    <p class="footer-tagline">Supporting local and international projects.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-copyright">&copy; 2025 Datakö. All rights reserved.</div>
-                <div class="footer-legal">
-                    <a href="legal.html">Legal notice</a>
-                    <a href="privacy.html">Privacy policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div class="footer-reveal"><footer class="footer home-footer"><span class="footer-wordmark" aria-hidden="true">Datakö</span><div class="container"><div class="footer-grid"><div class="footer-col footer-identity"><img src="../images/logo-2026-white.png" alt="Datakö" class="footer-logo" width="835" height="253"><p class="footer-desc">Consulting firm specialized in Data, Analytics &amp; Artificial Intelligence.</p></div><div class="footer-col footer-nav"><p class="footer-title">Explore</p><ul class="footer-links"><li><a href="solutions.html">Solutions</a></li><li><a href="prestations.html">Services</a></li><li><a href="formations.html">Academy</a></li><li><a href="matching.html">Matching</a></li><li><a href="blog.html">Blog</a></li></ul></div><div class="footer-col footer-contact"><p class="footer-title">Contact</p><ul class="footer-links-contact"><li><a href="mailto:contact@datakö.com">contact@datakö.com</a></li><li>Guinea &amp; France</li></ul><p class="footer-tagline">Supporting local and international projects.</p></div></div><div class="footer-bottom"><div class="footer-copyright">&copy; 2026 Datakö. All rights reserved.</div><div class="footer-legal"><a href="legal.html">Legal notice</a><a href="privacy.html">Privacy policy</a></div></div></div></footer></div>
+
 
     <a href="contact.html" class="floating-btn" aria-label="Submit your project">
         <span class="btn-text">Submit your project</span>
@@ -350,8 +293,8 @@
         </span>
     </a>
 
-    <script src="../js/main.js?v=20260811-6"></script>
-    <script src="../js/home-motion.js?v=20260811-2"></script>
+    <script src="../js/main.js?v=20260812-2"></script>
+    <script src="../js/home-motion.js?v=20260812-1"></script>
 </body>
 
 </html>
