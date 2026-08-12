@@ -160,20 +160,23 @@ Stations. Toutes les captures marketing en **thème sombre**.
 
 - [x] H1 en graisse 400 + `--type-display` / `--tracking-display`
 - [x] Collision `.data-source-d` × `.decision-card` corrigée (les deux étaient ancrées bas-droite)
-- [ ] **Ordre mobile du hero** : le visuel passe sous les CTA, donc la première impression mobile est
-      du texte pur. Piste : `display: contents` sur `.home-hero-copy` en mobile puis `order` sur
-      eyebrow / h1 / lead / **visuel** / actions
-- [ ] `cover-reveal` sur le H1 (balisage `<span class="reveal"><span>…</span></span>`)
-- [ ] Une bande `--color-bone` comme respiration
-- [ ] Rythme vertical sur les tokens `--sp-*`
-- [ ] `index.html` charge `css/main.css` **sans version** — à versionner comme les autres routes
+- [x] **Ordre mobile du hero** — `display: contents` + `order`. ⚠️ Ordonner **tous** les enfants : un
+      enfant sans `order` prend `order: 0` et remonte en tête (piège rencontré avec le lien diagnostic)
+- [x] `cover-reveal` sur le H1 — variante `.reveal-block` obligatoire sur un titre multi-lignes,
+      sinon `overflow: hidden` rogne tout après la première ligne. ⚠️ La home ne charge **pas**
+      `page-motion.js` : l'observateur a dû être ajouté à `home-motion.js`
+- [x] Une bande `--color-bone` sur `.home-essentials` — rythme clair → navy → bone → clôture
+- [x] Versionnement des feuilles sur `index.html`
+- [x] Produit qui déborde du cadre (Réf 04) — Fleet à droite, Stations à gauche, `overflow-x: clip`
+      sur la section comme garde-fou
+- [x] Stepper : trois états lisibles (contour / rempli sobre / rempli vif + halo)
+- [x] Fin du récit : les quatre états traversés restent en trace à `opacity .08` derrière la décision
 - [ ] Section produits : passer de 2 blocs alternés à **3 cartes égales** (Distribution arrive).
-      ⚠️ Ne pas créer de lien mort : la page Distribution n'existe pas encore
-- [ ] Fin du récit : l'état final est aujourd'hui l'écran **le plus vide** de la séquence. La
-      composition doit être la plus dense — signal + décision + effet chiffré, étapes précédentes en
-      trace atténuée. (La *mécanique* relève de M2, la *composition* peut se faire ici.)
-- [ ] Stepper : `.is-past` ne change qu'une couleur de bordure, les étapes franchies sont
-      indistinguables de celles à venir
+      ⚠️ Bloqué — ne pas créer de lien mort, la page Distribution n'existe pas encore
+- [ ] **Capture Stations à reprendre** : `0 GNF` partout et thème clair sur un site sombre. Non
+      retouchable — repeindre des chiffres dans une capture produit reviendrait à fabriquer des
+      données. À reprendre en **thème sombre avec le dataset de démo**, ce qui règle les deux
+      problèmes. Option intermédiaire proposée : panneau construit en DOM, comme les plaques du blog
 
 ## 7. Dettes connues, non traitées
 
