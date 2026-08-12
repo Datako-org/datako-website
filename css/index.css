@@ -1781,7 +1781,28 @@ html[data-theme="dark"] .home-btn-primary:hover {
         grid-template-columns: 1fr;
     }
 
+    /* En une colonne, le visuel se retrouvait après les CTA : la première
+       impression mobile était donc du texte pur, sans rien de l'univers
+       Data & IA. display: contents promeut les enfants de la copie au rang
+       d'éléments de grille, ce qui permet d'intercaler la scène entre
+       l'accroche et les boutons — le titre reste lu en premier, le visuel
+       est vu avant l'appel à l'action. */
     .home-hero-copy {
+        display: contents;
+    }
+
+    .home-hero-copy > .eyebrow { order: 1; }
+    .home-hero h1 { order: 2; }
+    .home-hero-lead { order: 3; }
+    .data-story { order: 4; }
+    .home-hero-actions { order: 5; }
+    .home-diagnostic-link { order: 6; }
+
+    .home-hero-copy > .eyebrow,
+    .home-hero h1,
+    .home-hero-lead,
+    .home-hero-actions,
+    .home-diagnostic-link {
         max-width: 780px;
     }
 
