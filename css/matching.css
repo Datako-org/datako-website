@@ -14,7 +14,13 @@
 .matching-difference { padding-top:25px; border-top:1px solid var(--color-line-strong); }
 .matching-difference > span,.funnel-label,.matching-path > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.11em; text-transform:uppercase; }
 .matching-difference ul { margin-top:20px; }
-.matching-difference li { padding:17px 0; border-bottom:1px solid var(--color-line); color:var(--color-ink); }
+/* Sélecteur d'enfant direct, pas descendant : « .matching-difference li »
+   attrapait aussi les li du tunnel plus bas et posait un filet gris sous
+   chaque barre de progression. Et le dernier de la liste perd le sien —
+   .matching-shortlist ouvre déjà sur un border-top 28px plus bas, les deux
+   traits se suivaient. */
+.matching-difference > ul > li { padding:17px 0; border-bottom:1px solid var(--color-line); color:var(--color-ink); }
+.matching-difference > ul > li:last-child { border-bottom:0; }
 
 .matching-intro-grid { padding-top:44px; border-top:1px solid var(--color-line-strong); display:grid; grid-template-columns:1fr 1fr; gap:clamp(60px,8vw,120px); align-items:center; }
 .matching-intro h2 { font-size: var(--type-h2); font-weight: 400; }
