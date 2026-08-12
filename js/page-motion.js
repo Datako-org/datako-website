@@ -193,13 +193,26 @@
         });
 
         if (!reducedMotion.matches) {
-            window.setInterval(() => {
-                if (stopped || document.hidden) return;
-                if (screen.matches(':hover') || rail.matches(':hover')) return;
-                if (screen.contains(document.activeElement) || rail.contains(document.activeElement)) return;
-                const current = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
-                show(tabs[(current + 1) % tabs.length]);
-            }, 4000);
+            // Deux cadences. La première bascule arrive vite : un visiteur qui
+            // scrolle doit avoir vu que le rail tourne avant d'avoir quitté le
+            // hero, sinon il ne saura jamais qu'il y a trois modules. Les
+            // suivantes respirent, sinon le hero clignote.
+            const PREMIERE = 1400;
+            const SUIVANTES = 3000;
+
+            const enPause = () => stopped || document.hidden
+                || screen.matches(':hover') || rail.matches(':hover')
+                || screen.contains(document.activeElement) || rail.contains(document.activeElement);
+
+            const tick = () => {
+                if (!enPause()) {
+                    const current = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
+                    show(tabs[(current + 1) % tabs.length]);
+                }
+                window.setTimeout(tick, SUIVANTES);
+            };
+
+            window.setTimeout(tick, PREMIERE);
         }
     }
 
