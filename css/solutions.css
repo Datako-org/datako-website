@@ -427,9 +427,10 @@ html[data-theme="dark"] .solution-module-stations .solution-module-visual img {
 }
 
 /* --- Panneau produit en DOM -----------------------------------------
-   Datako Distribution n a pas encore de capture au theme du site. Plutot
+   Datako Stations n a pas encore de capture au theme du site. Plutot
    qu un visuel provisoire, le module porte deux chiffres reels du produit :
-   net a tout zoom, traduisible, et sans dependance a un asset. */
+   net a tout zoom, traduisible, et sans dependance a un asset.
+   Distribution est passe a une vraie capture le 12/08/2026. */
 .solution-module-panel {
     display: grid;
     grid-template-rows: repeat(2, 1fr);

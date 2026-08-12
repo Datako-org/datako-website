@@ -1001,7 +1001,7 @@ html[data-theme="dark"] .page-2026 .logo-img {
 
 .page-2026 .nav-link {
     color: var(--color-ink-soft);
-    font-size: 0.88rem;
+    font-size: 0.93rem;
 }
 
 .page-2026 .nav-link:hover,
@@ -1013,11 +1013,16 @@ html[data-theme="dark"] .page-2026 .logo-img {
     background: var(--color-accent);
 }
 
+/* Les trois controles de droite (diagnostic, langue, theme) portent l action.
+   Ils sont dimensionnes ensemble pour partager la meme hauteur optique — 46px,
+   au-dessus du seuil tactile de 44px. */
 .page-2026 .nav-btn-diagnostic {
     border-color: var(--color-line-strong);
     background: var(--color-ink);
     color: var(--color-canvas) !important;
     box-shadow: none;
+    padding: 13px 24px;
+    font-size: 0.9rem;
 }
 
 .page-2026 .nav-btn-diagnostic:hover {
@@ -1029,6 +1034,8 @@ html[data-theme="dark"] .page-2026 .logo-img {
     color: var(--color-ink);
     border-color: var(--color-line);
     background: var(--color-surface);
+    width: 50px;
+    height: 50px;
 }
 
 .page-2026 .theme-toggle:hover {
@@ -1040,6 +1047,8 @@ html[data-theme="dark"] .page-2026 .logo-img {
     margin-left: 0;
     border-color: var(--color-line);
     background: var(--color-surface);
+    padding: 11px 20px;
+    font-size: 0.88rem;
 }
 
 .page-2026 .lang-opt {
