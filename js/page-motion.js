@@ -4,6 +4,7 @@
     // cover-reveal : opt-in, posé à la main sur les H1 et les moments
     // structurants. Aucun titre ne s'anime sans avoir été marqué.
     const coverReveals = [...document.querySelectorAll('.reveal')];
+    const cameras = [...document.querySelectorAll('[data-camera]')];
     const valueChain = document.querySelector('[data-value-chain]');
     const chainSteps = valueChain ? [...valueChain.querySelectorAll('[data-chain-step]')] : [];
     const timers = [];
@@ -47,6 +48,9 @@
         clearTimers();
         revealItems.forEach(item => item.classList.add('is-visible'));
         coverReveals.forEach(item => item.classList.add('is-revealed'));
+        // Sans ça, la caméra resterait sur son état d'arrivée — inclinée et
+        // transparente — pour les personnes en mouvement réduit.
+        cameras.forEach(camera => camera.classList.add('is-settled'));
         completeChain();
     };
 
@@ -84,6 +88,45 @@
             playChain();
         }, { threshold: 0.32 });
         chainObserver.observe(valueChain);
+    }
+
+    // ── Caméra produit ────────────────────────────────────────────────────
+    // Réf 04 : une caméra au-dessus de l'interface. Volontairement sans zoom —
+    // les captures pèsent 44 Ko, un agrandissement les détruirait — et
+    // volontairement brève : le hero pose le produit, c'est M3 qui démontre.
+    // Le repos est plat : l'inclinaison n'existe que le temps de l'arrivée,
+    // puis la parallaxe reste sous 1,6° pour ne jamais déformer un chiffre.
+    const finePointer = window.matchMedia('(min-width: 1100px) and (pointer: fine)');
+
+    if (cameras.length) {
+        const settleObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-settled');
+                settleObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.25 });
+        cameras.forEach(camera => settleObserver.observe(camera));
+
+        cameras.forEach(camera => {
+            let frame = 0;
+            camera.addEventListener('pointermove', event => {
+                if (!finePointer.matches) return;
+                if (frame) return;
+                frame = requestAnimationFrame(() => {
+                    frame = 0;
+                    const box = camera.getBoundingClientRect();
+                    const x = (event.clientX - box.left) / box.width - 0.5;
+                    const y = (event.clientY - box.top) / box.height - 0.5;
+                    camera.style.setProperty('--cam-y', (x * 1.6).toFixed(2));
+                    camera.style.setProperty('--cam-x', (-y * 1).toFixed(2));
+                });
+            });
+            camera.addEventListener('pointerleave', () => {
+                camera.style.setProperty('--cam-y', '0');
+                camera.style.setProperty('--cam-x', '0');
+            });
+        });
     }
 
     reducedMotion.addEventListener?.('change', event => {

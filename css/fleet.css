@@ -201,3 +201,43 @@
     .control-row[data-slot]::after { display: none; }
     .control-row[data-slot].is-filled { animation: none; }
 }
+
+/* ── Réf 04 · caméra produit (version tenue) ──────────────────────────
+   Le hero pose le produit ; c'est M3, plus bas, qui le démontre. La caméra
+   se contente donc d'une arrivée et d'une parallaxe très courte.
+
+   Pas de zoom, volontairement : la capture pèse 44 Ko et un agrandissement
+   la réduirait en bouillie. Et l'inclinaison reste sous 2° — au-delà, les
+   chiffres du tableau de bord se déforment, ce qui est contre-productif
+   pour un produit dont la valeur est justement le chiffre.               */
+.fleet-hero-grid { perspective: 1700px; }
+
+.fleet-screen {
+    opacity: 0;
+    transform: rotateY(-3.2deg) rotateX(1.4deg) translateY(14px);
+    transition: transform 1100ms var(--ease-out), opacity 760ms ease;
+}
+
+.fleet-hero.is-settled .fleet-screen {
+    opacity: 1;
+    transform: rotateY(calc(var(--cam-y) * 1deg)) rotateX(calc(var(--cam-x) * 1deg)) translateY(0);
+}
+
+/* La parallaxe suit le curseur : elle doit répondre, pas glisser. */
+.fleet-hero.is-settled:hover .fleet-screen {
+    transition: transform 380ms var(--ease-out);
+}
+
+@media (max-width: 1099px) {
+    .fleet-screen { transform: none; }
+    .fleet-hero.is-settled .fleet-screen { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fleet-screen,
+    .fleet-hero.is-settled .fleet-screen {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

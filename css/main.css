@@ -214,6 +214,15 @@ button {
     }
 }
 
+/* ── Caméra produit · valeurs par défaut ────────────────────────────────
+   Les défauts vivent sur [data-camera] et nulle part ailleurs : JS écrit ces
+   variables sur ce même élément, et une redéclaration plus bas dans l'arbre
+   masquerait la valeur héritée — la parallaxe n'arriverait jamais à la cible. */
+[data-camera] {
+    --cam-x: 0;
+    --cam-y: 0;
+}
+
 /* ── cover-reveal · primitive signature (Jalon 1) ───────────────────────
    Le texte n'apparaît pas en fondu : il est découvert par un cache qui se
    retire. Volontairement opt-in — réservé aux H1 et aux quelques moments
