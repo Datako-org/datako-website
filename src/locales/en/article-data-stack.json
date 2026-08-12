@@ -1,0 +1,38 @@
+{
+  "text": [
+    "Modern data stack: where to start — Datakö",
+    "Skip to main content",
+    "Blog",
+    "/ Modern data stack",
+    "Data Engineering",
+    "Modern data stack:",
+    "where to start.",
+    "The ecosystem has grown to the point where you can spend more time choosing tools than delivering usable data. Here is an order for laying the bricks that limits regret.",
+    "18 June 2026",
+    "8 min read",
+    "What the term covers",
+    "“Modern data stack” describes an assembly of specialised tools, usually managed services, covering the path from source to use. Each brick does one thing and interfaces with the others, where the platforms of fifteen years ago tried to do everything.",
+    "The most visible shift concerns transformation: it increasingly happens after loading, inside the warehouse, rather than before. This is not an absolute rule — volume, cost or confidentiality still justify transforming upstream — but it has become the default starting point.",
+    "The bricks, in the order they become useful",
+    "The common mistake is choosing the whole chain before having a first use. A stack is better built in the order the needs appear: first get the data somewhere, then make it consistent, then make it readable, and only then industrialise it.",
+    "Each brick only makes sense if the previous one holds. A catalogue over unreliable data documents the mess; a dashboard over unstable definitions produces arguments rather than decisions.",
+    "Ingestion — bring the sources into one place, without transforming them.",
+    "Warehouse — a single foundation, where compute and storage scale separately.",
+    "Transformation — versioned, tested rules producing business-level tables.",
+    "Delivery — indicators whose definition is written down somewhere.",
+    "A stack becomes a platform the day someone can explain where a figure comes from without opening a tool.",
+    "The cost you do not see at the start",
+    "The advertised price of a cloud warehouse is almost never what you pay. Real cost depends on refresh frequency, the volume rescanned on each run, and the number of models rebuilt without need. A badly paced pipeline can cost several times an equivalent one running at the right rhythm.",
+    "The other cost is human: every tool added needs an owner, a recovery procedure and a version upgrade. A stack of six managed products is still a system to operate.",
+    "Start small without painting yourself in",
+    "A reasonable starting point comes down to three choices: a warehouse, an ingestion mechanism, a transformation tool. Delivery can first go through whatever the teams already use. That foundation is enough to answer real questions, and it closes no doors.",
+    "What costs dearly later is not having chosen three tools instead of six. It is having left the business definitions outside the code repository, where nobody can review them.",
+    "A data pipeline to build or to take over?",
+    "We look at your sources, your uses and your real constraints before talking about tools.",
+    "Talk about your project",
+    "← All articles"
+  ],
+  "attributes": [
+    "Modern data stack: what the term covers, in which order to lay the bricks, where the costs hide, and how to start small without painting yourself in."
+  ]
+}

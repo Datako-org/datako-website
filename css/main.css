@@ -11,12 +11,308 @@
     --container-width: 1200px;
     --header-height: 80px;
     --border-radius: 12px;
+
+    /* 2026 semantic foundations — legacy aliases above remain stable for existing pages */
+    --color-canvas: #f3f6f5;
+    --color-canvas-soft: #e9efed;
+    --color-surface: #ffffff;
+    --color-surface-raised: #ffffff;
+    --color-ink: #062f3a;
+    --color-ink-soft: #3d5961;
+    --color-ink-muted: #64777c;
+    --color-line: rgba(6, 47, 58, 0.14);
+    --color-line-strong: rgba(6, 47, 58, 0.28);
+    --color-navy: #032e3a;
+    --color-navy-soft: #0a3d49;
+    --color-on-navy: #f7fbfa;
+    --color-accent: #3457e8;
+    --color-accent-strong: #243cc7;
+    --color-violet: #7258ef;
+    --color-success: #168f70;
+    --shadow-soft: 0 24px 70px rgba(4, 38, 48, 0.10);
+    --shadow-raised: 0 28px 90px rgba(4, 38, 48, 0.16);
+    --radius-sm: 10px;
+    --radius-md: 18px;
+    --radius-lg: 30px;
+    --space-section: clamp(5rem, 10vw, 9rem);
+    --container-wide: 1360px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* ── Design system 2026 · validé au Jalon 1 ─────────────────────────
+       Ces tokens s'ajoutent aux précédents ; aucune valeur existante n'est
+       modifiée, donc les pages déjà en ligne ne bougent pas.               */
+
+    /* Respiration entre le clair et le navy. À utiliser avec parcimonie :
+       une bande par page, pas une couleur de fond récurrente. */
+    --color-bone: #ece6dd;
+
+    /* Échelle typographique. La hiérarchie passe par la taille et le
+       tracking, plus par la graisse : les grands titres sont en 400.
+       Les graisses 500/600 restent disponibles sur les petits éléments
+       quand la lisibilité ou la hiérarchie l'exige. */
+    --type-display: clamp(3.4rem, 7.2vw, 5.75rem);
+    --type-h1: clamp(2.9rem, 5.4vw, 4.5rem);
+    --type-h2: clamp(2.1rem, 3.6vw, 3.25rem);
+    --type-h3: clamp(1.35rem, 1.8vw, 1.75rem);
+    --type-lead: clamp(1.1rem, 1.3vw, 1.3rem);
+    --type-body: 1.0625rem;
+    --type-label: 0.6875rem;
+
+    --tracking-display: -0.03em;
+    --tracking-h1: -0.028em;
+    --tracking-h2: -0.024em;
+    --tracking-h3: -0.01em;
+    --tracking-label: 0.14em;
+
+    /* Rythme vertical : trois valeurs, pas douze. C'est la régularité qui
+       produit le calme. */
+    --sp-3: 24px;
+    --sp-4: 32px;
+    --sp-6: 48px;
+    --sp-8: 64px;
+    --sp-12: 96px;
+    --sp-16: 128px;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --color-canvas: #071f27;
+    --color-canvas-soft: #0a2932;
+    --color-surface: #0d3039;
+    --color-surface-raised: #123943;
+    --color-ink: #f4f8f7;
+    --color-ink-soft: #c7d4d6;
+    --color-ink-muted: #91a7ab;
+    --color-line: rgba(231, 242, 241, 0.14);
+    --color-line-strong: rgba(231, 242, 241, 0.28);
+    --color-navy: #02181f;
+    --color-navy-soft: #092d36;
+    --color-on-navy: #f7fbfa;
+    --color-accent: #88a0ff;
+    --color-accent-strong: #b3c0ff;
+    --color-violet: #a694ff;
+    --color-success: #63d9b8;
+    --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.28);
+    --shadow-raised: 0 28px 90px rgba(0, 0, 0, 0.42);
+
+    /* En sombre, la respiration ne peut pas être une teinte claire : c'est un
+       navy légèrement réchauffé qui joue le même rôle de bande intercalaire. */
+    --color-bone: #102a2f;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html:not([data-theme="dark"]) {
+    color-scheme: light;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+.skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 3000;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    font-weight: 700;
+    transform: translateY(-180%);
+    transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* ── Footer · curtain reveal + mot-géant (Jalon 2) ──────────────────────
+   Le contenu de la page remonte et découvre le footer, au lieu de le
+   pousser devant lui.
+
+   Mécanique : clip-path sur le conteneur. Un ancêtre porteur de clip-path
+   devient bloc conteneur pour ses descendants en position: fixed —
+   l'effet reste donc confiné au footer et ne touche à aucune autre page.
+
+   Volontairement sobre : rideau + mot-géant, rien d'autre. Pas de marquee,
+   pas de halo animé, rien qui tourne en boucle.                          */
+.footer-reveal {
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.footer-reveal > .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-wordmark {
+    position: absolute;
+    left: 50%;
+    /* Calé juste au-dessus du filet de copyright : le mot tient entier dans
+       le footer et remplit la respiration du bas au lieu de la laisser vide. */
+    bottom: 0.04em;
+    transform: translateX(-50%);
+    z-index: 0;
+    font-size: clamp(6rem, 27vw, 23rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    /* 0.75 rognait la boîte du glyphe : les lettres étaient coupées en haut
+       comme en bas. À 1 elles se déploient entières et viennent occuper le
+       vide au-dessus de la barre de copyright. */
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    color: transparent;
+    /* Le dégradé descend jusqu'à 82 % pour que le bas des lettres reste
+       perceptible — sinon on retrouve un mot tronqué, cette fois par la
+       couleur au lieu du cadrage. Il reste faible : un filigrane se sent,
+       il ne se lit pas. */
+    background: linear-gradient(180deg, rgba(247, 251, 250, 0.075) 0%, rgba(247, 251, 250, 0.02) 55%, rgba(247, 251, 250, 0) 82%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Le contenu du footer repasse au-dessus du filigrane. */
+.footer-reveal > .footer > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Le rideau ne se déploie qu'à partir du moment où la hauteur d'écran le
+   permet : sur mobile, un plein écran de vide avant le copyright ne sert
+   personne, et 100dvh évite en prime le bug de la barre d'URL. */
+@media (min-width: 900px) and (min-height: 640px) {
+    .footer-reveal {
+        min-height: min(100dvh, 760px);
+    }
+}
+
+@media (max-width: 899px), (max-height: 639px) {
+    .footer-reveal {
+        clip-path: none;
+    }
+
+    .footer-reveal > .footer {
+        position: static;
+    }
+}
+
+/* ── Caméra produit · valeurs par défaut ────────────────────────────────
+   Les défauts vivent sur [data-camera] et nulle part ailleurs : JS écrit ces
+   variables sur ce même élément, et une redéclaration plus bas dans l'arbre
+   masquerait la valeur héritée — la parallaxe n'arriverait jamais à la cible. */
+[data-camera] {
+    --cam-x: 0;
+    --cam-y: 0;
+}
+
+/* ── cover-reveal · primitive signature (Jalon 1) ───────────────────────
+   Le texte n'apparaît pas en fondu : il est découvert par un cache qui se
+   retire. Volontairement opt-in — réservé aux H1 et aux quelques moments
+   structurants, jamais appliqué à tous les titres, pour préserver les
+   zones calmes.
+
+   Balisage :
+       <h1><span class="reveal"><span>Une ligne</span></span></h1>
+   La classe .is-revealed est posée par l'observateur de page-motion.js.   */
+.reveal {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.reveal > span {
+    display: inline-block;
+    transform: translateY(105%);
+    transition: transform 760ms var(--ease-out);
+}
+
+.reveal.is-revealed > span {
+    transform: translateY(0);
+}
+
+/* Variante bloc : sur un titre qui court sur plusieurs lignes, un .reveal
+   en inline-block rognerait les lignes suivantes. Le bloc entier est alors
+   découvert d'un seul tenant. */
+.reveal-block {
+    display: block;
+}
+
+/* Lignes successives d'un même bloc : léger décalage, pas une cascade. */
+.reveal:nth-of-type(2) > span { transition-delay: 90ms; }
+.reveal:nth-of-type(3) > span { transition-delay: 180ms; }
+.reveal:nth-of-type(4) > span { transition-delay: 270ms; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal > span {
+        transform: none;
+        transition: none;
+    }
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+body.page-2026 {
+    font-family: "Familjen Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    transition: background-color 240ms ease, color 240ms ease;
+}
+
+.page-2026 p {
+    color: var(--color-ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
 }
 
 body {
@@ -291,6 +587,18 @@ p {
     box-shadow: 0 5px 25px rgba(37, 211, 102, 0.2);
 }
 
+.whatsapp-float-btn.hero-delayed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+}
+
+.whatsapp-float-btn.hero-delayed.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
 .whatsapp-float-btn svg {
     width: 28px;
     height: 28px;
@@ -559,6 +867,293 @@ p {
     }
 }
 
+/* =========================================
+   2026 global shell controls
+   ========================================= */
+
+body.nav-open {
+    overflow: hidden;
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hamburger,
+.theme-toggle,
+.nav-backdrop,
+.lang-opt {
+    appearance: none;
+    border: 0;
+    font: inherit;
+}
+
+.hamburger {
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.theme-toggle {
+    position: relative;
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    cursor: pointer;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.theme-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+.theme-icon {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    transition: opacity 180ms ease, transform 240ms var(--ease-out);
+}
+
+.theme-icon-sun {
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    box-shadow: 0 -7px 0 -5px currentColor, 0 7px 0 -5px currentColor,
+        7px 0 0 -5px currentColor, -7px 0 0 -5px currentColor;
+}
+
+.theme-icon-moon {
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-24deg);
+}
+
+.theme-toggle[data-theme-current="light"] .theme-icon-sun,
+.theme-toggle[data-theme-current="dark"] .theme-icon-moon {
+    opacity: 1;
+}
+
+.theme-toggle[data-theme-current="light"] .theme-icon-moon,
+.theme-toggle[data-theme-current="dark"] .theme-icon-sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.45);
+}
+
+.lang-opt {
+    padding: 2px;
+    background: transparent;
+}
+
+.nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 990;
+    display: block;
+    background: rgba(1, 20, 26, 0.46);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+}
+
+.nav-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.page-2026 .header {
+    height: 76px;
+    background: color-mix(in srgb, var(--color-canvas) 84%, transparent);
+    color: var(--color-ink);
+    border-bottom-color: var(--color-line);
+    box-shadow: 0 8px 34px rgba(4, 38, 48, 0.04);
+}
+
+.page-2026 .header .container {
+    width: min(100%, var(--container-wide));
+    max-width: var(--container-wide);
+}
+
+.page-2026 .logo-img {
+    height: 40px !important;
+    filter: none;
+}
+
+html[data-theme="dark"] .page-2026 .logo-img {
+    filter: brightness(0) invert(1);
+}
+
+.page-2026 .nav-menu {
+    align-items: center;
+    gap: clamp(14px, 1.5vw, 28px);
+}
+
+.page-2026 .nav-link {
+    color: var(--color-ink-soft);
+    font-size: 0.93rem;
+}
+
+.page-2026 .nav-link:hover,
+.page-2026 .nav-link.active {
+    color: var(--color-ink);
+}
+
+.page-2026 .nav-link::after {
+    background: var(--color-accent);
+}
+
+/* Les trois controles de droite (diagnostic, langue, theme) portent l action.
+   Ils sont dimensionnes ensemble pour partager la meme hauteur optique — 46px,
+   au-dessus du seuil tactile de 44px. */
+.page-2026 .nav-btn-diagnostic {
+    border-color: var(--color-line-strong);
+    background: var(--color-ink);
+    color: var(--color-canvas) !important;
+    box-shadow: none;
+    padding: 13px 24px;
+    font-size: 0.9rem;
+}
+
+.page-2026 .nav-btn-diagnostic:hover {
+    border-color: var(--color-ink);
+    background: var(--color-accent-strong);
+}
+
+.page-2026 .theme-toggle {
+    color: var(--color-ink);
+    border-color: var(--color-line);
+    background: var(--color-surface);
+    width: 50px;
+    height: 50px;
+}
+
+.page-2026 .theme-toggle:hover {
+    border-color: var(--color-line-strong);
+    background: var(--color-canvas-soft);
+}
+
+.page-2026 .lang-switcher {
+    margin-left: 0;
+    border-color: var(--color-line);
+    background: var(--color-surface);
+    padding: 11px 20px;
+    font-size: 0.88rem;
+}
+
+.page-2026 .lang-opt {
+    color: var(--color-ink-muted);
+}
+
+.page-2026 .lang-opt:hover,
+.page-2026 .lang-opt.active {
+    color: var(--color-ink);
+    text-shadow: none;
+}
+
+.page-2026 .lang-divider {
+    color: var(--color-line-strong);
+}
+
+@media (max-width: 1080px) {
+    .hamburger {
+        display: block;
+        position: relative;
+        z-index: 1102;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: auto;
+        z-index: 1101;
+        width: min(88vw, 430px);
+        height: 100dvh;
+        padding: 104px 34px 40px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: var(--bg-primary);
+        border-left: 1px solid rgba(255, 255, 255, 0.10);
+        text-align: left;
+        transform: translateX(104%);
+        transition: transform 320ms var(--ease-out);
+    }
+
+    .nav-menu.active {
+        left: auto;
+        transform: translateX(0);
+    }
+
+    .nav-item {
+        width: 100%;
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-link,
+    .nav-btn-diagnostic {
+        display: flex;
+        width: 100%;
+        padding: 16px 2px;
+        font-size: 1rem;
+    }
+
+    .nav-btn-diagnostic {
+        justify-content: center;
+        margin: 16px 0;
+        padding: 12px 18px;
+    }
+
+    .lang-switcher {
+        width: max-content;
+        margin: 18px 0 0;
+    }
+
+    .page-2026 .bar {
+        background-color: var(--color-ink);
+    }
+
+    .page-2026 .nav-menu {
+        align-items: stretch;
+        background: var(--color-surface);
+        border-left-color: var(--color-line);
+        box-shadow: -24px 0 70px rgba(2, 24, 31, 0.18);
+    }
+
+    .page-2026 .nav-item {
+        border-bottom-color: var(--color-line);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Keep one unobstructive project contact on small screens: WhatsApp. */
+    .floating-btn {
+        display: none;
+    }
+
+    .whatsapp-float-btn {
+        right: 18px;
+        left: auto;
+        bottom: calc(18px + env(safe-area-inset-bottom));
+        width: 50px;
+        height: 50px;
+    }
+}
+
 /* Language Switcher */
 .lang-switcher {
     display: flex;
@@ -601,6 +1196,305 @@ p {
     color: rgba(255, 255, 255, 0.15);
     font-size: 0.9rem;
     font-weight: 300;
+}
+
+/* =========================================
+   2026 shared editorial components
+   ========================================= */
+
+.page-2026 main {
+    overflow: clip;
+}
+
+.page-2026 [id] {
+    scroll-margin-top: 104px;
+}
+
+.site-container {
+    width: min(100%, var(--container-wide));
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 64px);
+}
+
+.site-section {
+    padding-block: var(--space-section);
+}
+
+.section-kicker {
+    margin: 0 0 24px;
+    color: var(--color-accent);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.section-kicker::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    margin-right: 12px;
+    display: inline-block;
+    background: currentColor;
+    vertical-align: middle;
+}
+
+.page-2026 .serif-accent {
+    color: var(--color-accent);
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.015em;
+}
+
+.site-heading {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(2.7rem, 5vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+}
+
+.site-lead {
+    max-width: 660px;
+    color: var(--color-ink-soft);
+    font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
+}
+
+.site-actions {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.site-btn {
+    min-height: 50px;
+    padding: 13px 22px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: transform 220ms var(--ease-out), border-color 220ms ease, background-color 220ms ease;
+}
+
+.site-btn:hover {
+    transform: translateY(-2px);
+}
+
+.site-btn-primary {
+    background: var(--color-ink);
+    color: var(--color-canvas);
+}
+
+.site-btn-primary:hover {
+    background: var(--color-accent-strong);
+}
+
+.site-btn-secondary {
+    border-color: var(--color-line-strong);
+    background: var(--color-surface);
+    color: var(--color-ink);
+}
+
+.site-editorial-link {
+    appearance: none;
+    width: fit-content;
+    padding: 0 0 4px;
+    border: 0;
+    border-bottom: 1px solid var(--color-line-strong);
+    background: transparent;
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 0.94rem;
+    font-weight: 700;
+    line-height: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.site-editorial-link span {
+    transition: transform 220ms var(--ease-out);
+}
+
+.site-editorial-link:hover span {
+    transform: translateX(4px);
+}
+
+.site-navy {
+    background: var(--color-navy);
+    color: var(--color-on-navy);
+}
+
+.site-navy .section-kicker {
+    color: #4fd1db;
+}
+
+.site-navy p {
+    color: #a8bec4;
+}
+
+.site-final-cta {
+    padding-block: clamp(72px, 9vw, 118px);
+    background: #021217;
+    color: white;
+}
+
+.site-final-cta-inner {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 52px;
+}
+
+.site-final-cta h2 {
+    max-width: 760px;
+    margin: 0;
+    color: white;
+    font-size: clamp(2.5rem, 5vw, 5.1rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+}
+
+.site-footer {
+    margin: 0;
+    background: #021217;
+}
+
+.site-footer .footer-logo {
+    height: 56px;
+}
+
+.site-footer .footer-title {
+    margin-bottom: 18px;
+    color: rgba(255,255,255,.48);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .66rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+[data-page-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 700ms ease, transform 900ms var(--ease-out);
+}
+
+[data-page-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* The first screen is content, not an intro: it must remain immediately readable. */
+.page-2026 main > section:first-child [data-page-reveal] {
+    opacity: 1;
+    transform: none;
+}
+
+/* Shared accessible project modal. Kept navy in both themes as a focused moment. */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(1, 20, 26, .78);
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 240ms ease, visibility 240ms ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-container {
+    position: relative;
+    width: min(100%, 620px);
+    max-height: min(90vh, 820px);
+    padding: clamp(28px, 5vw, 48px);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 18px;
+    background: #062a35;
+    color: white;
+    box-shadow: 0 30px 90px rgba(1,20,26,.46);
+    overflow-y: auto;
+    transform: translateY(16px) scale(.98);
+    transition: transform 320ms var(--ease-out);
+}
+
+.modal-overlay.active .modal-container { transform: none; }
+.modal-container h2 { margin: 0 48px 28px 0; color: white; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
+.modal-close { position: absolute; top: 22px; right: 22px; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; background: transparent; color: white; cursor: pointer; }
+.modal-close:hover { background: rgba(255,255,255,.1); }
+body.no-scroll { overflow: hidden; }
+
+.modal-form { display: flex; flex-direction: column; gap: 17px; }
+.modal-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.modal-form .form-field { display: grid; gap: 7px; color: rgba(255,255,255,.76); font-size: .82rem; }
+.modal-form input,
+.modal-form select,
+.modal-form textarea { width: 100%; padding: 13px 14px; border: 1px solid rgba(255,255,255,.17); border-radius: 6px; background: rgba(255,255,255,.07); color: white; font: inherit; }
+.modal-form input::placeholder,
+.modal-form textarea::placeholder { color: rgba(255,255,255,.45); }
+.modal-form select option { color: #062a35; background: white; }
+.modal-form .site-btn { width: 100%; border-color: transparent; background: linear-gradient(105deg, var(--color-accent), var(--color-violet)); color: white; justify-content: center; }
+.modal-form .site-btn:hover { filter: brightness(1.08); }
+.modal-form .form-reassurance-text { color: rgba(255,255,255,.62); }
+
+@media (max-width: 560px) {
+    .modal-overlay { padding: 12px; align-items: end; }
+    .modal-container { max-height: 94vh; padding: 28px 20px; border-radius: 18px 18px 8px 8px; }
+    .modal-form .form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1080px) {
+    .site-final-cta-inner {
+        align-items: start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 700px) {
+    .site-section {
+        padding-block: 78px;
+    }
+
+    .site-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .site-btn {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-page-reveal] {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 /* --- Global Modal Reassurance Icon Fix --- */
@@ -868,3 +1762,9 @@ p {
         padding: 80px 0;
     }
 }
+
+/* ── Captures produit : une variante par theme ────────────────────────
+   Le basculement se fait en JS (main.js, swapShots) et non en CSS : une
+   image en display:none est quand meme telechargee, meme en loading="lazy",
+   donc empiler deux <img> doublait le poids reseau. Une seule balise porte
+   les deux sources dans des data-attributs. */
