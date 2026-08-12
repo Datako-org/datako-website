@@ -750,6 +750,35 @@
     transform: perspective(1500px) rotateY(0) translateY(0);
 }
 
+/* Le produit déborde du cadre (principe Databricks) : une interface coupée
+   par le bord suggère qu'il reste à voir, là où une interface encadrée dit
+   qu'on a tout montré. Le côté qui sort perd son arrondi, sinon la capture
+   a l'air posée plutôt que continuée.
+
+   Réservé aux écrans larges : sous 1100px la colonne est déjà étroite, et
+   overflow-x sur la section garantit qu'aucun débordement ne crée de
+   défilement horizontal. */
+@media (min-width: 1100px) {
+    .product-proof {
+        overflow-x: clip;
+    }
+
+    .product-feature .product-screen {
+        margin-right: calc(-1 * clamp(28px, 6vw, 104px));
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .product-feature-stations .product-screen {
+        margin-right: 0;
+        margin-left: calc(-1 * clamp(28px, 6vw, 104px));
+        border-right: 1px solid var(--color-line);
+        border-left: 0;
+        border-radius: 0 22px 22px 0;
+    }
+}
+
 .product-screen img {
     display: block;
     width: 100%;
@@ -1442,9 +1471,16 @@
     box-shadow: 0 0 0 8px rgba(94, 116, 245, 0.13), 0 0 42px rgba(94, 116, 245, 0.32);
 }
 
+/* Une étape franchie ne se distinguait que par une nuance de bordure : à
+   l'œil, elle était indistinguable d'une étape à venir, et le stepper ne
+   racontait donc aucune progression. Trois états désormais lisibles —
+   à venir : contour seul · franchie : pastille remplie, sobre ·
+   active : remplie, vive, avec halo. */
 .journey-steps li.is-past span,
 .decision-journey.is-complete .journey-steps li:not(:last-child) span {
-    border-color: rgba(158, 176, 255, 0.46);
+    border-color: rgba(158, 176, 255, 0.55);
+    background: rgba(94, 116, 245, 0.2);
+    color: rgba(255, 255, 255, 0.88);
 }
 
 .journey-signal {
