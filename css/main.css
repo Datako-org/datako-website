@@ -173,21 +173,27 @@ button {
 .footer-wordmark {
     position: absolute;
     left: 50%;
-    /* Le filigrane était calé sur le bord bas : sa panse et ses jambages
-       passaient sous la barre de copyright. Relevé pour que le mot tienne
-       entier dans le footer. */
-    bottom: 0.16em;
+    /* Calé juste au-dessus du filet de copyright : le mot tient entier dans
+       le footer et remplit la respiration du bas au lieu de la laisser vide. */
+    bottom: 0.04em;
     transform: translateX(-50%);
     z-index: 0;
-    font-size: clamp(6rem, 26vw, 22rem);
+    font-size: clamp(6rem, 27vw, 23rem);
     font-weight: 400;
     letter-spacing: -0.04em;
-    line-height: 0.75;
+    /* 0.75 rognait la boîte du glyphe : les lettres étaient coupées en haut
+       comme en bas. À 1 elles se déploient entières et viennent occuper le
+       vide au-dessus de la barre de copyright. */
+    line-height: 1;
     white-space: nowrap;
     pointer-events: none;
     user-select: none;
     color: transparent;
-    background: linear-gradient(180deg, rgba(247, 251, 250, 0.10) 0%, rgba(247, 251, 250, 0) 62%);
+    /* Le dégradé descend jusqu'à 82 % pour que le bas des lettres reste
+       perceptible — sinon on retrouve un mot tronqué, cette fois par la
+       couleur au lieu du cadrage. Il reste faible : un filigrane se sent,
+       il ne se lit pas. */
+    background: linear-gradient(180deg, rgba(247, 251, 250, 0.075) 0%, rgba(247, 251, 250, 0.02) 55%, rgba(247, 251, 250, 0) 82%);
     -webkit-background-clip: text;
     background-clip: text;
 }
