@@ -1,6 +1,9 @@
 .page-matching { background:var(--color-canvas); }
 .matching-hero { padding:150px 0 88px; }
-.matching-hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(60px,8vw,120px); align-items:end; }
+/* align-items:start plutôt que end : les deux colonnes partagent la même
+   ligne haute, et la composition asymétrique se lit comme un choix au lieu
+   d'un décalage. */
+.matching-hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(60px,8vw,120px); align-items:start; }
 .matching-hero h1,.matching-intro h2,.matching-process h2,.matching-path h2 { margin:0; color:var(--color-ink); font-weight:600; letter-spacing:-.055em; line-height:.96; }
 .matching-hero h1 { font-size: var(--type-h1); font-weight: 400; }
 .matching-hero .site-lead { margin-top:28px; }
@@ -72,3 +75,120 @@
   .funnel-stage,.anonymous-profiles,.matching-process-step { opacity:1!important; transform:none!important; }
   .matching-process-flow::before { width:100%; transition:none; }
 }
+
+/* --- Le hero disait ce que Matching est, pas ce qui le distingue ------
+   La colonne droite s arretait apres trois lignes et laissait une bande
+   vide sous le hero. Elle porte desormais l argument reel du service : on
+   ne renvoie pas une liste, on presente un ou deux profils. Les trois
+   nombres racontent l entonnoir mieux qu une phrase. */
+.matching-shortlist {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-line);
+}
+
+.matching-shortlist-label {
+    display: block;
+    margin-bottom: 20px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.matching-funnel-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 16px;
+}
+
+.matching-funnel-steps li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 16px;
+    align-items: baseline;
+    opacity: .32;
+    transform: translateY(6px);
+    transition: opacity 460ms ease, transform 560ms var(--ease-out);
+}
+
+.matching-funnel-steps li.is-current,
+.matching-funnel-steps li.is-complete,
+.matching-shortlist .is-complete li { opacity: 1; transform: none; }
+
+.matching-funnel-steps span { color: var(--color-ink-soft); font-size: .92rem; }
+
+.matching-funnel-steps b {
+    color: var(--color-ink);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* La barre retrecit a chaque etape : l entonnoir se voit avant de se lire. */
+.matching-funnel-steps i {
+    grid-column: 1 / -1;
+    display: block;
+    height: 3px;
+    border-radius: 99px;
+    background: var(--color-line-strong);
+    position: relative;
+    overflow: hidden;
+}
+
+.matching-funnel-steps i::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--w);
+    border-radius: 99px;
+    background: var(--color-ink-muted);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 820ms var(--ease-out);
+}
+
+.matching-funnel-steps li.is-current i::after,
+.matching-funnel-steps li.is-complete i::after { transform: scaleX(1); }
+
+.matching-funnel-steps .is-final b { color: var(--color-accent); }
+.matching-funnel-steps .is-final i::after { background: var(--color-accent); }
+
+.matching-shortlist p {
+    margin: 22px 0 0;
+    color: var(--color-ink-muted);
+    font-size: .86rem;
+    line-height: 1.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .matching-funnel-steps li { opacity: 1; transform: none; transition: none; }
+    .matching-funnel-steps i::after { transform: scaleX(1); transition: none; }
+}
+
+/* Entonnoir en trois colonnes : empile en vertical, il rendait la colonne
+   droite deux fois plus haute que la gauche et deplacait le vide au lieu
+   de le combler. */
+@media (min-width: 700px) {
+    .matching-funnel-steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .matching-funnel-steps li {
+        grid-template-columns: 1fr;
+        align-content: start;
+        gap: 4px;
+    }
+
+    .matching-funnel-steps span { font-size: .78rem; }
+    .matching-funnel-steps b { font-size: 1.75rem; line-height: 1.1; }
+    .matching-funnel-steps i { margin-top: 8px; }
+}
+
+.matching-shortlist { margin-top: 26px; padding-top: 24px; }
+.matching-shortlist p { margin-top: 18px; }
