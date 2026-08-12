@@ -1476,9 +1476,13 @@
 
 /* Compact bridge to the existing service pages */
 
+/* La respiration bone, une seule fois sur la page. Elle s'intercale entre
+   le récit en navy et l'appel final, ce qui donne le rythme
+   clair → navy → bone → final au lieu d'une bascule brutale clair/navy.
+   Une bande par page : c'est ce qui la garde efficace. */
 .home-essentials {
     border-bottom: 1px solid var(--color-line);
-    background: var(--color-surface);
+    background: var(--color-bone);
 }
 
 .essentials-grid {

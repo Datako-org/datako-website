@@ -3,6 +3,9 @@
     const story = document.querySelector('[data-data-story]');
     const journey = document.querySelector('[data-decision-journey]');
     const revealItems = document.querySelectorAll('[data-reveal]');
+    // La home ne charge pas page-motion.js : sans cet observateur, un titre
+    // marqué .reveal resterait masqué par son cache.
+    const coverReveals = [...document.querySelectorAll('.reveal')];
     const timers = new Set();
 
     const later = (callback, delay) => {
@@ -123,6 +126,7 @@
         if (story) story.dataset.played = 'true';
         completeJourney();
         revealItems.forEach(item => item.classList.add('is-revealed'));
+        coverReveals.forEach(item => item.classList.add('is-revealed'));
     };
 
     if (reducedMotion.matches || !('IntersectionObserver' in window)) {
@@ -144,6 +148,17 @@
                 playJourney();
             }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
             journeyObserver.observe(journey);
+        }
+
+        if (coverReveals.length) {
+            const coverObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-revealed');
+                    coverObserver.unobserve(entry.target);
+                });
+            }, { threshold: 0.6 });
+            coverReveals.forEach(item => coverObserver.observe(item));
         }
 
         if (revealItems.length) {

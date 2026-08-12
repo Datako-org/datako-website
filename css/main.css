@@ -239,6 +239,13 @@ button {
     transform: translateY(0);
 }
 
+/* Variante bloc : sur un titre qui court sur plusieurs lignes, un .reveal
+   en inline-block rognerait les lignes suivantes. Le bloc entier est alors
+   découvert d'un seul tenant. */
+.reveal-block {
+    display: block;
+}
+
 /* Lignes successives d'un même bloc : léger décalage, pas une cascade. */
 .reveal:nth-of-type(2) > span { transition-delay: 90ms; }
 .reveal:nth-of-type(3) > span { transition-delay: 180ms; }
