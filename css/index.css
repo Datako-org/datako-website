@@ -120,9 +120,11 @@
     max-width: 100%;
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(3.6rem, 5vw, 5.75rem);
-    font-weight: 600;
-    letter-spacing: -0.065em;
+    /* Jalon 1 : la hiérarchie passe par la taille et le tracking, pas par
+       la graisse. Le 600 criait ; le 400 impose sans hausser le ton. */
+    font-size: var(--type-display);
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
     line-height: 0.88;
     overflow-wrap: normal;
     text-wrap: balance;
@@ -337,7 +339,11 @@
 .data-source-a { top: 9%; left: 2%; transform: rotate(-5deg); }
 .data-source-b { top: 10%; right: 1%; transform: rotate(4deg); }
 .data-source-c { bottom: 8%; left: 1%; transform: rotate(4deg); }
-.data-source-d { right: 2%; bottom: 8%; transform: rotate(-4deg); }
+/* La carte Décision occupe le coin bas-droit (right 4%, 164px). Cette
+   source y était ancrée aussi et passait dessous : invisible en sombre,
+   sale et bien visible en clair. Elle rejoint le bas-centre, où elle reste
+   dans la logique « sources éparses » sans chevaucher l'aboutissement. */
+.data-source-d { left: 31%; bottom: 2%; transform: rotate(-4deg); }
 
 .data-paths {
     position: absolute;
