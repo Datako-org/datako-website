@@ -5,7 +5,7 @@
 .stations-hero-grid { display:grid; grid-template-columns:minmax(0,.88fr) minmax(520px,1.12fr); gap:clamp(54px,7vw,100px); align-items:start; }
 .stations-status { display:inline-flex; align-items:center; gap:9px; color:var(--color-success); font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; }
 .stations-status::before { content:""; width:7px; height:7px; border-radius:50%; background:currentColor; box-shadow:0 0 0 5px color-mix(in srgb,currentColor 13%,transparent); }
-.stations-hero h1 { margin:20px 0 0; color:var(--color-ink); font-size:clamp(4rem,6.8vw,7.1rem); font-weight:600; letter-spacing:-.066em; line-height:.9; }
+.stations-hero h1 { margin:20px 0 0; color:var(--color-ink); font-size: var(--type-h1); font-weight: 400; letter-spacing: var(--tracking-h1); line-height: 1.02; }
 .stations-hero .site-lead { margin:28px 0 0; }
 .station-live { padding:20px; border:1px solid var(--color-line); border-radius:20px; background:var(--color-surface); box-shadow:var(--shadow-soft); }
 .station-live-head { padding-bottom:16px; border-bottom:1px solid var(--color-line); display:flex; justify-content:space-between; gap:20px; color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; }
@@ -40,7 +40,7 @@
 
 .stations-coverage { background:var(--color-canvas-soft); }
 .stations-coverage-head,.station-day-head,.stations-whatsapp-head,.station-roles-head { margin-bottom:45px; display:flex; justify-content:space-between; align-items:end; gap:60px; }
-.stations-coverage h2,.station-day h2,.stations-whatsapp h2,.station-roles h2 { margin:0; color:var(--color-ink); font-size:clamp(2.8rem,5vw,5rem); font-weight:600; letter-spacing:-.055em; line-height:.96; }
+.stations-coverage h2,.station-day h2,.stations-whatsapp h2,.station-roles h2 { margin:0; color:var(--color-ink); font-size: var(--type-h2); font-weight: 400; letter-spacing: var(--tracking-h2); line-height: 1.04; }
 .stations-coverage-head p,.station-day-head p,.stations-whatsapp-head p,.station-roles-head p { max-width:470px; margin:0; }
 .station-cockpit { margin-bottom:28px; border:1px solid var(--color-line); border-radius:16px; background:var(--color-surface); overflow:hidden; }
 .station-cockpit img { width:100%; max-height:540px; object-fit:cover; object-position:left top; display:block; }
@@ -117,7 +117,7 @@
 @media(max-width:768px){
  .stations-breadcrumb { padding-top:92px; }
  .stations-hero { padding-top:52px; }
- .stations-hero h1 { font-size:clamp(3.5rem,17vw,5.5rem); }
+ .stations-hero h1 { font-size: var(--type-h1); font-weight: 400; }
  .station-live-main { grid-template-columns:1fr 1fr; }
  .pistol-card { grid-column:1/-1; min-height:auto; }
  .station-live-stages { grid-template-columns:1fr 1fr; }
