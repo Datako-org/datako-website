@@ -76,6 +76,33 @@ et les modifications semblent sans effet.
   restent statiques — les zones calmes sont un choix.
 - **Toute animation permanente doit avoir un bouton pause** avec libellé descriptif.
 
+### Règle de composition (2026-08-12) — **un système commun, pas un template commun**
+
+Mesuré sur les 10 heros du site : **6 pages partagent le squelette exact** — eyebrow, grand titre à
+gauche, chapô, deux CTA, panneau rectangulaire à droite (index, solutions, fleet, distribution,
+formations, matching). Et **l'accent serif italique est sur 8 H1 sur 10**, donc il ne signale plus rien.
+
+Le design system fixe la **grammaire** — échelle typographique, couleurs, rythme, primitives. Il ne
+doit pas fixer la **composition**. Chaque page garde la sienne, et les différences existantes se
+renforcent au lieu de se lisser.
+
+**Deux familles à rendre reconnaissables :**
+
+| Famille | Pages | Registre |
+|---|---|---|
+| **Datakö corporate** | Prestations, Academy, Matching, Blog, Contact | éditorial : espace, composition, typographie. Peu ou pas d'interface |
+| **Datakö produits** | Fleet, Distribution, Stations | produit visible : interface réelle, débordement du cadre, données, motion de démonstration |
+
+La **Home fait le pont** entre les deux : elle raconte la transformation *et* montre les produits.
+
+Ce qui doit rester différenciant, page par page, plutôt que d'être aligné : le récit animé de la Home,
+les compteurs `03 / 01 / 03` de Solutions, l'entonnoir `47 → 6 → 2` de Matching, la bande bone du Blog,
+la sobriété fonctionnelle de Contact.
+
+⚠️ Conséquence sur une décision déjà prise : le `cover-reveal` a été étendu aux 3 H1 produit, ce qui
+**renforce l'homogénéité**. À réexaminer — la primitive gagnerait à distinguer les familles plutôt qu'à
+les unifier. Idem pour l'accent italique, à raréfier.
+
 ### Règle d'exactitude (2026-08-12) — s'applique à tout le site
 
 **Dès qu'on touche à des concepts techniques, réglementaires ou métier : pas de formulation

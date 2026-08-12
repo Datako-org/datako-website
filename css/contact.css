@@ -2,7 +2,7 @@
 .page-contact .whatsapp-float-btn { display:none; }
 .contact-main { padding:150px 0 100px; }
 .contact-grid { display:grid; grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr); gap:clamp(50px,7vw,95px); align-items:start; }
-.contact-intro h1 { margin:18px 0 0; color:var(--color-ink); font-size:clamp(4rem,6.2vw,6.4rem); font-weight:600; letter-spacing:-.06em; line-height:.94; }
+.contact-intro h1 { margin:18px 0 0; color:var(--color-ink); font-size: var(--type-h1); font-weight: 400; letter-spacing: var(--tracking-h1); line-height: 1.02; }
 .contact-intro .site-lead { margin:24px 0 0; }
 .contact-reassurance { margin:30px 0 40px; padding-top:20px; border-top:1px solid var(--color-line-strong); display:flex; flex-wrap:wrap; gap:11px 30px; }
 .contact-reassurance span { display:flex; align-items:center; gap:10px; color:var(--color-ink-soft); font-size:.9rem; }
@@ -54,7 +54,7 @@
 @media(max-width:1050px){ .contact-grid { grid-template-columns:1fr; } .form-state-grid { grid-template-columns:1fr 1fr; } }
 @media(max-width:768px){
   .contact-main { padding-top:125px; }
-  .contact-intro h1 { font-size:clamp(3.7rem,16vw,5.3rem); }
+  .contact-intro h1 { font-size: var(--type-h1); }
   .contact-form-row,.form-state-grid { grid-template-columns:1fr; }
   .contact-form-foot { align-items:stretch; flex-direction:column; }
 }
