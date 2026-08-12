@@ -15,18 +15,22 @@
    hub qui la compte. « 03 / 01 / 03 » n'annonçait rien qu'on ne relise
    trois écrans plus bas.
 
-   Deux écarts assumés avec 1a :
+   La composition suit 1a : rotation automatique, et panneau redessiné pour
+   Stations plutôt qu'une capture — à cette largeur, une capture réduite
+   devient illisible. Décidé par Abdoulaye le 12/08/2026, contre mon avis
+   sur le mouvement perpétuel ; sa règle, sa décision.
 
-   1. AUCUN COCKPIT REDESSINÉ. 1a redessinait l'écran Stations avec des
-      valeurs inventées (57 480 000 encaissé, cuves à 62 % et 78 %,
-      « 2 points demandent votre attention »). Les trois captures réelles
-      existent maintenant — on les montre.
+   CE QUI NE SUIT PAS 1a : LES CHIFFRES. La maquette portait 57 480 000
+   d'encaissé, 6 000 000 de crédits, 1 700 000 de charges, des cuves à
+   62 % et 78 % et « 2 points demandent votre attention ». Le cockpit réel
+   affiche 47 640 000, 1 800 000, 200 000 et « Rien à signaler ». Le dessin
+   est celui de la maquette, les montants sont ceux du produit.
 
-   2. PAS DE BOUCLE. 1a tournait toutes les 5 s, indéfiniment. Ici le rail
-      s'écrit une fois à l'entrée dans le viewport, puis se fige. Ensuite
-      le visiteur pilote. C'est la grammaire déjà en place sur Fleet,
-      Distribution et Stations : une ouverture, pas une animation
-      permanente à côté du H1.
+   Deux éléments de 1a n'ont aucune source et ne sont donc pas repris : les
+   pourcentages de remplissage (aucune capacité de cuve n'existe nulle part)
+   et la ventilation par pistolet (absente de toutes les captures reçues).
+   Ils sont remplacés par le stock théorique en litres et par les quatre
+   chiffres d'« Activité de la journée ».
    ══════════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -288,7 +292,7 @@ body {
     object-fit: cover;
     object-position: left top;
     opacity: 0;
-    transition: opacity 460ms ease;
+    transition: opacity 300ms ease;
 }
 
 .screen-stack img.is-active,
@@ -309,7 +313,7 @@ body {
     padding: clamp(16px, 2vw, 26px);
     background: #f6f8f8;
     opacity: 0;
-    transition: opacity 460ms ease;
+    transition: opacity 300ms ease;
 }
 
 .panel-top { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -442,7 +446,9 @@ body {
 <div class="note">
     <h1>Hero Solutions — proposition</h1>
     <p>Reprend l'intention de <b>1a</b> : le hub montre sa gamme au lieu de la compter. Le compteur « 03 / 01 / 03 » annonçait des chiffres qu'on relit trois écrans plus bas.</p>
-    <p><b>Deux écarts avec 1a.</b> Aucun cockpit n'est redessiné — 1a inventait <code>57 480 000</code> d'encaissé, des cuves à 62 % et 78 % et « 2 points demandent votre attention », alors que le produit affiche <code>47 640 000</code> et « Rien à signaler ». Les trois captures réelles existent, on les montre. Et il n'y a <b>pas de boucle</b> : le rail s'écrit une fois à l'entrée, puis se fige — ensuite le visiteur pilote.</p>
+    <p><b>Rotation automatique</b> toutes les 4 s, fondu de 300 ms. Elle marque une pause au survol et au focus clavier, s'arrête définitivement au premier clic sur un module, et ne démarre pas sous <code>prefers-reduced-motion</code>.</p>
+    <p><b>Le dessin vient de 1a, les chiffres viennent du produit.</b> La maquette portait <code>57 480 000</code> d'encaissé, <code>6 000 000</code> de crédits et <code>1 700 000</code> de charges ; le cockpit réel affiche <code>47 640 000</code>, <code>1 800 000</code> et <code>200 000</code>.</p>
+    <p><b>Deux éléments de 1a n'ont aucune source</b> et sont remplacés : les cuves à 62 % et 78 % (aucune capacité de cuve n'existe, donc aucun pourcentage n'est calculable) laissent place au stock théorique en litres de l'écran Clôture ; la ventilation par pistolet, absente de toutes les captures reçues, laisse place aux quatre chiffres d'« Activité de la journée » dans le bandeau.</p>
     <p class="note-warn"><b>Ce que ce prototype rend visible :</b> Distribution est la seule capture en thème clair. Dans un cadre unique où les écrans se remplacent, le passage de Fleet à Distribution produit un flash blanc. C'est l'argument le plus net pour la recapturer en sombre.</p>
 </div>
 
@@ -576,7 +582,7 @@ const startRotation = () => {
         // Survol ou focus clavier : on saute le tour, on ne tue pas la boucle.
         if (screen.matches(':hover') || rail.matches(':hover') || screen.contains(document.activeElement)) return;
         advance();
-    }, 5000);
+    }, 4000);
 };
 
 /* Un clic reprend la main : la rotation s'arrête pour de bon. */
