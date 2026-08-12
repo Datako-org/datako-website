@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Solutions · proposition — prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Hero Solutions — proposition · prototype isolé
+
+   Reprend l'INTENTION de 1a : un hub qui montre sa gamme vaut mieux qu'un
+   hub qui la compte. « 03 / 01 / 03 » n'annonçait rien qu'on ne relise
+   trois écrans plus bas.
+
+   Deux écarts assumés avec 1a :
+
+   1. AUCUN COCKPIT REDESSINÉ. 1a redessinait l'écran Stations avec des
+      valeurs inventées (57 480 000 encaissé, cuves à 62 % et 78 %,
+      « 2 points demandent votre attention »). Les trois captures réelles
+      existent maintenant — on les montre.
+
+   2. PAS DE BOUCLE. 1a tournait toutes les 5 s, indéfiniment. Ici le rail
+      s'écrit une fois à l'entrée dans le viewport, puis se fige. Ensuite
+      le visiteur pilote. C'est la grammaire déjà en place sur Fleet,
+      Distribution et Stations : une ouverture, pas une animation
+      permanente à côté du H1.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --color-canvas: #f3f6f5;
+    --color-canvas-soft: #e9efed;
+    --color-surface: #ffffff;
+    --color-ink: #062f3a;
+    --color-ink-soft: #3d5961;
+    --color-ink-muted: #64777c;
+    --color-line: rgba(6, 47, 58, .14);
+    --color-line-strong: rgba(6, 47, 58, .28);
+    --color-navy: #032e3a;
+    --color-accent: #3457e8;
+    --color-success: #168f70;
+    --shadow-raised: 0 28px 90px rgba(4, 38, 48, .16);
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink-soft);
+    font-family: "Familjen Grotesk", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Cartouche de lecture, hors maquette ─────────────────────────────── */
+.note {
+    padding: 26px clamp(20px, 5vw, 72px);
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-canvas-soft);
+}
+
+.note h1 {
+    margin: 0 0 10px;
+    color: var(--color-ink);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.note p { max-width: 82ch; margin: 0 0 8px; font-size: .89rem; }
+.note p:last-child { margin-bottom: 0; }
+.note b { color: var(--color-ink); font-weight: 500; }
+.note code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(6, 47, 58, .08);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .84em;
+}
+
+.note-warn { border-left: 3px solid #c6401f; padding-left: 14px; margin-top: 14px; }
+
+/* ── Hero ────────────────────────────────────────────────────────────── */
+.hero {
+    padding: clamp(64px, 8vw, 104px) clamp(20px, 5vw, 72px) clamp(56px, 7vw, 92px);
+    overflow: hidden;
+}
+
+.hero-grid {
+    max-width: 1360px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+    gap: clamp(40px, 5vw, 84px);
+    align-items: center;
+}
+
+.kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 26px;
+    color: var(--color-accent);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.kicker::before {
+    content: "";
+    width: 38px;
+    height: 1px;
+    background: currentColor;
+}
+
+.hero h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(2.5rem, 4.4vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+}
+
+.hero h2 em {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.lead { max-width: 52ch; margin: 30px 0 0; font-size: 1.04rem; }
+.lead + .lead { margin-top: 18px; }
+
+.actions { margin-top: 38px; display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+
+.btn {
+    padding: 15px 30px;
+    border: 0;
+    border-radius: 99px;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    font: inherit;
+    font-weight: 500;
+    font-size: .95rem;
+    cursor: pointer;
+    transition: background 220ms ease;
+}
+
+.btn:hover { background: var(--color-accent); }
+
+.link {
+    color: var(--color-ink);
+    font-weight: 500;
+    font-size: .95rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line-strong);
+    padding-bottom: 3px;
+    transition: border-color 220ms ease;
+}
+
+.link:hover { border-color: var(--color-accent); }
+
+/* ── Rail de modules ─────────────────────────────────────────────────── */
+.rail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(12px, 1.6vw, 26px);
+    margin-bottom: 26px;
+}
+
+.rail button {
+    position: relative;
+    padding: 17px 0 0;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    /* Ouverture : chaque colonne monte une fois, puis c'est fini. */
+    opacity: 0;
+    transform: translateY(9px);
+    transition: opacity 520ms var(--ease-out), transform 520ms var(--ease-out);
+}
+
+.rail button:disabled { cursor: default; }
+
+/* Le filet actif se dessine de gauche à droite : il désigne, il ne clignote pas. */
+.rail button::after {
+    content: "";
+    position: absolute;
+    inset: -1px auto auto 0;
+    height: 2px;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 620ms var(--ease-out);
+}
+
+.rail button[aria-selected="true"]::after { transform: scaleX(1); }
+
+.rail strong {
+    display: block;
+    color: var(--color-ink);
+    font-size: 1.06rem;
+    font-weight: 500;
+    letter-spacing: -.015em;
+}
+
+.rail span {
+    color: var(--color-ink-muted);
+    font-size: .84rem;
+}
+
+.rail button:disabled strong,
+.rail button:disabled span { opacity: .48; }
+
+.rail em {
+    font-style: normal;
+    color: var(--color-success);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .62rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.is-open .rail button { opacity: 1; transform: none; }
+.is-open .rail button:nth-child(2) { transition-delay: 90ms; }
+.is-open .rail button:nth-child(3) { transition-delay: 180ms; }
+.is-open .rail button:nth-child(4) { transition-delay: 270ms; }
+.is-open .rail button[aria-selected="true"]::after { transition-delay: 340ms; }
+
+/* ── Écran ───────────────────────────────────────────────────────────── */
+.screen {
+    position: relative;
+    margin: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    background: #071116;
+    box-shadow: var(--shadow-raised);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+    transition-delay: 260ms;
+}
+
+.is-open .screen { opacity: 1; transform: none; }
+
+.screen-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, .09);
+    background: rgba(255, 255, 255, .04);
+}
+
+.screen-bar i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .2);
+}
+
+.screen-bar span {
+    margin-left: 8px;
+    color: rgba(255, 255, 255, .5);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .6rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.screen-stack { position: relative; aspect-ratio: 1.82 / 1; }
+
+.screen-stack img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+    opacity: 0;
+    transition: opacity 460ms ease;
+}
+
+.screen-stack img.is-active { opacity: 1; }
+
+.screen figcaption {
+    padding: 13px 16px;
+    border-top: 1px solid rgba(255, 255, 255, .09);
+    color: rgba(255, 255, 255, .46);
+    font-size: .76rem;
+}
+
+/* ── Rejouer ─────────────────────────────────────────────────────────── */
+.replay {
+    max-width: 1360px;
+    margin: 26px auto 0;
+    padding: 0 clamp(20px, 5vw, 72px);
+}
+
+.replay button {
+    padding: 9px 17px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 99px;
+    background: none;
+    color: var(--color-ink-soft);
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+@media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .rail { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+}
+
+/* L'ouverture est un confort, pas le message : sans elle, tout est là. */
+@media (prefers-reduced-motion: reduce) {
+    .rail button, .screen { opacity: 1; transform: none; transition: none; }
+    .rail button::after { transform: scaleX(1); transition: none; }
+    .screen-stack img { transition: none; }
+    .replay { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="note">
+    <h1>Hero Solutions — proposition</h1>
+    <p>Reprend l'intention de <b>1a</b> : le hub montre sa gamme au lieu de la compter. Le compteur « 03 / 01 / 03 » annonçait des chiffres qu'on relit trois écrans plus bas.</p>
+    <p><b>Deux écarts avec 1a.</b> Aucun cockpit n'est redessiné — 1a inventait <code>57 480 000</code> d'encaissé, des cuves à 62 % et 78 % et « 2 points demandent votre attention », alors que le produit affiche <code>47 640 000</code> et « Rien à signaler ». Les trois captures réelles existent, on les montre. Et il n'y a <b>pas de boucle</b> : le rail s'écrit une fois à l'entrée, puis se fige — ensuite le visiteur pilote.</p>
+    <p class="note-warn"><b>Ce que ce prototype rend visible :</b> Distribution est la seule capture en thème clair. Dans un cadre unique où les écrans se remplacent, le passage de Fleet à Distribution produit un flash blanc. C'est l'argument le plus net pour la recapturer en sombre.</p>
+</div>
+
+<section class="hero" id="hero">
+    <div class="hero-grid">
+        <div>
+            <p class="kicker">La plateforme Datakö</p>
+            <h2>Des solutions métier pour piloter vos opérations et votre <em>rentabilité.</em></h2>
+            <p class="lead">Au-delà du conseil, Datakö édite des applications métier conçues pour le terrain. Nos solutions structurent vos opérations, suivent vos performances et vous redonnent le contrôle sur vos marges.</p>
+            <p class="lead">Moins de complexité, plus de visibilité, et des décisions prises au bon moment.</p>
+            <div class="actions">
+                <button class="btn" type="button">Demander une démo</button>
+                <a class="link" href="#hero">Voir les modules</a>
+            </div>
+        </div>
+
+        <div>
+            <div class="rail" role="tablist" aria-label="Modules Datakö">
+                <button type="button" role="tab" aria-selected="true" data-screen="fleet">
+                    <strong>Datakö Fleet</strong><span>Transport</span>
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-screen="distribution">
+                    <strong>Datakö Distribution</strong><span>Distribution carburant</span>
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-screen="stations">
+                    <strong>Datakö Stations</strong><span>Stations-service</span>
+                </button>
+                <button type="button" role="tab" aria-selected="false" disabled>
+                    <strong>Datakö HR</strong><em>En préparation</em>
+                </button>
+            </div>
+
+            <figure class="screen">
+                <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span data-label>Fleet · Vue d'ensemble</span></div>
+                <div class="screen-stack">
+                    <img class="is-active" data-screen="fleet" src="../images/home-fleet-anonymized.webp" alt="Vue d'ensemble anonymisée de Datakö Fleet">
+                    <img data-screen="distribution" src="../images/home-distribution-anonymized.webp" alt="Tableau de bord Datakö Distribution">
+                    <img data-screen="stations" src="../images/home-stations-demo.webp" alt="Cockpit de démonstration Datakö Stations">
+                </div>
+                <figcaption data-caption>Captures produit · environnement de démonstration</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<div class="replay"><button type="button" id="replay">Rejouer l'ouverture</button></div>
+
+<script>
+const hero  = document.getElementById('hero');
+const rail  = document.querySelector('.rail');
+const imgs  = [...document.querySelectorAll('.screen-stack img')];
+const label = document.querySelector('[data-label]');
+
+const labels = {
+    fleet:        "Fleet · Vue d'ensemble",
+    distribution: "Distribution · Tableau de bord",
+    stations:     "Stations · Cockpit du jour"
+};
+
+/* L'ouverture ne se joue qu'une fois, quand la composition entre dans le
+   champ. Pas d'intervalle, pas de reprise au scroll suivant. */
+const open = () => hero.classList.add('is-open');
+
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    open();
+} else {
+    new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            setTimeout(open, 220);
+            obs.disconnect();
+        });
+    }, { threshold: .3 }).observe(hero);
+}
+
+rail.addEventListener('click', event => {
+    const tab = event.target.closest('button[data-screen]');
+    if (!tab) return;
+    [...rail.querySelectorAll('button')].forEach(b => b.setAttribute('aria-selected', String(b === tab)));
+    imgs.forEach(img => img.classList.toggle('is-active', img.dataset.screen === tab.dataset.screen));
+    label.textContent = labels[tab.dataset.screen];
+});
+
+document.getElementById('replay').addEventListener('click', () => {
+    hero.classList.remove('is-open');
+    requestAnimationFrame(() => setTimeout(open, 60));
+});
+</script>
+</body>
+</html>
