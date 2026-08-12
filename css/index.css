@@ -948,6 +948,22 @@
     transform: translateY(0);
 }
 
+/* L'aboutissement était l'écran le plus vide de la séquence : après quatre
+   états denses, la décision arrivait seule au milieu d'un grand panneau.
+   Les états traversés restent désormais en trace derrière elle — assez
+   pour qu'on voie le chemin entier d'un coup d'œil, assez peu pour ne
+   jamais concurrencer la décision. Le climax devient le moment le plus
+   riche, plus le plus vide. */
+.decision-journey[data-step="4"] [data-journey-scene="0"],
+.decision-journey[data-step="4"] [data-journey-scene="1"],
+.decision-journey[data-step="4"] [data-journey-scene="2"],
+.decision-journey[data-step="4"] [data-journey-scene="3"] {
+    opacity: 0.08;
+    transform: translateY(0) scale(0.985);
+    filter: blur(1.5px);
+    transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+}
+
 .scene-label {
     position: absolute;
     top: 4px;
