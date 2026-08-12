@@ -53,10 +53,13 @@
 .why-datako h2 {
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(2.6rem, 5vw, 5.25rem);
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    line-height: 0.99;
+    /* Jalon 1 : grands titres en 400, et sur l'échelle des tokens plutôt
+       que sur des clamps maison qui montaient jusqu'à 84px. Le 600 subsiste
+       ailleurs, mais uniquement sur les petits éléments. */
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
 }
 
 .editorial-heading h2 em,
@@ -121,10 +124,12 @@
     margin: 0;
     color: var(--color-ink);
     /* Jalon 1 : la hiérarchie passe par la taille et le tracking, pas par
-       la graisse. Le 600 criait ; le 400 impose sans hausser le ton. */
-    font-size: var(--type-display);
+       la graisse. Le 600 criait ; le 400 impose sans hausser le ton.
+       --type-h1 et non --type-display : à 92px le titre hurlait autant que
+       le gras qu'on venait de retirer. */
+    font-size: var(--type-h1);
     font-weight: 400;
-    letter-spacing: var(--tracking-display);
+    letter-spacing: var(--tracking-h1);
     line-height: 0.88;
     overflow-wrap: normal;
     text-wrap: balance;
@@ -686,10 +691,10 @@
 .product-copy h3 {
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(2.2rem, 4vw, 4.35rem);
+    font-size: var(--type-h3);
     font-weight: 500;
-    letter-spacing: -0.055em;
-    line-height: 1.02;
+    letter-spacing: var(--tracking-h3);
+    line-height: 1.16;
 }
 
 .product-copy > p:not(.product-kicker) {
@@ -853,10 +858,10 @@
 .journey-heading h2 {
     margin: 0;
     color: var(--color-on-navy);
-    font-size: clamp(3rem, 6vw, 6.4rem);
-    font-weight: 500;
-    letter-spacing: -0.06em;
-    line-height: 0.94;
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
 }
 
 .journey-heading h2 em {
@@ -1548,10 +1553,10 @@
     max-width: 650px;
     margin: 0;
     color: var(--color-ink);
-    font-size: clamp(2.8rem, 5vw, 5.2rem);
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    line-height: 0.98;
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
 }
 
 .essentials-copy h2 em {
@@ -1733,10 +1738,10 @@
 .home-final-cta h2 {
     margin: 0;
     color: var(--color-on-navy);
-    font-size: clamp(3.1rem, 7vw, 7.2rem);
-    font-weight: 500;
-    letter-spacing: -0.065em;
-    line-height: 0.92;
+    font-size: var(--type-h1);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h1);
+    line-height: 1.02;
 }
 
 .home-final-cta h2 em {
