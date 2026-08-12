@@ -9,7 +9,7 @@
 <script>try{const t=localStorage.getItem('datako_theme');document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=20260812-3"><link rel="stylesheet" href="css/distribution.css?v=20260812-6"><link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/main.css?v=20260812-3"><link rel="stylesheet" href="css/distribution.css?v=20260812-8"><link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="alternate" hreflang="fr" href="solution-distribution.html"><link rel="alternate" hreflang="en" href="en/solution-distribution.html"><link rel="alternate" hreflang="x-default" href="solution-distribution.html"></head>
 <body class="page-2026 page-distribution">
 <a class="skip-link" href="#main-content">Aller au contenu principal</a>
@@ -30,8 +30,8 @@
 <div class="dist-screen-head" aria-hidden="true"><span>Tableau de bord Distribution</span><b>Toutes périodes</b></div>
 <div class="dist-kpi-grid">
 <div class="dist-kpi"><span>Volume distribué</span><b>20 000 L</b></div>
-<div class="dist-kpi dist-kpi-accent"><span>Péréquation État</span><b>+15 184 400 GNF</b></div>
-<div class="dist-kpi"><span>Position TVA</span><b>Soldée</b></div>
+<div class="dist-kpi dist-kpi-accent" data-focus="1"><span>Péréquation État</span><b>+15 184 400 GNF</b></div>
+<div class="dist-kpi" data-focus="2"><span>Position TVA</span><b>Soldée</b></div>
 <div class="dist-kpi"><span>Créances clients</span><b>234 000 000 GNF</b></div>
 </div>
 <figcaption>Cockpit Distribution · environnement de démonstration</figcaption>
@@ -151,7 +151,7 @@
 
 <div id="projectModal" class="modal-overlay" aria-hidden="true"><div class="modal-container"><button class="modal-close" aria-label="Fermer">✕</button><h2>Demander une démo Distribution</h2><div id="contact-form-container"></div></div></div>
 <script src="js/main.js?v=20260811-6"></script>
-<script src="js/page-motion.js?v=20260812-1"></script>
+<script src="js/page-motion.js?v=20260812-2"></script>
 <script src="js/product-motion.js?v=20260812-1"></script>
 </body>
 </html>

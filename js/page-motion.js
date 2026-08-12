@@ -127,6 +127,37 @@
                 camera.style.setProperty('--cam-x', '0');
             });
         });
+
+        // Trajet narratif : la caméra va chercher les chiffres marqués
+        // data-focus, dans l'ordre, puis recule et s'arrête pour de bon. Elle
+        // ne rejoue pas — un mouvement qui reboucle cesse de vouloir dire
+        // quelque chose. La parallaxe reprend la main une fois posée.
+        cameras.filter(camera => camera.querySelector('[data-focus]')).forEach(camera => {
+            const stops = [...camera.querySelectorAll('[data-focus]')]
+                .map(target => target.dataset.focus);
+            let started = false;
+
+            const travel = () => {
+                if (started) return;
+                started = true;
+                stops.forEach((stop, index) => {
+                    window.setTimeout(() => { camera.dataset.travelling = stop; }, 700 + index * 1250);
+                });
+                window.setTimeout(() => { camera.dataset.travelling = '0'; }, 700 + stops.length * 1250);
+                // L'attribut est retiré pour rendre le contrôle à la parallaxe,
+                // qui écrit sur les mêmes transformations.
+                window.setTimeout(() => { delete camera.dataset.travelling; }, 2100 + stops.length * 1250);
+            };
+
+            const travelObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    travelObserver.unobserve(entry.target);
+                    travel();
+                });
+            }, { threshold: 0.45 });
+            travelObserver.observe(camera);
+        });
     }
 
     reducedMotion.addEventListener?.('change', event => {

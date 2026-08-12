@@ -476,3 +476,63 @@
         transition: none;
     }
 }
+
+/* ── Réf 04 · le trajet de caméra ──────────────────────────────────────
+   La condition posée en analysant cette référence : la caméra bouge pour
+   répondre à une question, pas pour faire joli. Elle va chercher deux
+   chiffres précis, puis recule et se tait définitivement.
+
+   Réalisable ici parce que le cockpit est du DOM. Sur une capture à 44 Ko
+   l'agrandissement la réduirait en bouillie — c'est pour ça que le hero
+   Fleet garde la version sobre, sans zoom.
+
+   Court par nécessité : M3 porte la vraie démonstration plus bas sur cette
+   même page. Deux approches, ~2 s, puis repos. Jamais de boucle. */
+/* Le cadre ne bouge pas — c'est le contenu qui se déplace derrière lui.
+   Premier essai raté : en transformant .dist-screen, le panneau grandissait
+   par-dessus le H1. Or le titre lisible à tout instant est la contrainte de
+   base. Une vraie caméra garde son cadre et déplace la scène. */
+.dist-screen { overflow: clip; }
+
+.dist-kpi-grid { transform-origin: center center; }
+
+.dist-hero[data-travelling] .dist-kpi-grid {
+    transition: transform 1150ms var(--ease-out);
+}
+
+/* Péréquation est en haut à droite, Position TVA en bas à gauche : on tire
+   la grille dans la direction opposée pour amener la cellule au centre. */
+.dist-hero[data-travelling="1"] .dist-kpi-grid {
+    transform: scale(1.22) translate(-12%, 6%);
+}
+
+.dist-hero[data-travelling="2"] .dist-kpi-grid {
+    transform: scale(1.22) translate(12%, -6%);
+}
+
+.dist-hero[data-travelling="0"] .dist-kpi-grid {
+    transform: scale(1) translate(0, 0);
+}
+
+/* La carte visée reste nette, les autres s'effacent : le regard sait où aller. */
+.dist-hero[data-travelling] .dist-kpi { transition: opacity 500ms ease; }
+
+.dist-hero[data-travelling="1"] .dist-kpi:not([data-focus="1"]),
+.dist-hero[data-travelling="2"] .dist-kpi:not([data-focus="2"]) { opacity: .28; }
+
+/* Sous 1100px la carte visée ne tiendrait pas dans le cadre, et en mouvement
+   réduit le trajet n'a pas lieu d'être. */
+@media (max-width: 1099px) {
+    .dist-hero[data-travelling] .dist-kpi-grid,
+    .dist-hero[data-travelling="1"] .dist-kpi-grid,
+    .dist-hero[data-travelling="2"] .dist-kpi-grid { transform: none; transition: none; }
+    .dist-hero[data-travelling] .dist-kpi { opacity: 1 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dist-hero[data-travelling] .dist-kpi-grid,
+    .dist-hero[data-travelling="1"] .dist-kpi-grid,
+    .dist-hero[data-travelling="2"] .dist-kpi-grid { transform: none; transition: none; }
+    .dist-hero[data-travelling] .dist-kpi { opacity: 1 !important; }
+}
+
