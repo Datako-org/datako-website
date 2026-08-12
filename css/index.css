@@ -2330,3 +2330,74 @@ html[data-theme="dark"] .home-btn-primary:hover {
         animation: none;
     }
 }
+
+/* --- Panneau produit en DOM (Stations) --------------------------------
+   La capture qui occupait cette place montrait une journee a 0 GNF, sur la
+   page la plus vue du site. Reconstruite en DOM avec les valeurs de la page
+   Stations : coherente, traduisible, nette a tout zoom. */
+.product-panel {
+    display: grid;
+    gap: 1px;
+    background: var(--color-line);
+}
+
+.product-panel-kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--color-line);
+}
+
+.product-panel-kpis > div,
+.product-panel-tank {
+    padding: clamp(20px, 2.2vw, 28px);
+    background: var(--color-surface);
+}
+
+.product-panel span {
+    display: block;
+    margin-bottom: 9px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+}
+
+.product-panel b {
+    color: var(--color-ink);
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    font-weight: 400;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.product-panel-tank i {
+    display: block;
+    height: 6px;
+    margin-bottom: 10px;
+    border-radius: 99px;
+    background: var(--color-line-strong);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-panel-tank i::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--fill);
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-violet));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1100ms var(--ease-out);
+}
+
+.product-feature.is-revealed .product-panel-tank i::after { transform: scaleX(1); }
+
+.product-panel-tank b { font-size: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+    .product-panel-tank i::after { transform: scaleX(1); transition: none; }
+}
