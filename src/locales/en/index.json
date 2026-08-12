@@ -154,7 +154,9 @@
     "Sold on credit",
     "1,800,000 GNF",
     "Day health",
-    "Nothing to report"
+    "Nothing to report",
+    "No transaction beyond a customer’s ceiling",
+    "No discrepancy found on a delivery"
   ],
   "attributes": [
     "Datakö transforms operational data into actionable information to help companies decide and act.",

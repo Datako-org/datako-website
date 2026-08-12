@@ -11,21 +11,32 @@
 .station-live-head { padding-bottom:16px; border-bottom:1px solid var(--color-line); display:flex; justify-content:space-between; gap:20px; color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; }
 .live-dot { color:var(--color-success); }
 .station-live-main { padding:24px 0; display:grid; grid-template-columns:1fr 1fr 1.15fr; gap:16px; }
-.tank-card,.pistol-card { min-height:190px; padding:16px; border:1px solid var(--color-line); border-radius:10px; background:var(--color-canvas-soft); }
-.tank { position:relative; height:108px; margin-bottom:13px; border:1px solid var(--color-line-strong); border-radius:7px 7px 10px 10px; overflow:hidden; background:var(--color-surface); }
-.tank-fill { position:absolute; left:0; right:0; bottom:0; height:var(--level); background:var(--liquid); transition:height 760ms var(--ease-out); }
-.tank-alert { position:absolute; left:0; right:0; bottom:27%; border-top:1px solid #df7658; opacity:0; transition:opacity 400ms ease; }
-.tank-card strong { display:block; color:var(--color-ink); font-size:.83rem; }
-.tank-card small { color:var(--color-ink-muted); }
-.pistol-card > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.58rem; letter-spacing:.08em; text-transform:uppercase; }
-.pistol-list { margin-top:18px; display:grid; gap:11px; }
-.pistol-row { display:flex; justify-content:space-between; color:var(--color-ink-muted); font-size:.74rem; }
-.pistol-row strong { color:var(--color-ink); }
-.station-live[data-step="0"] .tank-fill { height:62%; }
-.station-live[data-step="1"] .tank-card:first-child .tank-fill { height:82%; }
-.station-live[data-step="2"] .tank-card:nth-child(2) .tank-fill { height:29%; }
-.station-live[data-step="2"] .tank-alert { opacity:1; }
-.station-live[data-step="3"] .tank-fill,.station-live.is-complete .tank-fill { height:55%; }
+/* Reconstruction de l ecran « Cloture · Certifier la journee ». Les cuves
+   animees d avant etaient inventees — niveaux a 62 % et « ecart a controler »,
+   alors que le cockpit plus bas sur la meme page annonce « aucun ecart
+   constate ». La sequence suit maintenant le calcul reel du produit :
+   ventes, puis credits et depenses, puis le cash net qui en decoule. */
+.close-card { min-height:190px; padding:16px; border:1px solid var(--color-line); border-radius:10px; background:var(--color-canvas-soft); display:flex; flex-direction:column; }
+.close-card > span { color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.58rem; letter-spacing:.08em; text-transform:uppercase; }
+.close-row { margin-top:13px; display:flex; justify-content:space-between; gap:12px; color:var(--color-ink-muted); font-size:.76rem; }
+.close-row strong { color:var(--color-ink); font-variant-numeric:tabular-nums; font-weight:500; }
+.close-row .is-credit { color:#e8b45f; }
+.close-row .is-repaid { color:#63d9b8; }
+.close-total { margin-top:auto; padding-top:13px; border-top:1px solid var(--color-line); display:flex; justify-content:space-between; gap:12px; align-items:baseline; color:var(--color-ink-muted); font-size:.76rem; }
+.close-total strong { color:var(--color-ink); font-size:.9rem; font-variant-numeric:tabular-nums; font-weight:500; }
+.close-total .is-cost { color:#e8846c; }
+.close-card-net { justify-content:center; gap:9px; }
+.close-card-net b { color:#63d9b8; font-size:clamp(1.2rem,2vw,1.6rem); font-weight:500; font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+.close-card-net small { color:var(--color-ink-muted); font-size:.72rem; line-height:1.5; }
+
+/* Chaque colonne reste en retrait tant que l etape qui la produit n a pas
+   ete jouee : c est la causalite, pas une simple apparition. */
+.close-card,.close-total[data-slot] { opacity:.34; transition:opacity 520ms var(--ease-out); }
+.close-card.is-filled,.station-live.is-complete .close-card,
+.close-total[data-slot].is-filled,.station-live.is-complete .close-total[data-slot] { opacity:1; }
+/* La carte des mouvements s allume a l etape 02, sa ligne de depenses seulement
+   a l etape 03 : sans ce decrochage, l etape 03 s allumerait sans rien produire. */
+.close-card.is-filled .close-total[data-slot]:not(.is-filled) { opacity:.34; }
 .station-live-stages { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--color-line); }
 .station-live-stages div { padding:14px 8px 4px; color:var(--color-ink-muted); font-size:.7rem; opacity:.35; transition:opacity 360ms ease; }
 .station-live-stages span { display:block; margin-bottom:7px; font-family:"IBM Plex Mono",monospace; font-size:.58rem; }
@@ -119,7 +130,9 @@
  .stations-hero { padding-top:52px; }
  .stations-hero h1 { font-size: var(--type-h1); font-weight: 400; }
  .station-live-main { grid-template-columns:1fr 1fr; }
- .pistol-card { grid-column:1/-1; min-height:auto; }
+ .close-card-net { grid-column:1/-1; min-height:auto; padding-block:22px; }
+ /* En deux colonnes, libelle et montant ne tiennent plus cote a cote. */
+ .close-total { flex-direction:column; align-items:flex-start; gap:5px; }
  .station-live-stages { grid-template-columns:1fr 1fr; }
  .station-principles,.station-module-grid,.day-flow,.stations-role-split,.whatsapp-station-flow,.station-role-grid { grid-template-columns:1fr; }
  .station-principle,.station-principle + .station-principle,.day-step,.day-step + .day-step,.station-role,.station-role + .station-role { min-height:auto; padding:28px 0; border-right:0; border-top:1px solid var(--color-line); }
@@ -130,7 +143,7 @@
  .station-phone { min-height:430px; }
 }
 @media(prefers-reduced-motion:reduce){
- .tank-fill,.day-step,.station-phone-step { transition:none!important; transform:none!important; opacity:1!important; }
+ .close-card,.day-step,.station-phone-step { transition:none!important; transform:none!important; opacity:1!important; }
 }
 
 /* --- Cockpit journalier en DOM ----------------------------------------

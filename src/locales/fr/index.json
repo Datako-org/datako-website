@@ -154,7 +154,9 @@
     "Vendus à crédit",
     "1 800 000 GNF",
     "Santé du jour",
-    "Rien à signaler"
+    "Rien à signaler",
+    "Aucune opération au-delà du plafond d’un client",
+    "Aucun écart constaté sur un dépotage"
   ],
   "attributes": [
     "Datakö transforme les données opérationnelles en information exploitable pour aider les entreprises à décider et agir.",

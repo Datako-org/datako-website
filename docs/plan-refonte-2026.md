@@ -175,9 +175,13 @@ solutions métier, pas l'architecture logicielle** — décision explicite d'Abd
 | **4 — Fleet** | page pilote + M3 (WhatsApp → cockpit) + caméra + mise en scène téléphone | ✅ fait |
 | **5 — Distribution** | page créée, M3 « Une saisie. Toute la réglementation. » | ✅ fait |
 | **6 — Stations** | cockpit reconstruit en DOM, plus aucun `0 GNF` | ✅ fait |
-| **7 — Solutions / Matching** | hub à 3 solutions ✅ · hero Matching rempli ✅ · **Prestations : expertises à brancher sur la chaîne** ⬜ |
+| **7 — Solutions / Matching** | hub à 3 solutions ✅ · hero Matching rempli ✅ | ✅ fait |
 | **8 — M1 puis M2** | M1 en prototype isolé ✅ (`docs/m1-convergence.html`) · **M2 : mécanique toujours à concevoir** ⬜ |
 | **9 — Passe finale** | graisses harmonisées ✅ · contraste fils d'Ariane ✅ · **perf LCP/CLS à mesurer** ⬜ |
+
+> La phase 7 portait « Prestations : expertises à brancher sur la chaîne ». **Rayé le 2026-08-12** sur
+> décision d'Abdoulaye : c'est le mapping expertise → étapes rejeté par la règle d'exactitude (§ ci-dessus).
+> Ne pas le ressusciter — la chaîne est un récit, pas une taxonomie des métiers.
 
 ### Chantier parallèle — non bloquant pour 0 à 4
 **Dataset de démo** : organisation dédiée, données fictives mais réalistes pour Distribution et
