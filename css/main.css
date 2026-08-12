@@ -173,7 +173,10 @@ button {
 .footer-wordmark {
     position: absolute;
     left: 50%;
-    bottom: -0.12em;
+    /* Le filigrane était calé sur le bord bas : sa panse et ses jambages
+       passaient sous la barre de copyright. Relevé pour que le mot tienne
+       entier dans le footer. */
+    bottom: 0.16em;
     transform: translateX(-50%);
     z-index: 0;
     font-size: clamp(6rem, 26vw, 22rem);
