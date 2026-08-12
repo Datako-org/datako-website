@@ -148,6 +148,72 @@ button {
     transform: translateY(0);
 }
 
+/* ── Footer · curtain reveal + mot-géant (Jalon 2) ──────────────────────
+   Le contenu de la page remonte et découvre le footer, au lieu de le
+   pousser devant lui.
+
+   Mécanique : clip-path sur le conteneur. Un ancêtre porteur de clip-path
+   devient bloc conteneur pour ses descendants en position: fixed —
+   l'effet reste donc confiné au footer et ne touche à aucune autre page.
+
+   Volontairement sobre : rideau + mot-géant, rien d'autre. Pas de marquee,
+   pas de halo animé, rien qui tourne en boucle.                          */
+.footer-reveal {
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.footer-reveal > .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-wordmark {
+    position: absolute;
+    left: 50%;
+    bottom: -0.12em;
+    transform: translateX(-50%);
+    z-index: 0;
+    font-size: clamp(6rem, 26vw, 22rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.75;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    color: transparent;
+    background: linear-gradient(180deg, rgba(247, 251, 250, 0.10) 0%, rgba(247, 251, 250, 0) 62%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Le contenu du footer repasse au-dessus du filigrane. */
+.footer-reveal > .footer > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Le rideau ne se déploie qu'à partir du moment où la hauteur d'écran le
+   permet : sur mobile, un plein écran de vide avant le copyright ne sert
+   personne, et 100dvh évite en prime le bug de la barre d'URL. */
+@media (min-width: 900px) and (min-height: 640px) {
+    .footer-reveal {
+        min-height: min(100dvh, 760px);
+    }
+}
+
+@media (max-width: 899px), (max-height: 639px) {
+    .footer-reveal {
+        clip-path: none;
+    }
+
+    .footer-reveal > .footer {
+        position: static;
+    }
+}
+
 /* ── cover-reveal · primitive signature (Jalon 1) ───────────────────────
    Le texte n'apparaît pas en fondu : il est découvert par un cache qui se
    retire. Volontairement opt-in — réservé aux H1 et aux quelques moments
