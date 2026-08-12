@@ -150,9 +150,8 @@
     transform: scale(1.025);
 }
 
-.solution-module-stations .solution-module-visual {
-    background: #f7f9fa;
-}
+/* La capture Stations est passee au theme sombre le 12/08/2026 : le fond clair
+   qui la precedait apparaissait en flash pendant le chargement de l image. */
 
 .solution-module-content {
     padding: clamp(28px, 4vw, 42px);
@@ -426,41 +425,3 @@ html[data-theme="dark"] .solution-module-stations .solution-module-visual img {
     }
 }
 
-/* --- Panneau produit en DOM -----------------------------------------
-   Datako Stations n a pas encore de capture au theme du site. Plutot
-   qu un visuel provisoire, le module porte deux chiffres reels du produit :
-   net a tout zoom, traduisible, et sans dependance a un asset.
-   Distribution est passe a une vraie capture le 12/08/2026. */
-.solution-module-panel {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    gap: 1px;
-    margin: 0;
-    background: var(--color-line);
-    border-bottom: 1px solid var(--color-line);
-}
-
-.solution-module-panel > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    padding: clamp(20px, 2.6vw, 30px);
-    background: var(--color-navy);
-}
-
-.solution-module-panel span {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: var(--type-label);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, .5);
-}
-
-.solution-module-panel b {
-    color: var(--color-on-navy);
-    font-size: clamp(1.2rem, 1.9vw, 1.55rem);
-    font-weight: 400;
-    letter-spacing: -.02em;
-    font-variant-numeric: tabular-nums;
-}
