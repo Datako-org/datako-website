@@ -146,3 +146,58 @@
  .fleet-screen,.chat-flow [data-sequence-step],.proof-step { transform:none!important; opacity:1!important; }
  .fleet-feature-svg .motion-stroke { animation:none!important; stroke-dashoffset:0!important; }
 }
+
+/* ── M3 · Le terrain remplit le cockpit ────────────────────────────────
+   La légende de cette section promet déjà que « chaque réponse complète
+   immédiatement une ligne de l'opération ». Le cockpit était pourtant
+   affiché complet dès le départ : la promesse était écrite, jamais jouée.
+
+   Une ligne en attente montre son intitulé et un trait à la place de la
+   valeur — elle se lit comme « pas encore renseignée », pas comme un vide.
+   La valeur arrive au moment exact où le terrain répond.                  */
+.control-row[data-slot] > strong {
+    position: relative;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 420ms ease, transform 520ms var(--ease-out);
+}
+
+.control-row[data-slot]::after {
+    content: "";
+    width: 26px;
+    height: 1px;
+    align-self: center;
+    background: rgba(255, 255, 255, .28);
+    transition: opacity 300ms ease;
+}
+
+.control-row[data-slot].is-filled > strong {
+    opacity: 1;
+    transform: none;
+}
+
+.control-row[data-slot].is-filled::after {
+    opacity: 0;
+}
+
+/* La ligne qui vient de se remplir s'éclaire brièvement : c'est ce qui
+   relie le message de gauche à la donnée de droite. */
+.control-row[data-slot].is-filled {
+    animation: control-row-land 900ms var(--ease-out);
+}
+
+@keyframes control-row-land {
+    0%   { background: rgba(94, 116, 245, .16); }
+    100% { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .control-row[data-slot] > strong {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .control-row[data-slot]::after { display: none; }
+    .control-row[data-slot].is-filled { animation: none; }
+}
