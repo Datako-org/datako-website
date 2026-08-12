@@ -27,3 +27,7 @@ build/
 
 # Uploads internes d'Antigravity
 data/*.tmp
+
+# Config de serveur local, propre a chaque worktree : les ports different
+# volontairement pour que plusieurs previews tournent en parallele.
+.claude/launch.json
