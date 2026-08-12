@@ -1,0 +1,37 @@
+{
+  "text": [
+    "L’IA générative dans une PME : par où commencer — Datakö",
+    "Aller au contenu principal",
+    "Blog",
+    "/ IA générative",
+    "IA & Business",
+    "L’IA générative dans une PME :",
+    "par où commencer.",
+    "Les outils sont accessibles, les démonstrations impressionnantes. Ce qui manque le plus souvent, ce n’est pas la technologie — c’est un premier usage assez précis pour être mesuré.",
+    "15 décembre 2025",
+    "5 min de lecture",
+    "Le problème n’est pas l’outil",
+    "Une PME qui teste l’IA générative bute rarement sur la technique. Les modèles sont disponibles à l’abonnement, les interfaces sont simples, et les premières démonstrations fonctionnent presque toujours. Le blocage arrive après : l’essai ne se transforme pas en usage régulier, parce que personne n’a défini ce qu’il devait remplacer ni comment on saurait qu’il fonctionne.",
+    "Un projet d’IA qui commence par « qu’est-ce qu’on pourrait faire avec ça ? » produit des démonstrations. Un projet qui commence par « quelle tâche nous coûte deux heures par jour ? » produit un usage.",
+    "Choisir un premier cas qui se mesure",
+    "Les meilleurs premiers cas partagent trois caractéristiques : la tâche est répétitive, son résultat est vérifiable par la personne qui l’effectue déjà, et une erreur n’a pas de conséquence irréversible. Rédiger un compte rendu à partir de notes, classer des demandes entrantes, extraire des informations d’un document type : ces tâches se prêtent à une mise en production progressive.",
+    "À l’inverse, un premier cas qui touche directement un client, un montant ou une décision réglementée place la barre trop haut. Il faudra y venir, mais pas en apprenant.",
+    "La tâche se répète assez pour que le gain se cumule.",
+    "Son résultat est vérifiable par celui qui la fait déjà.",
+    "Une erreur se rattrape sans conséquence pour un client.",
+    "L’enjeu n’est pas de savoir si l’IA sait faire. C’est de savoir si votre organisation saura vérifier ce qu’elle produit.",
+    "Ce qui se passe quand la donnée n’est pas prête",
+    "Beaucoup de projets échouent en amont du modèle. Une assistance qui doit répondre sur vos produits a besoin d’une base de produits à jour ; une extraction automatique a besoin de documents cohérents. Quand ces éléments vivent dans plusieurs fichiers et plusieurs versions, l’outil hérite du désordre.",
+    "C’est souvent à ce moment que la question devient une question de données plutôt qu’une question d’IA — et qu’elle rejoint le travail moins spectaculaire de centralisation et de structuration.",
+    "Mesurer avant d’étendre",
+    "Avant de généraliser, il faut un point de comparaison : combien de temps la tâche prenait-elle, combien de reprises étaient nécessaires, quelle part est passée en revue par un humain. Sans ces repères, un déploiement devient une intuition partagée plutôt qu’une décision.",
+    "Une PME n’a pas besoin d’une stratégie IA. Elle a besoin d’un usage qui tient, d’une mesure honnête, et d’une raison claire de passer au suivant.",
+    "Un usage en tête, mais pas de point de départ ?",
+    "On regarde ensemble ce que vos données permettent aujourd’hui, et par quel cas commencer pour que le résultat soit mesurable.",
+    "Parler de votre projet",
+    "← Tous les articles"
+  ],
+  "attributes": [
+    "Par où commencer avec l’IA générative dans une PME : choisir un premier cas mesurable, préparer les données et évaluer avant d’étendre."
+  ]
+}

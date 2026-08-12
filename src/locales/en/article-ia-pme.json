@@ -1,0 +1,37 @@
+{
+  "text": [
+    "Generative AI in a smaller company: where to start — Datakö",
+    "Skip to main content",
+    "Blog",
+    "/ Generative AI",
+    "AI & Business",
+    "Generative AI in a smaller company:",
+    "where to start.",
+    "The tools are available and the demos are impressive. What is usually missing is not the technology — it is a first use case precise enough to be measured.",
+    "15 December 2025",
+    "5 min read",
+    "The tool is not the problem",
+    "A smaller company trying generative AI rarely gets stuck on the technical side. Models come with a subscription, the interfaces are simple, and the first demo almost always works. The difficulty comes after: the trial never turns into regular use, because nobody defined what it was meant to replace or how anyone would know it was working.",
+    "A project that starts with “what could we do with this?” produces demos. A project that starts with “which task costs us two hours a day?” produces use.",
+    "Pick a first case you can measure",
+    "The best first cases share three traits: the task repeats, its output can be checked by whoever already does it, and a mistake carries no irreversible consequence. Drafting a report from notes, sorting incoming requests, pulling information out of a standard document — these lend themselves to a gradual rollout.",
+    "A first case that touches a customer, an amount or a regulated decision sets the bar too high. You will get there, but not while learning.",
+    "The task repeats often enough for the gain to accumulate.",
+    "Its output can be checked by whoever already does it.",
+    "A mistake can be caught before it reaches a customer.",
+    "The question is not whether AI can do the work. It is whether your organisation can check what it produces.",
+    "What happens when the data is not ready",
+    "Many projects fail upstream of the model. An assistant answering questions about your products needs an up-to-date product base; automatic extraction needs consistent documents. When those live across several files and several versions, the tool inherits the mess.",
+    "This is usually the point where the question stops being about AI and becomes a question about data — and rejoins the less spectacular work of centralising and structuring it.",
+    "Measure before you extend",
+    "Before generalising, you need a baseline: how long the task took, how many rounds of correction it needed, what share still goes through a human. Without those markers, a rollout is a shared intuition rather than a decision.",
+    "A smaller company does not need an AI strategy. It needs one use that holds, an honest measurement, and a clear reason to move to the next one.",
+    "Have a use case in mind but no starting point?",
+    "We look together at what your data allows today, and which case to start with so the result can actually be measured.",
+    "Talk about your project",
+    "← All articles"
+  ],
+  "attributes": [
+    "Where to start with generative AI in a smaller company: pick a measurable first case, get the data ready, and evaluate before extending."
+  ]
+}

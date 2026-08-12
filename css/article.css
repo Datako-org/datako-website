@@ -1,0 +1,133 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Article de blog — lecture longue
+
+   Une seule colonne, mesurée. Les articles précédents étaient en pleine
+   largeur : au-delà de 75 caractères, l'œil perd la ligne suivante en
+   revenant à la marge. Ici la colonne de texte est plafonnée, et seuls le
+   titre et les respirations débordent.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.article-breadcrumb {
+    padding-block: 22px;
+    border-bottom: 1px solid var(--color-line);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
+.article-breadcrumb a { color: inherit; }
+
+/* ── Chapeau ──────────────────────────────────────────────────────── */
+.article-head {
+    padding-block: var(--sp-16, 128px) var(--sp-8, 64px);
+    border-bottom: 1px solid var(--color-line);
+}
+
+.article-head h1 {
+    max-width: 18ch;
+    margin: 0 0 var(--sp-4, 32px);
+    font-size: var(--type-h1);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h1);
+    line-height: 1.02;
+}
+
+.article-head .site-lead { max-width: 58ch; }
+
+.article-meta {
+    display: flex;
+    gap: 22px;
+    margin: var(--sp-6, 48px) 0 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
+/* ── Corps ────────────────────────────────────────────────────────── */
+.article-body { padding-block: var(--sp-12, 96px); }
+
+.article-body section { margin-bottom: var(--sp-12, 96px); }
+.article-body section:last-of-type { margin-bottom: 0; }
+
+.article-body h2 {
+    max-width: 24ch;
+    margin: 0 0 var(--sp-4, 32px);
+    font-size: var(--type-h3);
+    font-weight: 500;
+    letter-spacing: var(--tracking-h3);
+    line-height: 1.18;
+}
+
+.article-body p {
+    /* 68ch : la mesure de lecture confortable, un peu en deçà de la limite. */
+    max-width: 68ch;
+    margin: 0 0 22px;
+    color: var(--color-ink-soft);
+    font-size: 1.09rem;
+    line-height: 1.72;
+}
+
+.article-body p:last-child { margin-bottom: 0; }
+
+.article-list {
+    max-width: 68ch;
+    margin: var(--sp-4, 32px) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-line);
+}
+
+.article-list li {
+    padding-block: 16px;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+}
+
+/* La citation respire davantage et sort légèrement de la colonne : c'est le
+   seul endroit où le rythme de lecture s'interrompt volontairement. */
+.article-body blockquote {
+    max-width: 30ch;
+    margin: 0 0 var(--sp-12, 96px);
+    padding-left: var(--sp-4, 32px);
+    border-left: 2px solid var(--color-accent);
+    color: var(--color-ink);
+    font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+    font-weight: 400;
+    letter-spacing: -.015em;
+    line-height: 1.28;
+}
+
+/* ── Appel final ──────────────────────────────────────────────────── */
+.article-cta-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .82fr);
+    gap: clamp(36px, 5vw, 80px);
+    align-items: end;
+}
+
+.article-cta h2 {
+    margin: 0;
+    max-width: 18ch;
+    color: var(--color-on-navy);
+    font-size: var(--type-h2);
+    font-weight: 400;
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.04;
+}
+
+.article-cta p { margin: 0 0 24px; color: rgba(255, 255, 255, .68); max-width: 46ch; }
+
+.article-back {
+    padding-block: var(--sp-8, 64px);
+    border-top: 1px solid var(--color-line);
+}
+
+@media (max-width: 900px) {
+    .article-cta-grid { grid-template-columns: 1fr; }
+    .article-body blockquote { max-width: 100%; }
+}

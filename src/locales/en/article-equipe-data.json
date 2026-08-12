@@ -1,0 +1,37 @@
+{
+  "text": [
+    "Building a data team inside a smaller company — Datakö",
+    "Skip to main content",
+    "Blog",
+    "/ Data team",
+    "SMEs & Data organisation",
+    "Building a data team",
+    "inside a smaller company.",
+    "A company's first data hire often shapes the next five years. Here are the trade-offs that come up most, and the ones that cost most when they are settled badly.",
+    "18 December 2025",
+    "6 min read",
+    "The single all-rounder is a dead end",
+    "The usual reflex is to look for one person who can hold the infrastructure, produce the analysis and build the models. That profile exists, but it is rare, expensive, and above all cannot excel at everything at once: engineering and analysis are not practised at the same rhythm or on the same objects.",
+    "The real risk is not a failed hire. It is dependency: after two years one person knows the calculation rules, and their departure stops the company.",
+    "Start from the need, not the org chart",
+    "Before defining a role, it helps to answer three questions: what is missing today in order to decide, how often that gap shows up, and who will use the result. The answer points to very different first hires.",
+    "A company that cannot consolidate its figures has an engineering problem. A company that has the figures but draws nothing from them has an analysis and delivery problem. The two are hired differently.",
+    "The figures exist but will not come together → engineering need.",
+    "The figures come together but nobody uses them → analysis need.",
+    "The figures circulate but nobody knows which are right → governance need.",
+    "Hire for the problem you have this year, not for the organisation you hope to have in five.",
+    "What must exist before the second hire",
+    "Three things stop a new team from becoming a dependency: business definitions written somewhere other than in someone's head, code versioned in a shared repository, and a known procedure for taking over if a pipeline stops.",
+    "These are not large-company requirements. They are what separates an installed capability from personal knowledge.",
+    "In-house, outsourced, or both",
+    "Some skills are better kept inside: those touching the business, the definitions, the trade-offs. Others are usefully rented at the start, when the need is one-off or highly technical — setting up ingestion, framing governance, industrialising a model.",
+    "The reasonable split is usually that one: keep the business knowledge, buy the technical acceleration — and write down what was done, so you do not buy the same thing twice.",
+    "A data team to build or to consolidate?",
+    "We look at your real needs before talking about roles, and tell you plainly what does not need to be brought in-house.",
+    "Talk about your project",
+    "← All articles"
+  ],
+  "attributes": [
+    "Building a data team in a smaller company: why the single all-rounder is a dead end, how to start from the real need, and what must exist before the second hire."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "text": [
+    "Modern Data Stack : par où commencer — Datakö",
+    "Aller au contenu principal",
+    "Blog",
+    "/ Modern Data Stack",
+    "Data Engineering",
+    "Modern Data Stack :",
+    "par où commencer.",
+    "L’écosystème s’est enrichi au point qu’on peut passer plus de temps à choisir des outils qu’à livrer une donnée utilisable. Voici comment poser les briques dans l’ordre qui limite les regrets.",
+    "12 décembre 2025",
+    "8 min de lecture",
+    "Ce que recouvre le terme",
+    "« Modern Data Stack » désigne un assemblage d’outils spécialisés, généralement infogérés, qui couvrent le trajet de la donnée depuis ses sources jusqu’à son usage. Chaque brique fait une chose et s’interface avec les autres, là où les plateformes d’il y a quinze ans cherchaient à tout faire.",
+    "Le déplacement le plus visible est celui de la transformation : elle se fait de plus en plus après le chargement, dans l’entrepôt, plutôt qu’avant. Ce n’est pas une règle absolue — les contraintes de volume, de coût ou de confidentialité justifient encore de transformer en amont — mais c’est devenu le point de départ par défaut.",
+    "Les briques, dans l’ordre où elles deviennent utiles",
+    "L’erreur fréquente est de choisir toute la chaîne avant d’avoir un premier usage. Une stack se construit mieux dans l’ordre où les besoins apparaissent : d’abord amener la donnée quelque part, ensuite la rendre cohérente, ensuite la rendre lisible, et seulement après l’industrialiser.",
+    "Chaque brique n’a de sens que si la précédente tient. Un catalogue sur des données non fiabilisées documente le désordre ; un tableau de bord sur des définitions instables produit des débats plutôt que des décisions.",
+    "Ingestion — amener les sources dans un même endroit, sans les transformer.",
+    "Entrepôt — un socle unique, où le calcul et le stockage se dimensionnent séparément.",
+    "Transformation — des règles versionnées et testées, qui produisent des tables métier.",
+    "Restitution — des indicateurs dont la définition est écrite quelque part.",
+    "Une stack ne devient une plateforme que le jour où quelqu’un peut expliquer d’où vient un chiffre, sans ouvrir un outil.",
+    "Le coût qu’on ne voit pas au départ",
+    "Le prix affiché d’un entrepôt cloud n’est presque jamais celui qu’on paie. Le coût réel dépend de la fréquence des rafraîchissements, du volume rescanné à chaque exécution et du nombre de modèles reconstruits sans nécessité. Une chaîne mal cadencée peut coûter plusieurs fois le prix d’une chaîne équivalente exécutée au bon rythme.",
+    "L’autre coût est humain : chaque outil ajouté demande un propriétaire, une procédure de reprise et une montée de version. Une stack de six produits infogérés reste un système à exploiter.",
+    "Commencer petit sans se condamner",
+    "Un point de départ raisonnable tient en trois choix : un entrepôt, un mécanisme d’ingestion, un outil de transformation. La restitution peut d’abord passer par ce que les équipes utilisent déjà. Ce socle suffit à répondre à des questions réelles, et il ne ferme aucune porte.",
+    "Ce qui se paie cher plus tard, ce n’est pas d’avoir choisi trois outils au lieu de six. C’est d’avoir laissé les définitions métier hors du dépôt de code, là où personne ne peut les relire.",
+    "Une chaîne de données à poser ou à reprendre ?",
+    "On regarde vos sources, vos usages et vos contraintes réelles avant de parler d’outils.",
+    "Parler de votre projet",
+    "← Tous les articles"
+  ],
+  "attributes": [
+    "Modern Data Stack : ce que le terme recouvre, dans quel ordre poser les briques, où se cachent les coûts et comment commencer petit sans se condamner."
+  ]
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- Generated from src/pages/article-data-stack.html — run npm run i18n:build. -->
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Modern Data Stack : ce que le terme recouvre, dans quel ordre poser les briques, où se cachent les coûts et comment commencer petit sans se condamner.">
+<link rel="canonical" href="blog-modern-data-stack.html">
+<title>Modern Data Stack : par où commencer — Datakö</title>
+<script>try{const t=localStorage.getItem("datako_theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=20260812-5"><link rel="stylesheet" href="css/article.css?v=20260812-1"><link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="alternate" hreflang="fr" href="blog-modern-data-stack.html"><link rel="alternate" hreflang="en" href="en/blog-modern-data-stack.html"><link rel="alternate" hreflang="x-default" href="blog-modern-data-stack.html"></head>
+<body class="page-2026 page-article">
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<header class="header" data-site-header><div class="container"><a href="index.html" class="logo" aria-label="Datakö — Accueil"><img src="images/logo-2026-navy.png" alt="Datakö" class="logo-img" width="835" height="253"></a><nav aria-label="Navigation principale"><ul class="nav-menu" id="primary-navigation"><li class="nav-item"><a href="prestations.html" class="nav-link">Prestations</a></li><li class="nav-item"><a href="solutions.html" class="nav-link">Solutions</a></li><li class="nav-item"><a href="formations.html" class="nav-link">Academy</a></li><li class="nav-item"><a href="matching.html" class="nav-link">Matching</a></li><li class="nav-item"><a href="blog.html" class="nav-link active" aria-current="page">Blog</a></li><li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li><li class="nav-item"><a href="https://diagnostic.xn--datak-nua.com/" class="nav-btn-diagnostic">Diagnostic Data &amp; IA</a></li></ul><button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-controls="primary-navigation" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button></nav></div></header>
+<main id="main-content">
+
+<div class="article-breadcrumb"><div class="site-container"><a href="blog.html">Blog</a> / Modern Data Stack</div></div>
+
+<article>
+<header class="article-head">
+<div class="site-container">
+<p class="section-kicker">Data Engineering</p>
+<h1><span class="reveal reveal-block"><span>Modern Data Stack : <span class="serif-accent">par où commencer.</span></span></span></h1>
+<p class="site-lead">L’écosystème s’est enrichi au point qu’on peut passer plus de temps à choisir des outils qu’à livrer une donnée utilisable. Voici comment poser les briques dans l’ordre qui limite les regrets.</p>
+<p class="article-meta"><time>12 décembre 2025</time><span>8 min de lecture</span></p>
+</div>
+</header>
+
+<div class="article-body">
+<div class="site-container">
+<section data-page-reveal><h2>Ce que recouvre le terme</h2><p>« Modern Data Stack » désigne un assemblage d’outils spécialisés, généralement infogérés, qui couvrent le trajet de la donnée depuis ses sources jusqu’à son usage. Chaque brique fait une chose et s’interface avec les autres, là où les plateformes d’il y a quinze ans cherchaient à tout faire.</p><p>Le déplacement le plus visible est celui de la transformation : elle se fait de plus en plus après le chargement, dans l’entrepôt, plutôt qu’avant. Ce n’est pas une règle absolue — les contraintes de volume, de coût ou de confidentialité justifient encore de transformer en amont — mais c’est devenu le point de départ par défaut.</p></section>
+<section data-page-reveal><h2>Les briques, dans l’ordre où elles deviennent utiles</h2><p>L’erreur fréquente est de choisir toute la chaîne avant d’avoir un premier usage. Une stack se construit mieux dans l’ordre où les besoins apparaissent : d’abord amener la donnée quelque part, ensuite la rendre cohérente, ensuite la rendre lisible, et seulement après l’industrialiser.</p><p>Chaque brique n’a de sens que si la précédente tient. Un catalogue sur des données non fiabilisées documente le désordre ; un tableau de bord sur des définitions instables produit des débats plutôt que des décisions.</p>
+<ul class="article-list"><li>Ingestion — amener les sources dans un même endroit, sans les transformer.</li><li>Entrepôt — un socle unique, où le calcul et le stockage se dimensionnent séparément.</li><li>Transformation — des règles versionnées et testées, qui produisent des tables métier.</li><li>Restitution — des indicateurs dont la définition est écrite quelque part.</li></ul></section>
+<blockquote data-page-reveal>Une stack ne devient une plateforme que le jour où quelqu’un peut expliquer d’où vient un chiffre, sans ouvrir un outil.</blockquote>
+<section data-page-reveal><h2>Le coût qu’on ne voit pas au départ</h2><p>Le prix affiché d’un entrepôt cloud n’est presque jamais celui qu’on paie. Le coût réel dépend de la fréquence des rafraîchissements, du volume rescanné à chaque exécution et du nombre de modèles reconstruits sans nécessité. Une chaîne mal cadencée peut coûter plusieurs fois le prix d’une chaîne équivalente exécutée au bon rythme.</p><p>L’autre coût est humain : chaque outil ajouté demande un propriétaire, une procédure de reprise et une montée de version. Une stack de six produits infogérés reste un système à exploiter.</p></section>
+<section data-page-reveal><h2>Commencer petit sans se condamner</h2><p>Un point de départ raisonnable tient en trois choix : un entrepôt, un mécanisme d’ingestion, un outil de transformation. La restitution peut d’abord passer par ce que les équipes utilisent déjà. Ce socle suffit à répondre à des questions réelles, et il ne ferme aucune porte.</p><p>Ce qui se paie cher plus tard, ce n’est pas d’avoir choisi trois outils au lieu de six. C’est d’avoir laissé les définitions métier hors du dépôt de code, là où personne ne peut les relire.</p></section>
+</div>
+</div>
+</article>
+
+<section class="site-section site-navy article-cta" aria-labelledby="article-cta-title">
+<div class="site-container article-cta-grid">
+<h2 id="article-cta-title">Une chaîne de données à poser ou à reprendre ?</h2>
+<div><p>On regarde vos sources, vos usages et vos contraintes réelles avant de parler d’outils.</p><a class="site-btn site-btn-primary" href="contact.html">Parler de votre projet</a></div>
+</div>
+</section>
+
+<div class="article-back"><div class="site-container"><a class="site-editorial-link" href="blog.html">← Tous les articles</a></div></div>
+
+</main>
+<div class="footer-reveal"><footer class="footer site-footer"><span class="footer-wordmark" aria-hidden="true">Datakö</span><div class="container"><div class="footer-grid"><div class="footer-col footer-identity"><img src="images/logo-2026-white.png" alt="Datakö" class="footer-logo" width="835" height="253"><p class="footer-desc">Cabinet de conseil spécialisé en Data, Analytics &amp; Intelligence Artificielle.</p></div><div class="footer-col footer-nav"><p class="footer-title">Explorer</p><ul class="footer-links"><li><a href="solutions.html">Solutions</a></li><li><a href="prestations.html">Prestations</a></li><li><a href="formations.html">Academy</a></li><li><a href="matching.html">Matching</a></li><li><a href="blog.html">Blog</a></li></ul></div><div class="footer-col footer-contact"><p class="footer-title">Échanger</p><ul class="footer-links-contact"><li><a href="mailto:contact@datakö.com">contact@datakö.com</a></li><li>Guinée &amp; France</li></ul><p class="footer-tagline">Accompagnement de projets locaux et internationaux.</p></div></div><div class="footer-bottom"><div class="footer-copyright">&copy; 2026 Datakö. Tous droits réservés.</div><div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="politique-confidentialite.html">Politique de confidentialité</a></div></div></div></footer></div>
+
+<script src="js/main.js?v=20260811-6"></script>
+<script src="js/page-motion.js?v=20260812-2"></script>
+</body>
+</html>

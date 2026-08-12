@@ -6,6 +6,9 @@ const root = process.cwd();
 const pages = [
   { route: 'index', fr: 'index.html', en: 'index.html' },
   { route: 'blog', fr: 'blog.html', en: 'blog.html' },
+  { route: 'article-ia-pme', fr: 'blog-ia-generative-pme.html', en: 'blog-ia-generative-pme.html' },
+  { route: 'article-data-stack', fr: 'blog-modern-data-stack.html', en: 'blog-modern-data-stack.html' },
+  { route: 'article-equipe-data', fr: 'blog-equipe-data-pme.html', en: 'blog-equipe-data-pme.html' },
   { route: 'solutions', fr: 'solutions.html', en: 'solutions.html' },
   { route: 'prestations', fr: 'prestations.html', en: 'prestations.html' },
   { route: 'formations', fr: 'formations.html', en: 'formations.html' },
