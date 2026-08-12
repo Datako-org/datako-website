@@ -291,7 +291,112 @@ body {
     transition: opacity 460ms ease;
 }
 
-.screen-stack img.is-active { opacity: 1; }
+.screen-stack img.is-active,
+.screen-stack .panel.is-active { opacity: 1; }
+
+/* ── Panneau Stations redessiné ──────────────────────────────────────────
+   Une capture réduite à cette largeur devient illisible : le panneau
+   redessiné reste net. Les montants sont ceux du cockpit réel — 47 640 000
+   encaissé, 1 800 000 à crédit, 200 000 de dépenses — pas ceux de la
+   maquette. Les cuves portent le stock théorique de l'écran Clôture, en
+   litres : aucune capacité n'existe, donc aucun pourcentage n'est calculable. */
+.panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+    padding: clamp(16px, 2vw, 26px);
+    background: #f6f8f8;
+    opacity: 0;
+    transition: opacity 460ms ease;
+}
+
+.panel-top { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.panel-card {
+    padding: clamp(13px, 1.5vw, 20px);
+    border: 1px solid rgba(6, 47, 58, .13);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.panel-card > span {
+    color: var(--color-ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .58rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.panel-big {
+    display: block;
+    margin: 8px 0 14px;
+    color: var(--color-ink);
+    font-size: clamp(1.5rem, 2.7vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.panel-big i { font-style: normal; font-size: .48em; color: var(--color-ink-muted); margin-left: 5px; }
+
+.panel-pair { display: flex; gap: clamp(16px, 2.4vw, 34px); }
+.panel-pair div span { display: block; color: var(--color-ink-muted); font-family: "IBM Plex Mono", monospace; font-size: .55rem; letter-spacing: .13em; text-transform: uppercase; }
+.panel-pair div b { color: var(--color-ink); font-family: "IBM Plex Mono", monospace; font-size: .92rem; font-weight: 500; }
+
+.tank-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 11px; font-size: .78rem; }
+.tank-row span { color: var(--color-ink-soft); font-family: "IBM Plex Mono", monospace; font-size: .72rem; }
+.tank-row b { color: var(--color-ink); font-family: "IBM Plex Mono", monospace; font-size: .72rem; font-weight: 500; }
+
+.tank-bar { height: 7px; margin-top: 5px; border-radius: 99px; background: rgba(6, 47, 58, .1); overflow: hidden; }
+.tank-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: var(--c); }
+
+.panel-note { margin: 14px 0 0; color: var(--color-ink-muted); font-size: .72rem; }
+
+/* Bandeau : les quatre chiffres de « Activité de la journée » défilent. */
+.marquee {
+    align-self: end;
+    border: 1px solid rgba(6, 47, 58, .13);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.marquee > span {
+    display: block;
+    padding: 11px 16px 0;
+    color: var(--color-ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .55rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    padding: 9px 0 13px;
+    animation: slide 22s linear infinite;
+}
+
+.screen:hover .marquee-track,
+.screen:focus-within .marquee-track { animation-play-state: paused; }
+
+.marquee-track div {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 0 22px;
+    white-space: nowrap;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+}
+
+.marquee-track div span { color: var(--color-ink-muted); }
+.marquee-track div b { color: var(--color-ink); font-weight: 500; }
+
+@keyframes slide { to { transform: translateX(-50%); } }
 
 .screen figcaption {
     padding: 13px 16px;
@@ -375,7 +480,39 @@ body {
                 <div class="screen-stack">
                     <img class="is-active" data-screen="fleet" src="../images/home-fleet-anonymized.webp" alt="Vue d'ensemble anonymisée de Datakö Fleet">
                     <img data-screen="distribution" src="../images/home-distribution-anonymized.webp" alt="Tableau de bord Datakö Distribution">
-                    <img data-screen="stations" src="../images/home-stations-demo.webp" alt="Cockpit de démonstration Datakö Stations">
+                    <div class="panel" data-screen="stations" role="img" aria-label="Cockpit de démonstration Datakö Stations : 47 640 000 GNF encaissés">
+                        <div class="panel-top">
+                            <div class="panel-card">
+                                <span>Encaissé aujourd'hui</span>
+                                <b class="panel-big">47 640 000<i>GNF</i></b>
+                                <div class="panel-pair">
+                                    <div><span>Crédits</span><b>1 800 000</b></div>
+                                    <div><span>Charges</span><b>200 000</b></div>
+                                </div>
+                            </div>
+                            <div class="panel-card">
+                                <span>Stock théorique</span>
+                                <div class="tank-row"><span>Cuve 1 · Gasoil</span><b>33 160 L</b></div>
+                                <div class="tank-bar"><i style="--w:100%;--c:#c9973c"></i></div>
+                                <div class="tank-row"><span>Cuve Essence</span><b>18 500 L</b></div>
+                                <div class="tank-bar"><i style="--w:56%;--c:#31788a"></i></div>
+                                <p class="panel-note">Relevé physique non mesuré.</p>
+                            </div>
+                        </div>
+                        <div class="marquee">
+                            <span>Activité de la journée</span>
+                            <div class="marquee-track">
+                                <div><span>Chiffre d'affaires</span><b>48 000 000</b></div>
+                                <div><span>Vendus à crédit</span><b>1 800 000</b></div>
+                                <div><span>Remboursés</span><b>1 440 000</b></div>
+                                <div><span>Dépenses du jour</span><b>200 000</b></div>
+                                <div aria-hidden="true"><span>Chiffre d'affaires</span><b>48 000 000</b></div>
+                                <div aria-hidden="true"><span>Vendus à crédit</span><b>1 800 000</b></div>
+                                <div aria-hidden="true"><span>Remboursés</span><b>1 440 000</b></div>
+                                <div aria-hidden="true"><span>Dépenses du jour</span><b>200 000</b></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <figcaption data-caption>Captures produit · environnement de démonstration</figcaption>
             </figure>
@@ -386,10 +523,12 @@ body {
 <div class="replay"><button type="button" id="replay">Rejouer l'ouverture</button></div>
 
 <script>
-const hero  = document.getElementById('hero');
-const rail  = document.querySelector('.rail');
-const imgs  = [...document.querySelectorAll('.screen-stack img')];
-const label = document.querySelector('[data-label]');
+const hero   = document.getElementById('hero');
+const rail   = document.querySelector('.rail');
+const panes  = [...document.querySelectorAll('.screen-stack [data-screen]')];
+const tabs   = [...rail.querySelectorAll('button[data-screen]')];
+const label  = document.querySelector('[data-label]');
+const screen = document.querySelector('.screen');
 
 const labels = {
     fleet:        "Fleet · Vue d'ensemble",
@@ -399,7 +538,7 @@ const labels = {
 
 /* L'ouverture ne se joue qu'une fois, quand la composition entre dans le
    champ. Pas d'intervalle, pas de reprise au scroll suivant. */
-const open = () => hero.classList.add('is-open');
+const open = () => { hero.classList.add('is-open'); startRotation(); };
 
 if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     open();
@@ -413,12 +552,39 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     }, { threshold: .3 }).observe(hero);
 }
 
+const show = name => {
+    tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.screen === name)));
+    panes.forEach(p => p.classList.toggle('is-active', p.dataset.screen === name));
+    label.textContent = labels[name];
+};
+
+/* Rotation automatique, 5 s. La pause est évaluée AU MOMENT du tick plutôt
+   que pilotée par mouseenter/mouseleave : une paire d'événements manquée
+   suffisait à figer la rotation pour de bon. */
+let timer   = null;
+let stopped = false;
+
+const advance = () => {
+    const current = tabs.findIndex(b => b.getAttribute('aria-selected') === 'true');
+    show(tabs[(current + 1) % tabs.length].dataset.screen);
+};
+
+const startRotation = () => {
+    if (timer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(() => {
+        if (stopped) return;
+        // Survol ou focus clavier : on saute le tour, on ne tue pas la boucle.
+        if (screen.matches(':hover') || rail.matches(':hover') || screen.contains(document.activeElement)) return;
+        advance();
+    }, 5000);
+};
+
+/* Un clic reprend la main : la rotation s'arrête pour de bon. */
 rail.addEventListener('click', event => {
     const tab = event.target.closest('button[data-screen]');
     if (!tab) return;
-    [...rail.querySelectorAll('button')].forEach(b => b.setAttribute('aria-selected', String(b === tab)));
-    imgs.forEach(img => img.classList.toggle('is-active', img.dataset.screen === tab.dataset.screen));
-    label.textContent = labels[tab.dataset.screen];
+    stopped = true;
+    show(tab.dataset.screen);
 });
 
 document.getElementById('replay').addEventListener('click', () => {
