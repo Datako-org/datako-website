@@ -1,5 +1,10 @@
 .page-matching { background:var(--color-canvas); }
-.matching-hero { padding:150px 0 88px; }
+/* Le hero n'avait pas de filet de fin, contrairement à ceux de Solutions,
+   Prestations et Stations. Sans lui, ses 88px de padding bas et les 144px
+   de la section suivante fusionnaient en une seule étendue de 232px que
+   rien ne venait clore : le vide se lisait comme un oubli, pas comme une
+   respiration. Le filet le referme, le padding réduit le resserre. */
+.matching-hero { padding:150px 0 52px; border-bottom:1px solid var(--color-line); }
 /* align-items:start plutôt que end : les deux colonnes partagent la même
    ligne haute, et la composition asymétrique se lit comme un choix au lieu
    d'un décalage. */
