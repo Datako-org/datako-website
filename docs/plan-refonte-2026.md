@@ -8,6 +8,44 @@
 
 ---
 
+## ⚑ EN PRODUCTION depuis le 2026-08-12
+
+La refonte est **en ligne** sur `xn--datak-nua.com`, via la PR #42 fusionnée dans `master`.
+`feat/refonte-site-2026` a absorbé `master` en `-s ours` : l'ancien site a été intégralement
+remplacé, rien n'en a été conservé.
+
+**Ce que ça change pour la suite.** Le dépôt n'est plus un chantier : toute modification part
+maintenant d'une branche courte issue de `origin/master`, avec une PR. **Ne plus partir de
+`refonte/socle`** — elle porte l'histoire d'avant la réécriture des messages de commit, et la
+fusionner ressusciterait 61 commits déjà retirés.
+
+Contrôle passé en production le jour du déploiement : 13 pages testées en FR et EN, aucune image
+cassée, thème clair par défaut, bascule des captures fonctionnelle, `hero-datako.png` et
+`hero-canvas.js` bien absents. Accueil à 333 Ko en 9 requêtes.
+
+### Ce qui reste ouvert
+
+| Sujet | Nature |
+|---|---|
+| **Mentions légales** — hébergeur non nommé, mentions d'immatriculation absentes | juridique, données d'entreprise |
+| **`contact@datakö.com`** en caractères non-ASCII | à tester en conditions réelles : c'est le seul moyen de contact des pages légales |
+| **Captures Fleet** clair et sombre : périodes différentes | basculer le thème change le tableau de bord, pas seulement son habillage |
+| **Bande navy de Prestations** : les captures claires y jurent | la section reste sombre quel que soit le thème |
+| **Deux CTA flottants** coexistent | WhatsApp et « Soumettre votre projet » |
+| **M2 — récit au scroll** | jamais conçu ; critère retenu : les mêmes objets persistent et se réorganisent |
+
+### Tranché — ne pas rouvrir
+
+**Le halo bleu du hero Academy est conservé** (décision d'Abdoulaye, 2026-08-12). Le
+`radial-gradient(circle at 48% 34%, rgba(58,122,254,.16), transparent 43%)` de
+`.academy-hero::before` reste en place, superposé à la grille technique.
+
+J'avais signalé qu'il appartenait à la famille des *glowing gradients* écartée au cadrage initial, et
+proposé deux fois de le retirer. La réponse est non : il reste. Inutile de le resoulever à chaque
+passage sur cette page.
+
+---
+
 ## 1. Où le travail se fait
 
 | | |
@@ -192,12 +230,15 @@ Stations. Toutes les captures marketing en **thème sombre**.
 
 ## 5. Jalons de validation
 
+> Les jalons ci-dessous ont été **dépassés par la mise en production du 2026-08-12** : la validation
+> s'est faite en bloc sur la branche complète plutôt que jalon par jalon. Conservés pour mémoire.
+
 | # | On montre | État |
 |---|---|---|
 | 1 | Styleguide — typo, couleurs, spacing, primitives | ✅ validé |
 | 2 | Chrome global + pages legacy au niveau | ✅ montré |
-| 3 | Home statique | 🔶 en cours |
-| 4 | Fleet complète + M3 | ⬜ |
+| 3 | Home statique | ✅ en production |
+| 4 | Fleet complète + M3 | ✅ en production |
 | 5 | Distribution complète | ⬜ |
 | 6 | M1 en prototype isolé | ⬜ |
 | 7 | M2 en prototype isolé | ⬜ |
