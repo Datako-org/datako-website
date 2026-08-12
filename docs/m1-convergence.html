@@ -57,9 +57,10 @@ body {
   color: var(--ink-muted);
 }
 
+/* La scène prend la plus grande part : c'est elle qu'on vient regarder. */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr);
+  grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr);
   gap: clamp(40px,5vw,80px);
   align-items: center;
   padding-block: clamp(30px,4vw,60px) clamp(60px,8vw,110px);
@@ -67,7 +68,7 @@ body {
 
 h1 {
   margin: 0 0 22px;
-  font-size: clamp(2.9rem,5.4vw,4.5rem);
+  font-size: clamp(2.4rem,3.6vw,3.5rem);
   font-weight: 400;
   letter-spacing: -.028em;
   line-height: 1.02;
@@ -107,7 +108,7 @@ h1 em { font-family: "Instrument Serif", serif; font-style: italic; color: var(-
   border: 1px solid var(--line);
   border-radius: 50%;
   transform: translate(-50%,-50%) rotate(0deg);
-  transition: transform 2400ms var(--ease), opacity 900ms ease;
+  transition: transform 4200ms var(--ease), opacity 1400ms ease;
 }
 .m1-ring-1 { width: 300px; height: 300px; }
 .m1-ring-2 { width: 460px; height: 460px; }
@@ -138,10 +139,30 @@ h1 em { font-family: "Instrument Serif", serif; font-style: italic; color: var(-
     rotate(var(--a))
     translateX(var(--r))
     rotate(calc(-1 * var(--a)));
-  transition: transform 1500ms var(--ease), opacity 700ms ease, border-color 700ms ease;
+  transition: transform 2400ms var(--ease), opacity 700ms ease, border-color 900ms ease;
 }
 
+/* Les sources n'arrivent pas d'un bloc : elles se posent une par une, ce qui
+   laisse le temps de lire les noms de fichiers. C'est l'état « dispersé »
+   qui doit s'installer avant que la convergence ait un sens. */
 .m1.is-in .m1-node { opacity: 1; }
+.m1.is-in .m1-node:nth-of-type(1)  { transition-delay: 0ms; }
+.m1.is-in .m1-node:nth-of-type(2)  { transition-delay: 70ms; }
+.m1.is-in .m1-node:nth-of-type(3)  { transition-delay: 140ms; }
+.m1.is-in .m1-node:nth-of-type(4)  { transition-delay: 210ms; }
+.m1.is-in .m1-node:nth-of-type(5)  { transition-delay: 280ms; }
+.m1.is-in .m1-node:nth-of-type(6)  { transition-delay: 350ms; }
+.m1.is-in .m1-node:nth-of-type(7)  { transition-delay: 420ms; }
+.m1.is-in .m1-node:nth-of-type(8)  { transition-delay: 490ms; }
+.m1.is-in .m1-node:nth-of-type(9)  { transition-delay: 560ms; }
+.m1.is-in .m1-node:nth-of-type(10) { transition-delay: 630ms; }
+
+/* La spirale part elle aussi en décalé : les sources proches s'amarrent en
+   premier, les lointaines suivent. Le socle se remplit progressivement au
+   lieu de tout absorber d'un coup. */
+.m1.is-converged .m1-node:nth-of-type(2n)  { transition-delay: 180ms; }
+.m1.is-converged .m1-node:nth-of-type(3n)  { transition-delay: 360ms; }
+.m1.is-converged .m1-node:nth-of-type(5n)  { transition-delay: 520ms; }
 
 /* Le rayon tombe à zéro ET l'angle avance : la trajectoire interpolée
    entre les deux états n'est pas une ligne droite, c'est une spirale. */
@@ -347,14 +368,22 @@ button:hover { background: rgba(255,255,255,.06); }
       return;
     }
 
-    // Une seule séquence, ~1,6 s. Le socle se structure pendant que les
-    // dernières sources finissent leur spirale : les temps se recouvrent,
-    // sinon la scène donne l'impression d'attendre.
-    requestAnimationFrame(() => scene.classList.add('is-in'));
-    later(() => scene.classList.add('is-converged'), 260);
-    later(() => scene.classList.add('is-structured'), 1180);
-    later(() => scene.classList.add('is-docked'), 1500);
-    later(() => scene.classList.add('is-decided'), 1560);
+    // Rythme du prototype, volontairement contemplatif : il faut pouvoir
+    // LIRE les noms de fichiers avant qu'ils partent, sinon la dispersion ne
+    // veut rien dire et on ne voit qu'un mouvement.
+    //
+    //   0,4 s  les sources se posent une à une (dispersion lisible à ~1 s)
+    //   2,0 s  la spirale démarre — 2,4 s de trajet, en décalé
+    //   3,8 s  le socle se structure pendant que les dernières s'amarrent
+    //   4,9 s  la décision émerge
+    //
+    // La version embarquée sur la home sera plus serrée : ici on regarde,
+    // là-bas on lit un titre pendant que ça se joue à côté.
+    later(() => scene.classList.add('is-in'), 400);
+    later(() => scene.classList.add('is-converged'), 2000);
+    later(() => scene.classList.add('is-structured'), 3800);
+    later(() => scene.classList.add('is-docked'), 4900);
+    later(() => scene.classList.add('is-decided'), 4960);
   };
 
   const io = new IntersectionObserver(entries => {
