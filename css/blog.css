@@ -396,3 +396,34 @@
         aspect-ratio: 16 / 10;
     }
 }
+/* ── Plaque typographique (remplace les visuels IA génériques) ──────────
+   Les cartes portaient des images de stock — cerveau lumineux, blocs
+   isométriques néon — en contradiction avec le positionnement terrain du
+   reste du site. La plaque affiche la catégorie de l article, ce qui dit
+   quelque chose de vrai sur son contenu au lieu de le décorer. */
+.blog-card-plate {
+    display: flex;
+    align-items: flex-end;
+    aspect-ratio: 16 / 7;
+    padding: var(--sp-3, 24px);
+    background: var(--color-navy, #032e3a);
+    border-bottom: 1px solid var(--color-line, rgba(231, 242, 241, .14));
+}
+
+html:not([data-theme="dark"]) .blog-card-plate {
+    background: var(--color-bone, #ece6dd);
+}
+
+.blog-card-plate .blog-category {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label, .6875rem);
+    font-weight: 500;
+    letter-spacing: var(--tracking-label, .14em);
+    text-transform: uppercase;
+    color: var(--color-on-navy, #f7fbfa);
+    margin: 0;
+}
+
+html:not([data-theme="dark"]) .blog-card-plate .blog-category {
+    color: var(--color-ink, #062f3a);
+}

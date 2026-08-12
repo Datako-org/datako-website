@@ -149,32 +149,10 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
-<body>
+<body class="page-2026 page-thanks">
 
     <!-- Header (Identical to index.html) -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="{{a.0}}" class="logo-img" style="height: 150px; width: auto;">
-            </a>
-
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="prestations.html" class="nav-link">{{t.1}}</a></li>
-                    <li class="nav-item"><a href="formations.html" class="nav-link">{{t.2}}</a></li>
-                    <li class="nav-item"><a href="matching.html" class="nav-link">{{t.3}}</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">{{t.4}}</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">{{t.5}}</a></li>
-                    <li class="nav-item"><a href="https://diagnostic.xn--datak-nua.com/" class="nav-btn-diagnostic">{{t.6}}</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </nav>
-        </div>
-    </header>
+    {{> header }}
 
     <!-- Main Content -->
     <main class="page-merci container">
@@ -186,77 +164,33 @@
                 </svg>
             </div>
 
-            <h1 class="merci-title">{{t.7}}</h1>
-            <p class="merci-text">{{t.8}}</p>
+            <h1 class="merci-title">{{t.1}}</h1>
+            <p class="merci-text">{{t.2}}</p>
 
             <div class="next-steps">
-                <h3>{{t.9}}</h3>
+                <h3>{{t.3}}</h3>
                 <ul class="steps-list">
-                    <li>{{t.10}}</li>
-                    <li>{{t.11}}</li>
-                    <li>{{t.12}}</li>
+                    <li>{{t.4}}</li>
+                    <li>{{t.5}}</li>
+                    <li>{{t.6}}</li>
                 </ul>
             </div>
 
             <div class="actions">
-                <a href="index.html" class="btn btn-primary">{{t.13}}</a>
-                <a href="prestations.html" class="btn btn-outline">{{t.14}}</a>
+                <a href="index.html" class="btn btn-primary">{{t.7}}</a>
+                <a href="prestations.html" class="btn btn-outline">{{t.8}}</a>
             </div>
 
             <p class="privacy-note">
-                {{t.15}}
+                {{t.9}}
             </p>
         </div>
     </main>
 
     <!-- Footer (Identical to index.html) -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Column 1: Identity -->
-                <div class="footer-col footer-identity">
-                    <img src="images/logo.png" style="height: 80px; width: auto;" alt="{{a.1}}" class="footer-logo">
-                    <p class="footer-desc">
-                        {{t.16}}
-                    </p>
-                </div>
-
-                <!-- Column 2: Navigation / Expertise -->
-                <div class="footer-col footer-nav">
-                    <ul class="footer-links">
-                        <li><a href="prestations.html">{{t.17}}</a></li>
-                        <li><a href="prestations.html">{{t.18}}</a></li>
-                        <li><a href="prestations.html">{{t.19}}</a></li>
-                        <li><a href="formations.html">{{t.20}}</a></li>
-                        <li><a href="matching.html">{{t.21}}</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Contact -->
-                <div class="footer-col footer-contact">
-                    <ul class="footer-links-contact">
-                        <li><a href="mailto:contact@datakö.com">{{t.22}}</a></li>
-                        <li>{{t.23}}</li>
-                    </ul>
-                    <p class="footer-tagline">
-                        {{t.24}}
-                    </p>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    {{t.25}}
-                </div>
-                <div class="footer-legal">
-                    <a href="mentions-legales.html">{{t.26}}</a>
-                    <a href="politique-confidentialite.html">{{t.27}}</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    {{> footer }}
 
     <script src="js/main.js?v=20260811-6"></script>
-</body>
+<script src="js/page-motion.js"></script></body>
 
 </html>
