@@ -126,13 +126,13 @@ solutions métier, pas l'architecture logicielle** — décision explicite d'Abd
 | **0 — Socle** | partials header/footer · lexique canonique · code mort · hygiène de marque | ✅ fait |
 | **1 — Design system** | échelle typo · teinte bone · rythme · primitive cover-reveal · styleguide | ✅ fait (Jalon 1 validé) |
 | **2 — Chrome global** | footer rideau + mot-géant · Blog/merci/légales au niveau 2026 | ✅ fait |
-| **3 — Home statique** | composition définitive, **sans** M1 ni M2 | 🔶 en cours |
-| **4 — Fleet** | page pilote + M3 (WhatsApp → cockpit) | ⬜ |
-| **5 — Distribution** | page nouvelle, dépend du dataset de démo | ⬜ |
-| **6 — Stations** | alignement + reprise des captures | ⬜ |
-| **7 — Solutions / Prestations / Matching / Academy** | hub à 3 solutions · expertises branchées sur la chaîne · hero Matching à refaire | ⬜ |
-| **8 — M1 puis M2** | prototypes isolés validés avant intégration | ⬜ |
-| **9 — Passe finale** | responsive · a11y · perf (LCP/CLS) · reduced-motion · `i18n:check` | ⬜ |
+| **3 — Home statique** | composition définitive, **sans** M1 ni M2 | ✅ fait |
+| **4 — Fleet** | page pilote + M3 (WhatsApp → cockpit) + caméra + mise en scène téléphone | ✅ fait |
+| **5 — Distribution** | page créée, M3 « Une saisie. Toute la réglementation. » | ✅ fait |
+| **6 — Stations** | cockpit reconstruit en DOM, plus aucun `0 GNF` | ✅ fait |
+| **7 — Solutions / Matching** | hub à 3 solutions ✅ · hero Matching rempli ✅ · **Prestations : expertises à brancher sur la chaîne** ⬜ |
+| **8 — M1 puis M2** | M1 en prototype isolé ✅ (`docs/m1-convergence.html`) · **M2 : mécanique toujours à concevoir** ⬜ |
+| **9 — Passe finale** | graisses harmonisées ✅ · contraste fils d'Ariane ✅ · **perf LCP/CLS à mesurer** ⬜ |
 
 ### Chantier parallèle — non bloquant pour 0 à 4
 **Dataset de démo** : organisation dédiée, données fictives mais réalistes pour Distribution et
@@ -177,6 +177,16 @@ Stations. Toutes les captures marketing en **thème sombre**.
       retouchable — repeindre des chiffres dans une capture produit reviendrait à fabriquer des
       données. À reprendre en **thème sombre avec le dataset de démo**, ce qui règle les deux
       problèmes. Option intermédiaire proposée : panneau construit en DOM, comme les plaques du blog
+
+## 6 bis. Où en sont les références
+
+| Réf | Destination | État |
+|---|---|---|
+| 01 — cercles en orbite | Hero home (M1) | ✅ **prototype** `docs/m1-convergence.html` — orbite devenue spirale entrante, contre-rotation conservée, sphère de particules et logos rejetés. **Pas encore intégré à la home** |
+| 02 — téléphone objet central | M3 Fleet | ✅ mécanique (WhatsApp → cockpit) **et** mise en scène (téléphone 460×700, incliné 6°, se redresse au survol). Main photoréaliste écartée |
+| 03 — footer cinématique | Footer global | ✅ rideau `clip-path` + mot-géant. Marquee, aurora et badge écartés |
+| 04 — caméra 3D | Heros produit | ✅ Fleet et Distribution — **sans zoom** : les captures pèsent 44 Ko, et au-delà de 2° les chiffres se déforment |
+| 05/06 — Databricks / Palantir | Système | ✅ échelle typo (72/52/32, graisse 400), teinte bone, `cover-reveal`, produit qui déborde |
 
 ## 7. Dettes connues, non traitées
 
