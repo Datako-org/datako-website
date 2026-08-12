@@ -1,5 +1,5 @@
 .page-fleet { background:var(--color-canvas); }
-.fleet-breadcrumb { padding:94px 0 18px; border-bottom:1px solid var(--color-line); color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.67rem; letter-spacing:.08em; }
+.fleet-breadcrumb { padding:94px 0 18px; border-bottom:1px solid var(--color-line); color: var(--color-ink-soft); font-family:"IBM Plex Mono",monospace; font-size:.67rem; letter-spacing:.08em; }
 .fleet-breadcrumb a { color:inherit; }
 .fleet-hero { position:relative; padding:70px 0 96px; overflow:hidden; }
 .fleet-hero::after { content:""; position:absolute; right:-190px; top:-100px; width:620px; height:620px; border:1px solid var(--color-line); border-radius:50%; opacity:.5; }

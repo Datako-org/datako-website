@@ -1,5 +1,5 @@
 .page-stations { background:var(--color-canvas); }
-.stations-breadcrumb { padding:94px 0 18px; border-bottom:1px solid var(--color-line); color:var(--color-ink-muted); font-family:"IBM Plex Mono",monospace; font-size:.67rem; letter-spacing:.08em; }
+.stations-breadcrumb { padding:94px 0 18px; border-bottom:1px solid var(--color-line); color: var(--color-ink-soft); font-family:"IBM Plex Mono",monospace; font-size:.67rem; letter-spacing:.08em; }
 .stations-breadcrumb a { color:inherit; }
 .stations-hero { padding:68px 0 96px; overflow:hidden; }
 .stations-hero-grid { display:grid; grid-template-columns:minmax(0,.88fr) minmax(520px,1.12fr); gap:clamp(54px,7vw,100px); align-items:start; }
