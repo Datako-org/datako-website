@@ -62,9 +62,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = document.documentElement;
     const themeStorageKey = 'datako_theme';
     const getTheme = () => localStorage.getItem(themeStorageKey) || 'light';
+    // Les captures produit existent en deux versions. On échange la source
+    // plutôt que d'empiler deux <img> masqués : un navigateur télécharge une
+    // image en display:none, même en loading="lazy" — les deux variantes
+    // partaient donc sur le réseau. Ici une seule est demandée.
+    const swapShots = theme => {
+        document.querySelectorAll('[data-shot-light]').forEach(img => {
+            const next = theme === 'dark' ? img.dataset.shotDark : img.dataset.shotLight;
+            if (!next || img.getAttribute('src') === next) return;
+            // Les deux variantes n'ont pas le même rapport : sans mise à jour
+            // des dimensions intrinsèques, la boîte réservée serait fausse.
+            const size = (theme === 'dark' ? img.dataset.shotDarkSize : img.dataset.shotLightSize || '').split('x');
+            if (size.length === 2) {
+                img.setAttribute('width', size[0]);
+                img.setAttribute('height', size[1]);
+            }
+            img.setAttribute('src', next);
+        });
+    };
+
     const setTheme = (theme, persist = true) => {
         root.dataset.theme = theme;
         if (persist) localStorage.setItem(themeStorageKey, theme);
+        swapShots(theme);
 
         document.querySelectorAll('.theme-toggle').forEach(button => {
             const nextTheme = theme === 'dark' ? 'light' : 'dark';

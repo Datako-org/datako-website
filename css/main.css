@@ -1762,3 +1762,9 @@ body.no-scroll { overflow: hidden; }
         padding: 80px 0;
     }
 }
+
+/* ── Captures produit : une variante par theme ────────────────────────
+   Le basculement se fait en JS (main.js, swapShots) et non en CSS : une
+   image en display:none est quand meme telechargee, meme en loading="lazy",
+   donc empiler deux <img> doublait le poids reseau. Une seule balise porte
+   les deux sources dans des data-attributs. */
