@@ -13,6 +13,7 @@ const pages = [
   { route: 'matching', fr: 'matching.html', en: 'matching.html' },
   { route: 'contact', fr: 'contact.html', en: 'contact.html' },
   { route: 'solution-fleet', fr: 'solution-fleet.html', en: 'solution-fleet.html' },
+  { route: 'solution-distribution', fr: 'solution-distribution.html', en: 'solution-distribution.html' },
   { route: 'solution-stations', fr: 'solution-stations.html', en: 'solution-stations.html' },
   { route: 'legal', fr: 'mentions-legales.html', en: 'legal.html' },
   { route: 'privacy', fr: 'politique-confidentialite.html', en: 'privacy.html' },

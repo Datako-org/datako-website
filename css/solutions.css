@@ -425,3 +425,41 @@ html[data-theme="dark"] .solution-module-stations .solution-module-visual img {
         transform: none !important;
     }
 }
+
+/* --- Panneau produit en DOM -----------------------------------------
+   Datako Distribution n a pas encore de capture au theme du site. Plutot
+   qu un visuel provisoire, le module porte deux chiffres reels du produit :
+   net a tout zoom, traduisible, et sans dependance a un asset. */
+.solution-module-panel {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1px;
+    margin: 0;
+    background: var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+}
+
+.solution-module-panel > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: clamp(20px, 2.6vw, 30px);
+    background: var(--color-navy);
+}
+
+.solution-module-panel span {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--type-label);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .5);
+}
+
+.solution-module-panel b {
+    color: var(--color-on-navy);
+    font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+    font-weight: 400;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+}
