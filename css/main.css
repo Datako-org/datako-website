@@ -916,37 +916,29 @@ body.nav-open {
     transform: translateY(-1px);
 }
 
+/* Icônes SVG. Les précédentes étaient dessinées en CSS — un cercle et quatre
+   box-shadow aux points cardinaux, qui se lisait comme un losange plutôt que
+   comme un soleil. */
 .theme-icon {
     position: absolute;
     inset: 50% auto auto 50%;
-    width: 16px;
-    height: 16px;
+    width: 19px;
+    height: 19px;
     transform: translate(-50%, -50%);
     transition: opacity 180ms ease, transform 240ms var(--ease-out);
 }
 
-.theme-icon-sun {
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    box-shadow: 0 -7px 0 -5px currentColor, 0 7px 0 -5px currentColor,
-        7px 0 0 -5px currentColor, -7px 0 0 -5px currentColor;
-}
-
-.theme-icon-moon {
-    border: 2px solid currentColor;
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) rotate(-24deg);
+/* L'icône annonce CE QU'ON OBTIENT, pas l'état courant : en sombre on voit un
+   soleil, et le libellé dit « Activer le thème clair ». Auparavant l'icône
+   décrivait l'état et le libellé l'action — deux messages contraires sur le
+   même bouton, ce qui explique qu'il n'ait pas été compris. */
+.theme-toggle[data-theme-current="light"] .theme-icon-moon,
+.theme-toggle[data-theme-current="dark"] .theme-icon-sun {
+    opacity: 1;
 }
 
 .theme-toggle[data-theme-current="light"] .theme-icon-sun,
 .theme-toggle[data-theme-current="dark"] .theme-icon-moon {
-    opacity: 1;
-}
-
-.theme-toggle[data-theme-current="light"] .theme-icon-moon,
-.theme-toggle[data-theme-current="dark"] .theme-icon-sun {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.45);
 }
@@ -1036,6 +1028,9 @@ html[data-theme="dark"] .page-2026 .logo-img {
     background: var(--color-surface);
     width: 50px;
     height: 50px;
+    /* Décollé du sélecteur de langue : les deux se touchaient presque et se
+       lisaient comme un seul groupe de contrôles. */
+    margin-left: clamp(6px, 0.8vw, 14px);
 }
 
 .page-2026 .theme-toggle:hover {

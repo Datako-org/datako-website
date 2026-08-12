@@ -104,9 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle = document.createElement('button');
         themeToggle.type = 'button';
         themeToggle.className = 'theme-toggle';
+        // Icônes vectorielles plutôt que dessinées en CSS : le soleil était un
+        // cercle et quatre points cardinaux, ce qui se lisait comme un losange.
+        // Huit rayons pour le soleil, un croissant franc pour la lune.
         themeToggle.innerHTML = `
-            <span class="theme-icon theme-icon-sun" aria-hidden="true"></span>
-            <span class="theme-icon theme-icon-moon" aria-hidden="true"></span>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.2"/>
+                <path d="M12 2.4v2.3M12 19.3v2.3M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.3M19.3 12h2.3M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>
+            </svg>
         `;
         headerNav.appendChild(themeToggle);
     }
