@@ -160,6 +160,49 @@
         });
     }
 
+    // ── Vitrine des modules (hero Solutions) ────────────────────────────
+    // Rotation automatique entre Fleet, Distribution et Stations. La pause
+    // est évaluée AU MOMENT du tick plutôt que pilotée par mouseenter et
+    // mouseleave : une paire d'événements manquée suffisait à figer la
+    // rotation définitivement.
+    const showcase = document.querySelector('[data-module-showcase]');
+
+    if (showcase) {
+        const rail = showcase.querySelector('.showcase-rail');
+        const screen = showcase.querySelector('.showcase-screen');
+        const label = showcase.querySelector('[data-showcase-label]');
+        const tabs = [...rail.querySelectorAll('button[data-showcase]')];
+        const panes = [...showcase.querySelectorAll('.showcase-stack [data-showcase]')];
+        // Le libellé de la barre de fenêtre voyage sur l'onglet lui-même :
+        // il vient ainsi du dictionnaire et reste traduisible.
+        let stopped = false;
+
+        const show = tab => {
+            const name = tab.dataset.showcase;
+            tabs.forEach(other => other.setAttribute('aria-selected', String(other === tab)));
+            panes.forEach(pane => pane.classList.toggle('is-active', pane.dataset.showcase === name));
+            if (tab.dataset.caption) label.textContent = tab.dataset.caption;
+        };
+
+        rail.addEventListener('click', event => {
+            const tab = event.target.closest('button[data-showcase]');
+            if (!tab) return;
+            // Un clic rend la main au visiteur : la rotation s'arrête pour de bon.
+            stopped = true;
+            show(tab);
+        });
+
+        if (!reducedMotion.matches) {
+            window.setInterval(() => {
+                if (stopped || document.hidden) return;
+                if (screen.matches(':hover') || rail.matches(':hover')) return;
+                if (screen.contains(document.activeElement) || rail.contains(document.activeElement)) return;
+                const current = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
+                show(tabs[(current + 1) % tabs.length]);
+            }, 4000);
+        }
+    }
+
     reducedMotion.addEventListener?.('change', event => {
         if (event.matches) useStaticState();
     });

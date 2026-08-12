@@ -88,7 +88,38 @@
     "47,6 M GNF",
     "Santé du jour",
     "Rien à signaler",
-    "Coffre-fort numérique des salariés"
+    "Coffre-fort numérique des salariés",
+    "Transport",
+    "Distribution carburant",
+    "Stations-service",
+    "Modules Datakö",
+    "Fleet · Vue d’ensemble",
+    "Distribution · Tableau de bord",
+    "Stations · Cockpit du jour",
+    "Captures produit · environnement de démonstration",
+    "Encaissé aujourd’hui",
+    "47 640 000",
+    "GNF",
+    "Crédits",
+    "1 800 000",
+    "Charges",
+    "200 000",
+    "Stock théorique",
+    "Cuve 1 · Gasoil",
+    "33 160 L",
+    "Cuve Essence",
+    "18 500 L",
+    "Relevé physique non mesuré.",
+    "Activité de la journée",
+    "Chiffre d’affaires",
+    "48 000 000",
+    "Vendus à crédit",
+    "1 800 000",
+    "Remboursés",
+    "1 440 000",
+    "Dépenses du jour",
+    "200 000",
+    "Voir les modules"
   ],
   "attributes": [
     "Découvrez les solutions métier Datakö pour piloter les opérations, structurer les données terrain et éclairer les décisions.",
@@ -96,6 +127,7 @@
     "Cockpit de démonstration Datakö Stations",
     "Pour aller plus loin",
     "Fermer",
-    "Tableau de bord Datakö Distribution"
+    "Tableau de bord Datakö Distribution",
+    "Cockpit de démonstration Datakö Stations : 47 640 000 GNF encaissés sur la journée"
   ]
 }

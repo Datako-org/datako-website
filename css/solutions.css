@@ -25,13 +25,16 @@
     transform: rotate(30deg);
 }
 
+/* La colonne de droite portait un compteur de trois lignes ; elle porte
+   maintenant un tableau de bord. Les proportions s inversent, sinon l ecran
+   tombe sous 600px et devient illisible. */
 .solutions-hero-grid {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
-    gap: clamp(54px, 8vw, 120px);
-    align-items: end;
+    grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+    gap: clamp(40px, 5vw, 84px);
+    align-items: center;
 }
 
 .solutions-hero h1 {
@@ -48,29 +51,221 @@
     margin: 32px 0 0;
 }
 
-.solutions-hero-summary {
-    border-top: 1px solid var(--color-line-strong);
+/* ── Vitrine des modules ──────────────────────────────────────────────
+   Remplace le compteur « 03 / 01 / 03 », qui annoncait des chiffres qu on
+   relit trois ecrans plus bas. Le hub montre sa gamme au lieu de la
+   compter : les quatre modules et leur ecran reel, en rotation. */
+.showcase-rail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(10px, 1.4vw, 24px);
+    margin-bottom: 24px;
 }
 
-.solutions-hero-summary div {
-    padding: 21px 0;
-    border-bottom: 1px solid var(--color-line);
+.showcase-rail button {
+    position: relative;
+    padding: 16px 0 0;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.showcase-rail button:disabled { cursor: default; }
+
+/* Le filet actif se dessine de gauche a droite : il designe, il ne clignote pas. */
+.showcase-rail button::after {
+    content: "";
+    position: absolute;
+    inset: -1px auto auto 0;
+    height: 2px;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 480ms var(--ease-out);
+}
+
+.showcase-rail button[aria-selected="true"]::after { transform: scaleX(1); }
+
+.showcase-rail strong {
+    display: block;
+    color: var(--color-ink);
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: -.015em;
+}
+
+.showcase-rail span { color: var(--color-ink-muted); font-size: .82rem; }
+.showcase-rail button:disabled strong,
+.showcase-rail button:disabled span { opacity: .48; }
+
+.showcase-rail em {
+    font-style: normal;
+    color: var(--color-success);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .6rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.showcase-screen {
+    margin: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    background: #071116;
+    box-shadow: var(--shadow-raised);
+    overflow: hidden;
+}
+
+.showcase-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, .09);
+    background: rgba(255, 255, 255, .04);
+}
+
+.showcase-bar i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, .2); }
+
+.showcase-bar span {
+    margin-left: 8px;
+    color: rgba(255, 255, 255, .5);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .6rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+/* Le panneau tient la place d une capture : il doit s echelonner sur SA
+   largeur, pas sur celle du viewport. Entre 981px et 1200px la colonne de
+   droite tombe a ~360px et le contenu debordait de 80px du cadre. */
+.showcase-stack { position: relative; aspect-ratio: 1.82 / 1; container-type: inline-size; }
+
+.showcase-stack > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.showcase-stack img { object-fit: cover; object-position: left top; }
+.showcase-stack .is-active { opacity: 1; }
+
+.showcase-screen figcaption {
+    padding: 13px 16px;
+    border-top: 1px solid rgba(255, 255, 255, .09);
+    color: rgba(255, 255, 255, .46);
+    font-size: .76rem;
+}
+
+/* ── Panneau Stations redessine ───────────────────────────────────────
+   Reduite a cette largeur, une capture devient illisible ; le panneau
+   reste net. Les montants sont ceux du cockpit reel. Les cuves portent le
+   stock theorique en litres : aucune capacite de cuve n existe, donc aucun
+   pourcentage de remplissage n est calculable. */
+.showcase-panel {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+    padding: clamp(7px, 2.6cqi, 22px);
+    background: #f6f8f8;
+}
+
+.showcase-panel-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(6px, 2.2cqi, 12px); }
+
+.showcase-card {
+    padding: clamp(6px, 2.4cqi, 18px);
+    border: 1px solid rgba(6, 47, 58, .13);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.showcase-card > span {
+    color: var(--color-ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(.38rem, 1.55cqi, .56rem);
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.showcase-big {
+    display: block;
+    margin: clamp(4px, 1.6cqi, 8px) 0 clamp(6px, 2.6cqi, 13px);
+    color: var(--color-ink);
+    font-size: clamp(.95rem, 6.4cqi, 2.05rem);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.showcase-big i { font-style: normal; font-size: .46em; color: var(--color-ink-muted); margin-left: 5px; }
+
+.showcase-pair { display: flex; gap: clamp(8px, 4cqi, 30px); }
+.showcase-pair span { display: block; color: var(--color-ink-muted); font-family: "IBM Plex Mono", monospace; font-size: clamp(.36rem, 1.5cqi, .54rem); letter-spacing: .13em; text-transform: uppercase; }
+.showcase-pair b { color: var(--color-ink); font-family: "IBM Plex Mono", monospace; font-size: clamp(.58rem, 2.5cqi, .9rem); font-weight: 500; }
+
+.showcase-tank { display: flex; justify-content: space-between; gap: 8px; margin-top: clamp(5px, 2cqi, 10px); }
+.showcase-tank span { color: var(--color-ink-soft); font-family: "IBM Plex Mono", monospace; font-size: clamp(.46rem, 1.95cqi, .7rem); }
+.showcase-tank b { color: var(--color-ink); font-family: "IBM Plex Mono", monospace; font-size: clamp(.46rem, 1.95cqi, .7rem); font-weight: 500; }
+
+.showcase-bar-fill { height: clamp(4px, 1.3cqi, 7px); margin-top: clamp(3px, 1cqi, 5px); border-radius: 99px; background: rgba(6, 47, 58, .1); overflow: hidden; }
+.showcase-bar-fill i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: var(--c); }
+
+.showcase-note { margin: clamp(6px, 2.4cqi, 13px) 0 0; color: var(--color-ink-muted); font-size: clamp(.44rem, 1.85cqi, .7rem); }
+
+.showcase-marquee {
+    align-self: end;
+    border: 1px solid rgba(6, 47, 58, .13);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.showcase-marquee > span {
+    display: block;
+    padding: clamp(5px, 1.9cqi, 10px) clamp(8px, 3cqi, 16px) 0;
+    color: var(--color-ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(.36rem, 1.5cqi, .54rem);
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.showcase-track {
+    display: flex;
+    width: max-content;
+    padding: clamp(4px, 1.5cqi, 8px) 0 clamp(6px, 2.2cqi, 12px);
+    animation: showcase-slide 22s linear infinite;
+}
+
+.showcase-screen:hover .showcase-track,
+.showcase-screen:focus-within .showcase-track { animation-play-state: paused; }
+
+.showcase-track div {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.solutions-hero-summary dt {
-    color: var(--color-ink-soft);
-}
-
-.solutions-hero-summary dd {
-    margin: 0;
-    color: var(--color-ink);
+    gap: 10px;
+    padding: 0 clamp(10px, 4cqi, 22px);
+    white-space: nowrap;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-size: clamp(.48rem, 2cqi, .72rem);
+}
+
+.showcase-track div span { color: var(--color-ink-muted); }
+.showcase-track div b { color: var(--color-ink); font-weight: 500; }
+
+@keyframes showcase-slide { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .showcase-stack > *, .showcase-rail button::after { transition: none; }
+    .showcase-track { animation: none; }
 }
 
 .solutions-section-head {
@@ -360,8 +555,15 @@ html[data-theme="dark"] .solution-module-stations .solution-module-visual img {
         min-height: auto;
     }
 
-    .solutions-hero-summary {
-        max-width: 620px;
+    .hero-showcase {
+        max-width: 720px;
+    }
+
+    /* Deux colonnes plutot que quatre : a quatre, « Datako Distribution »
+       se casse sur trois lignes. */
+    .showcase-rail {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 18px;
     }
 
     .roadmap-row {

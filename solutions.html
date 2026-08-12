@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css?v=20260812-3">
-    <link rel="stylesheet" href="css/solutions.css?v=20260812-7">
+    <link rel="stylesheet" href="css/solutions.css?v=20260812-9">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="alternate" hreflang="fr" href="solutions.html"><link rel="alternate" hreflang="en" href="en/solutions.html"><link rel="alternate" hreflang="x-default" href="solutions.html"></head>
 <body class="page-2026 page-solutions">
@@ -26,13 +26,48 @@
                     <h1 id="solutions-title"><span class="reveal reveal-block"><span>Des solutions métier pour piloter vos opérations et votre rentabilité.</span></span></h1>
                     <p class="site-lead">Au-delà du conseil, Datakö édite des applications métier conçues pour le terrain. Nos solutions structurent vos opérations, suivent vos performances et vous redonnent le contrôle sur vos marges.</p>
                     <p class="site-lead">Moins de complexité, plus de visibilité, et des décisions prises au bon moment.</p>
-                    <div class="site-actions"><button class="site-btn site-btn-primary" data-open-modal="projectModal">Demander une démo</button></div>
+                    <div class="site-actions"><button class="site-btn site-btn-primary" data-open-modal="projectModal">Demander une démo</button><a class="site-editorial-link" href="#modules-title">Voir les modules</a></div>
                 </div>
-                <dl class="solutions-hero-summary" data-page-reveal>
-                    <div><dt>Modules disponibles</dt><dd>03</dd></div>
-                    <div><dt>En préparation</dt><dd>01</dd></div>
-                    <div><dt>Secteurs visés</dt><dd>03</dd></div>
-                </dl>
+                <div class="hero-showcase" data-module-showcase data-page-reveal>
+                    <div class="showcase-rail" role="tablist" aria-label="Modules Datakö">
+                        <button type="button" role="tab" aria-selected="true" data-showcase="fleet" data-caption="Fleet · Vue d’ensemble"><strong>Datakö Fleet</strong><span>Transport</span></button>
+                        <button type="button" role="tab" aria-selected="false" data-showcase="distribution" data-caption="Distribution · Tableau de bord"><strong>Datakö Distribution</strong><span>Distribution carburant</span></button>
+                        <button type="button" role="tab" aria-selected="false" data-showcase="stations" data-caption="Stations · Cockpit du jour"><strong>Datakö Stations</strong><span>Stations-service</span></button>
+                        <button type="button" role="tab" aria-selected="false" disabled><strong>Datakö HR</strong><em>En préparation</em></button>
+                    </div>
+                    <figure class="showcase-screen">
+                        <div class="showcase-bar" aria-hidden="true"><i></i><i></i><i></i><span data-showcase-label>Fleet · Vue d’ensemble</span></div>
+                        <div class="showcase-stack">
+                            <img class="is-active" data-showcase="fleet" src="images/home-fleet-anonymized.webp" alt="Vue d’ensemble anonymisée de Datakö Fleet" width="1742" height="903">
+                            <img data-showcase="distribution" src="images/home-distribution-anonymized.webp" alt="Tableau de bord Datakö Distribution" width="2048" height="1138" loading="lazy">
+                            <div class="showcase-panel" data-showcase="stations" role="img" aria-label="Cockpit de démonstration Datakö Stations : 47 640 000 GNF encaissés sur la journée">
+                                <div class="showcase-panel-top">
+                                    <div class="showcase-card">
+                                        <span>Encaissé aujourd’hui</span>
+                                        <b class="showcase-big">47 640 000<i>GNF</i></b>
+                                        <div class="showcase-pair"><div><span>Crédits</span><b>1 800 000</b></div><div><span>Charges</span><b>200 000</b></div></div>
+                                    </div>
+                                    <div class="showcase-card">
+                                        <span>Stock théorique</span>
+                                        <div class="showcase-tank"><span>Cuve 1 · Gasoil</span><b>33 160 L</b></div>
+                                        <div class="showcase-bar-fill"><i style="--w:100%;--c:#c9973c"></i></div>
+                                        <div class="showcase-tank"><span>Cuve Essence</span><b>18 500 L</b></div>
+                                        <div class="showcase-bar-fill"><i style="--w:56%;--c:#31788a"></i></div>
+                                        <p class="showcase-note">Relevé physique non mesuré.</p>
+                                    </div>
+                                </div>
+                                <div class="showcase-marquee">
+                                    <span>Activité de la journée</span>
+                                    <div class="showcase-track">
+                                        <div><span>Chiffre d’affaires</span><b>48 000 000</b></div><div><span>Vendus à crédit</span><b>1 800 000</b></div><div><span>Remboursés</span><b>1 440 000</b></div><div><span>Dépenses du jour</span><b>200 000</b></div>
+                                        <div aria-hidden="true"><span>Chiffre d’affaires</span><b>48 000 000</b></div><div aria-hidden="true"><span>Vendus à crédit</span><b>1 800 000</b></div><div aria-hidden="true"><span>Remboursés</span><b>1 440 000</b></div><div aria-hidden="true"><span>Dépenses du jour</span><b>200 000</b></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption>Captures produit · environnement de démonstration</figcaption>
+                    </figure>
+                </div>
             </div>
         </section>
 
@@ -109,6 +144,6 @@
 
 
     <div id="projectModal" class="modal-overlay" aria-hidden="true"><div class="modal-container"><button class="modal-close" aria-label="Fermer">✕</button><h2>Demander une démo</h2><div id="contact-form-container"></div></div></div>
-    <script src="js/main.js?v=20260811-6"></script><script src="js/page-motion.js?v=20260812-2"></script>
+    <script src="js/main.js?v=20260811-6"></script><script src="js/page-motion.js?v=20260812-3"></script>
 </body>
 </html>

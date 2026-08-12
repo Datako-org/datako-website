@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css?v=20260812-3">
-    <link rel="stylesheet" href="../css/solutions.css?v=20260812-7">
+    <link rel="stylesheet" href="../css/solutions.css?v=20260812-9">
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="alternate" hreflang="fr" href="../solutions.html"><link rel="alternate" hreflang="en" href="solutions.html"><link rel="alternate" hreflang="x-default" href="../solutions.html"></head>
 <body class="page-2026 page-solutions">
@@ -26,13 +26,48 @@
                     <h1 id="solutions-title"><span class="reveal reveal-block"><span>Business solutions to drive your operations and profitability.</span></span></h1>
                     <p class="site-lead">Beyond consulting, Datakö builds business applications for the field. Our solutions structure operations, track performance and help you regain control over margins.</p>
                     <p class="site-lead">Less complexity, more visibility and decisions made at the right time.</p>
-                    <div class="site-actions"><button class="site-btn site-btn-primary" data-open-modal="projectModal">Request a demo</button></div>
+                    <div class="site-actions"><button class="site-btn site-btn-primary" data-open-modal="projectModal">Request a demo</button><a class="site-editorial-link" href="#modules-title">See the modules</a></div>
                 </div>
-                <dl class="solutions-hero-summary" data-page-reveal>
-                    <div><dt>Available modules</dt><dd>03</dd></div>
-                    <div><dt>In preparation</dt><dd>01</dd></div>
-                    <div><dt>Target sectors</dt><dd>03</dd></div>
-                </dl>
+                <div class="hero-showcase" data-module-showcase data-page-reveal>
+                    <div class="showcase-rail" role="tablist" aria-label="Datakö modules">
+                        <button type="button" role="tab" aria-selected="true" data-showcase="fleet" data-caption="Fleet · Overview"><strong>Datakö Fleet</strong><span>Transport</span></button>
+                        <button type="button" role="tab" aria-selected="false" data-showcase="distribution" data-caption="Distribution · Dashboard"><strong>Datakö Distribution</strong><span>Fuel distribution</span></button>
+                        <button type="button" role="tab" aria-selected="false" data-showcase="stations" data-caption="Stations · Daily cockpit"><strong>Datakö Stations</strong><span>Service stations</span></button>
+                        <button type="button" role="tab" aria-selected="false" disabled><strong>Datakö HR</strong><em>In preparation</em></button>
+                    </div>
+                    <figure class="showcase-screen">
+                        <div class="showcase-bar" aria-hidden="true"><i></i><i></i><i></i><span data-showcase-label>Fleet · Overview</span></div>
+                        <div class="showcase-stack">
+                            <img class="is-active" data-showcase="fleet" src="../images/home-fleet-anonymized.webp" alt="Anonymized Datakö Fleet overview" width="1742" height="903">
+                            <img data-showcase="distribution" src="../images/home-distribution-anonymized.webp" alt="Datakö Distribution dashboard" width="2048" height="1138" loading="lazy">
+                            <div class="showcase-panel" data-showcase="stations" role="img" aria-label="Datakö Stations demonstration cockpit: 47,640,000 GNF collected for the day">
+                                <div class="showcase-panel-top">
+                                    <div class="showcase-card">
+                                        <span>Collected today</span>
+                                        <b class="showcase-big">47,640,000<i>GNF</i></b>
+                                        <div class="showcase-pair"><div><span>Credit</span><b>1,800,000</b></div><div><span>Expenses</span><b>200,000</b></div></div>
+                                    </div>
+                                    <div class="showcase-card">
+                                        <span>Theoretical stock</span>
+                                        <div class="showcase-tank"><span>Tank 1 · Diesel</span><b>33,160 L</b></div>
+                                        <div class="showcase-bar-fill"><i style="--w:100%;--c:#c9973c"></i></div>
+                                        <div class="showcase-tank"><span>Petrol tank</span><b>18,500 L</b></div>
+                                        <div class="showcase-bar-fill"><i style="--w:56%;--c:#31788a"></i></div>
+                                        <p class="showcase-note">Physical reading not measured.</p>
+                                    </div>
+                                </div>
+                                <div class="showcase-marquee">
+                                    <span>Activity for the day</span>
+                                    <div class="showcase-track">
+                                        <div><span>Revenue</span><b>48,000,000</b></div><div><span>Sold on credit</span><b>1,800,000</b></div><div><span>Repaid</span><b>1,440,000</b></div><div><span>Expenses today</span><b>200,000</b></div>
+                                        <div aria-hidden="true"><span>Revenue</span><b>48,000,000</b></div><div aria-hidden="true"><span>Sold on credit</span><b>1,800,000</b></div><div aria-hidden="true"><span>Repaid</span><b>1,440,000</b></div><div aria-hidden="true"><span>Expenses today</span><b>200,000</b></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption>Product captures · demonstration environment</figcaption>
+                    </figure>
+                </div>
             </div>
         </section>
 
@@ -109,6 +144,6 @@
 
 
     <div id="projectModal" class="modal-overlay" aria-hidden="true"><div class="modal-container"><button class="modal-close" aria-label="Close">✕</button><h2>Request a demo</h2><div id="contact-form-container"></div></div></div>
-    <script src="../js/main.js?v=20260811-6"></script><script src="../js/page-motion.js?v=20260812-2"></script>
+    <script src="../js/main.js?v=20260811-6"></script><script src="../js/page-motion.js?v=20260812-3"></script>
 </body>
 </html>
