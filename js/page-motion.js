@@ -200,7 +200,15 @@
             const PREMIERE = 1400;
             const SUIVANTES = 3000;
 
-            const enPause = () => stopped || document.hidden
+            // Le rail tournait encore quand le visiteur était trois sections
+            // plus bas. Hors champ, on suspend : il reprendra là où il en
+            // était si le visiteur remonte.
+            let dansLeChamp = true;
+            new IntersectionObserver(entries => {
+                entries.forEach(entry => { dansLeChamp = entry.isIntersecting; });
+            }, { threshold: 0 }).observe(showcase);
+
+            const enPause = () => stopped || document.hidden || !dansLeChamp
                 || screen.matches(':hover') || rail.matches(':hover')
                 || screen.contains(document.activeElement) || rail.contains(document.activeElement);
 
