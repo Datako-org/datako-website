@@ -8,9 +8,8 @@
     <title>{{t.0}}</title>
     <script>
         try {
-            const savedTheme = localStorage.getItem('datako_theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.dataset.theme = savedTheme || (systemDark ? 'dark' : 'light');
+            // Clair par defaut. Un visiteur qui a deja choisi le sombre le garde.
+            document.documentElement.dataset.theme = localStorage.getItem('datako_theme') || 'light';
         } catch (error) {
             document.documentElement.dataset.theme = 'light';
         }
@@ -292,7 +291,7 @@
         </span>
     </a>
 
-    <script src="js/main.js?v=20260811-6"></script>
+    <script src="js/main.js?v=20260812-1"></script>
     <script src="js/home-motion.js?v=20260812-1"></script>
 </body>
 

@@ -57,11 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- LANGUAGE LOGIC END ---
 
-    // Theme control — system preference by default, explicit choice persisted.
+    // Theme control — light by default, explicit choice persisted. Visitors
+    // who already picked dark keep it: only the fallback changed.
     const root = document.documentElement;
     const themeStorageKey = 'datako_theme';
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const getTheme = () => localStorage.getItem(themeStorageKey) || (systemTheme.matches ? 'dark' : 'light');
+    const getTheme = () => localStorage.getItem(themeStorageKey) || 'light';
     const setTheme = (theme, persist = true) => {
         root.dataset.theme = theme;
         if (persist) localStorage.setItem(themeStorageKey, theme);
@@ -96,11 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
     });
 
-    systemTheme.addEventListener?.('change', event => {
-        if (!localStorage.getItem(themeStorageKey)) {
-            setTheme(event.matches ? 'dark' : 'light', false);
-        }
-    });
+    // Plus d'écoute du thème système : le site part en clair quoi qu'il
+    // arrive, et suivre l'OS ferait basculer la page sous les yeux d'un
+    // visiteur qui n'a rien demandé.
 
     // Accessible mobile navigation. Legacy div toggles are upgraded to real buttons.
     let hamburger = document.querySelector('.hamburger');
