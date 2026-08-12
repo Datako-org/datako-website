@@ -1,6 +1,9 @@
 (() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const revealItems = [...document.querySelectorAll('[data-page-reveal]')];
+    // cover-reveal : opt-in, posé à la main sur les H1 et les moments
+    // structurants. Aucun titre ne s'anime sans avoir été marqué.
+    const coverReveals = [...document.querySelectorAll('.reveal')];
     const valueChain = document.querySelector('[data-value-chain]');
     const chainSteps = valueChain ? [...valueChain.querySelectorAll('[data-chain-step]')] : [];
     const timers = [];
@@ -43,6 +46,7 @@
     const useStaticState = () => {
         clearTimers();
         revealItems.forEach(item => item.classList.add('is-visible'));
+        coverReveals.forEach(item => item.classList.add('is-revealed'));
         completeChain();
     };
 
@@ -60,6 +64,17 @@
             });
         }, { threshold: 0.14, rootMargin: '0px 0px -5% 0px' });
         revealItems.forEach(item => revealObserver.observe(item));
+    }
+
+    if (coverReveals.length) {
+        const coverObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-revealed');
+                coverObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.6 });
+        coverReveals.forEach(item => coverObserver.observe(item));
     }
 
     if (valueChain) {

@@ -37,6 +37,41 @@
     --space-section: clamp(5rem, 10vw, 9rem);
     --container-wide: 1360px;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* ── Design system 2026 · validé au Jalon 1 ─────────────────────────
+       Ces tokens s'ajoutent aux précédents ; aucune valeur existante n'est
+       modifiée, donc les pages déjà en ligne ne bougent pas.               */
+
+    /* Respiration entre le clair et le navy. À utiliser avec parcimonie :
+       une bande par page, pas une couleur de fond récurrente. */
+    --color-bone: #ece6dd;
+
+    /* Échelle typographique. La hiérarchie passe par la taille et le
+       tracking, plus par la graisse : les grands titres sont en 400.
+       Les graisses 500/600 restent disponibles sur les petits éléments
+       quand la lisibilité ou la hiérarchie l'exige. */
+    --type-display: clamp(3.4rem, 7.2vw, 5.75rem);
+    --type-h1: clamp(2.9rem, 5.4vw, 4.5rem);
+    --type-h2: clamp(2.1rem, 3.6vw, 3.25rem);
+    --type-h3: clamp(1.35rem, 1.8vw, 1.75rem);
+    --type-lead: clamp(1.1rem, 1.3vw, 1.3rem);
+    --type-body: 1.0625rem;
+    --type-label: 0.6875rem;
+
+    --tracking-display: -0.03em;
+    --tracking-h1: -0.028em;
+    --tracking-h2: -0.024em;
+    --tracking-h3: -0.01em;
+    --tracking-label: 0.14em;
+
+    /* Rythme vertical : trois valeurs, pas douze. C'est la régularité qui
+       produit le calme. */
+    --sp-3: 24px;
+    --sp-4: 32px;
+    --sp-6: 48px;
+    --sp-8: 64px;
+    --sp-12: 96px;
+    --sp-16: 128px;
 }
 
 html[data-theme="dark"] {
@@ -59,6 +94,10 @@ html[data-theme="dark"] {
     --color-success: #63d9b8;
     --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.28);
     --shadow-raised: 0 28px 90px rgba(0, 0, 0, 0.42);
+
+    /* En sombre, la respiration ne peut pas être une teinte claire : c'est un
+       navy légèrement réchauffé qui joue le même rôle de bande intercalaire. */
+    --color-bone: #102a2f;
 }
 
 * {
@@ -107,6 +146,43 @@ button {
 
 .skip-link:focus {
     transform: translateY(0);
+}
+
+/* ── cover-reveal · primitive signature (Jalon 1) ───────────────────────
+   Le texte n'apparaît pas en fondu : il est découvert par un cache qui se
+   retire. Volontairement opt-in — réservé aux H1 et aux quelques moments
+   structurants, jamais appliqué à tous les titres, pour préserver les
+   zones calmes.
+
+   Balisage :
+       <h1><span class="reveal"><span>Une ligne</span></span></h1>
+   La classe .is-revealed est posée par l'observateur de page-motion.js.   */
+.reveal {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.reveal > span {
+    display: inline-block;
+    transform: translateY(105%);
+    transition: transform 760ms var(--ease-out);
+}
+
+.reveal.is-revealed > span {
+    transform: translateY(0);
+}
+
+/* Lignes successives d'un même bloc : léger décalage, pas une cascade. */
+.reveal:nth-of-type(2) > span { transition-delay: 90ms; }
+.reveal:nth-of-type(3) > span { transition-delay: 180ms; }
+.reveal:nth-of-type(4) > span { transition-delay: 270ms; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal > span {
+        transform: none;
+        transition: none;
+    }
 }
 
 .sr-only {
