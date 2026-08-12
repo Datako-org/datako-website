@@ -101,11 +101,22 @@
     "No date is announced yet. Talk to us about a team need or to receive updates when paths open.",
     "Contact us",
     "✕",
-    "Talk to Datakö Academy"
+    "Talk to Datakö Academy",
+    "Four paths, one level at a time",
+    "01",
+    "Read, clean up and tell the story behind the figures.",
+    "02",
+    "Build what holds in production.",
+    "03",
+    "Automate and anticipate.",
+    "04",
+    "Built with your teams, on your environment.",
+    "Support after the sessions"
   ],
   "attributes": [
     "Datakö Academy offers hands-on Data and AI learning paths for professionals and organizations.",
     "Academy method foundations",
-    "Close"
+    "Close",
+    "The progression across the four Academy paths"
   ]
 }
