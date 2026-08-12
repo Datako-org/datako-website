@@ -89,8 +89,12 @@
 /* --- Le hero disait ce que Matching est, pas ce qui le distingue ------
    La colonne droite s arretait apres trois lignes et laissait une bande
    vide sous le hero. Elle porte desormais l argument reel du service : on
-   ne renvoie pas une liste, on presente un ou deux profils. Les trois
-   nombres racontent l entonnoir mieux qu une phrase. */
+   ne renvoie pas une liste, on presente un ou deux profils.
+
+   Les trois etapes portaient 47 / 6 / 2. Retires le 12/08/2026 : ces
+   chiffres etaient inventes, codes en dur hors dictionnaire, et se lisaient
+   comme une performance mesuree sur une page publique. L entonnoir garde sa
+   forme — trois etapes, des barres qui retrecissent — sans rien affirmer. */
 .matching-shortlist {
     margin-top: 32px;
     padding-top: 28px;
@@ -117,9 +121,7 @@
 
 .matching-funnel-steps li {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 6px 16px;
-    align-items: baseline;
+    gap: 7px;
     opacity: .32;
     transform: translateY(6px);
     transition: opacity 460ms ease, transform 560ms var(--ease-out);
@@ -131,17 +133,12 @@
 
 .matching-funnel-steps span { color: var(--color-ink-soft); font-size: .92rem; }
 
-.matching-funnel-steps b {
-    color: var(--color-ink);
-    font-size: 1.4rem;
-    font-weight: 400;
-    letter-spacing: -.02em;
-    font-variant-numeric: tabular-nums;
-}
-
-/* La barre retrecit a chaque etape : l entonnoir se voit avant de se lire. */
+/* La barre retrecit a chaque etape : l entonnoir se voit avant de se lire.
+   Les proportions sont schematiques et le resteront tant qu il n y aura pas
+   de mesure reelle a afficher. Elles ne portent aucun chiffre : le seul
+   engagement chiffre du site est « un ou deux profils presentes », qui vit
+   dans la phrase sous l entonnoir. */
 .matching-funnel-steps i {
-    grid-column: 1 / -1;
     display: block;
     height: 3px;
     border-radius: 99px;
@@ -165,7 +162,7 @@
 .matching-funnel-steps li.is-current i::after,
 .matching-funnel-steps li.is-complete i::after { transform: scaleX(1); }
 
-.matching-funnel-steps .is-final b { color: var(--color-accent); }
+
 .matching-funnel-steps .is-final i::after { background: var(--color-accent); }
 
 .matching-shortlist p {
@@ -196,7 +193,6 @@
     }
 
     .matching-funnel-steps span { font-size: .78rem; }
-    .matching-funnel-steps b { font-size: 1.75rem; line-height: 1.1; }
     .matching-funnel-steps i { margin-top: 8px; }
 }
 
