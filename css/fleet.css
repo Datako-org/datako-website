@@ -241,3 +241,38 @@
         transition: none;
     }
 }
+
+/* --- Ref 02 : le telephone traite comme objet central ------------------
+   La mise en scene decidee etait un telephone tres grand, tres propre,
+   incline, flottant avec beaucoup d espace autour. Il etait jusqu ici
+   serre dans sa colonne, a taille modeste. La main photorealiste de la
+   reference reste ecartee : elle ferait publicite d application grand
+   public. */
+@media (min-width: 1100px) {
+    .fleet-execution {
+        grid-template-columns: minmax(400px, 1fr) minmax(280px, .78fr);
+        gap: clamp(48px, 5vw, 86px);
+        perspective: 1900px;
+    }
+
+    .phone-shell {
+        max-width: 460px;
+        min-height: 700px;
+        transform: rotateY(6deg) rotateX(1.5deg) translateZ(0);
+        transform-origin: right center;
+        box-shadow: 0 46px 110px rgba(0, 0, 0, .55), 0 6px 24px rgba(0, 0, 0, .35);
+        transition: transform 900ms var(--ease-out);
+    }
+
+    /* Au survol le telephone se redresse : le regard peut lire la
+       conversation sans deformation des que l attention s y porte. */
+    .fleet-execution:hover .phone-shell { transform: rotateY(0deg) rotateX(0deg); }
+
+    /* Le cockpit reste plat et net : c est lui qui porte les chiffres. */
+    .fleet-control-card { align-self: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .phone-shell,
+    .fleet-execution:hover .phone-shell { transform: none; transition: none; }
+}
