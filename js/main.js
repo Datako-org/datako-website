@@ -128,6 +128,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // arrive, et suivre l'OS ferait basculer la page sous les yeux d'un
     // visiteur qui n'a rien demandé.
 
+    // ── Le moment du footer, version mobile ─────────────────────────────
+    // Le rideau est un dispositif desktop : il dévoile un footer en
+    // position: fixed. En mobile c'est géométriquement impossible — le footer
+    // mesure 912px pour un écran de 812, donc son haut serait hors champ pour
+    // toujours. Mobile a donc son propre moment, même intention : le mot-géant
+    // monte et se révèle quand il entre dans le champ. Une seule lecture, puis
+    // il reste. Le CSS ne l'arme que sous le point de bascule du rideau.
+    const wordmark = document.querySelector('.footer-wordmark');
+    if (wordmark) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            wordmark.classList.add('is-risen');
+        } else {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    wordmark.classList.add('is-risen');
+                    observer.disconnect();
+                });
+            }, { threshold: 0.15 }).observe(wordmark);
+        }
+    }
+
     // Accessible mobile navigation. Legacy div toggles are upgraded to real buttons.
     let hamburger = document.querySelector('.hamburger');
     if (hamburger && hamburger.tagName !== 'BUTTON') {
