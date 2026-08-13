@@ -221,6 +221,36 @@ button {
     .footer-reveal > .footer {
         position: static;
     }
+
+    /* Le moment du footer, version mobile. Le rideau ne peut pas s'y jouer :
+       il dévoile un footer en position: fixed, or ce footer mesure 912px pour
+       un écran de 812 — son haut resterait hors champ. Le mot-géant prend le
+       relais : il monte et se révèle en entrant dans le champ. Même intention,
+       un footer qui arrive plutôt qu'un footer poussé, sans la contrainte de
+       hauteur.
+
+       Montée courte, 14 % : au-delà, le mouvement lutte contre le scroll qui
+       l'amène déjà vers le haut, et se lit comme un décalage plutôt que comme
+       une arrivée. La transform conserve le translateX(-50%) du centrage. */
+    .footer-wordmark {
+        opacity: 0;
+        transform: translate(-50%, 14%);
+        transition: opacity 700ms var(--ease-out), transform 820ms var(--ease-out);
+    }
+
+    .footer-wordmark.is-risen {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* L'arrivée est un confort : sans elle le mot est là, simplement immobile. */
+@media (prefers-reduced-motion: reduce) {
+    .footer-wordmark {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        transition: none;
+    }
 }
 
 /* ── Caméra produit · valeurs par défaut ────────────────────────────────
