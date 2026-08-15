@@ -44,6 +44,20 @@ J'avais signalé qu'il appartenait à la famille des *glowing gradients* écart�
 proposé deux fois de le retirer. La réponse est non : il reste. Inutile de le resoulever à chaque
 passage sur cette page.
 
+**Le rideau du footer ne peut pas se jouer en mobile** — contrainte géométrique, pas réglage.
+
+La mécanique dévoile un footer en `position: fixed` à travers une fenêtre de `clip-path`. Or le
+footer mesure **912 px de haut pour un écran de 812 px**. Vérifié en forçant la mécanique desktop à
+375 px : le haut du footer se pose à `-100px` et la première rangée de liens devient définitivement
+inatteignable. Aucun réglage ne rattrape ça — il faudrait raccourcir le footer sous la hauteur
+d'écran, donc toucher au contenu.
+
+Mobile a reçu **son propre moment** à la place (2026-08-12) : le mot-géant monte de 14 % et se
+révèle en entrant dans le champ, une seule fois. Même intention — un footer qui arrive plutôt qu'un
+footer poussé — sans la contrainte de hauteur. L'observateur vit dans `js/main.js` et **non** dans
+`page-motion.js` : le footer est sur les 34 pages, or `page-motion.js` est absent de trois d'entre
+elles, dont l'accueil.
+
 ---
 
 ## 1. Où le travail se fait
