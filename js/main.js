@@ -57,11 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- LANGUAGE LOGIC END ---
 
-    // Theme control — light by default, explicit choice persisted. Visitors
-    // who already picked dark keep it: only the fallback changed.
+    // Theme control — dark by default, explicit choice persisted. Visitors
+    // who already picked light keep it: only the fallback changed.
     const root = document.documentElement;
     const themeStorageKey = 'datako_theme';
-    const getTheme = () => localStorage.getItem(themeStorageKey) || 'light';
+    const getTheme = () => localStorage.getItem(themeStorageKey) || 'dark';
     // Les captures produit existent en deux versions. On échange la source
     // plutôt que d'empiler deux <img> masqués : un navigateur télécharge une
     // image en display:none, même en loading="lazy" — les deux variantes
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
     });
 
-    // Plus d'écoute du thème système : le site part en clair quoi qu'il
+    // Pas d'écoute du thème système : le site part en sombre quoi qu'il
     // arrive, et suivre l'OS ferait basculer la page sous les yeux d'un
     // visiteur qui n'a rien demandé.
 

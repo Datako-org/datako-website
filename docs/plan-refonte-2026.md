@@ -20,8 +20,14 @@ maintenant d'une branche courte issue de `origin/master`, avec une PR. **Ne plus
 fusionner ressusciterait 61 commits déjà retirés.
 
 Contrôle passé en production le jour du déploiement : 13 pages testées en FR et EN, aucune image
-cassée, thème clair par défaut, bascule des captures fonctionnelle, `hero-datako.png` et
-`hero-canvas.js` bien absents. Accueil à 333 Ko en 9 requêtes.
+cassée, bascule des captures fonctionnelle, `hero-datako.png` et `hero-canvas.js` bien absents.
+Accueil à 333 Ko en 9 requêtes.
+
+**Thème par défaut : sombre** (2026-08-13). Le site est parti en clair au déploiement, puis basculé
+en sombre. Trois endroits portent ce choix et doivent rester d'accord : le script inline des 13
+gabarits, `getTheme()` dans `js/main.js`, et le `src` statique des captures produit — qui doit
+pointer la variante du thème par défaut, sinon chaque page télécharge la mauvaise avant de la
+remplacer.
 
 ### Ce qui reste ouvert
 
