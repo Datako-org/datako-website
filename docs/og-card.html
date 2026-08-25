@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Carte de partage — source</title>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Source de l'image de partage (Open Graph), 1200x630.
+
+   Page volontairement conservee dans le depot : c'est ce qui permet de
+   regenerer l'image quand la promesse change, sans repartir d'un outil
+   externe. Capture d'ecran a 1200x630, export en PNG vers
+   images/og-datako.png.
+
+   Format impose par les plateformes : 1200x630 (ratio 1.91:1). WhatsApp,
+   LinkedIn et Slack recadrent sans pitie au-dela.
+   ══════════════════════════════════════════════════════════════════════ */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    width:1200px; height:630px; overflow:hidden;
+    background:#071f27;
+    font-family:"Familjen Grotesk", system-ui, sans-serif;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:76px 84px;
+    position:relative;
+}
+
+/* Grille technique, reprise du hero Academy : elle dit plan et construction.
+   Tres basse en contraste — elle se sent, elle ne se lit pas. */
+body::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+        linear-gradient(to right, rgba(231,242,241,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(231,242,241,.05) 1px, transparent 1px);
+    background-size:72px 72px;
+    -webkit-mask-image:linear-gradient(115deg, transparent 38%, #000 100%);
+}
+
+.top, .bottom { position:relative; }
+
+.logo { height:52px; display:block; }
+
+h1 {
+    max-width:19ch;
+    color:#f4f8f7;
+    font-size:74px; font-weight:400;
+    letter-spacing:-.032em; line-height:1.02;
+}
+
+.bottom {
+    display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
+}
+
+.tag {
+    color:#91a7ab;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:19px; letter-spacing:.14em; text-transform:uppercase;
+}
+
+.rule { height:2px; width:132px; background:#63d9b8; margin-bottom:26px; }
+</style>
+</head>
+<body>
+    <div class="top"><img class="logo" src="../images/logo-2026-white.png" alt=""></div>
+    <div class="bottom">
+        <div>
+            <div class="rule"></div>
+            <h1>Vos données opérationnelles, enfin pilotables.</h1>
+        </div>
+        <div class="tag">Data &amp; IA<br>Afrique de l'Ouest<br>+ Europe</div>
+    </div>
+</body>
+</html>
