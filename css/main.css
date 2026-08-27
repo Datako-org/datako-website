@@ -912,7 +912,6 @@ body.nav-open {
 }
 
 .hamburger,
-.theme-toggle,
 .nav-backdrop,
 .lang-opt {
     appearance: none;
@@ -928,49 +927,54 @@ body.nav-open {
     background: transparent;
 }
 
-.theme-toggle {
-    position: relative;
+/* ── Controle de theme · segmented control ───────────────────────────────
+   Les deux options restent visibles cote a cote, l'active porte une pastille.
+   Le bouton unique d'avant demandait de deviner si l'icone montrait l'etat
+   courant ou l'action a venir — ambiguite signalee par Abdoulaye.
+
+   Reference : airflow.apache.org. Le principe est repris, pas les mesures :
+   leurs boutons font 30x30 dans une pilule de 38 de haut, sous le seuil
+   tactile de 44px. Ici chaque bouton fait 44x44. */
+.theme-switch {
     flex: 0 0 auto;
-    width: 42px;
-    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
     border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 50%;
+    border-radius: 999px;
     background: rgba(255, 255, 255, 0.07);
+}
+
+.theme-switch__btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
     cursor: pointer;
-    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+    appearance: none;
+    font: inherit;
+    transition: background 200ms ease, color 200ms ease;
 }
 
-.theme-toggle:hover {
-    border-color: rgba(255, 255, 255, 0.42);
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-1px);
+.theme-switch__btn svg {
+    width: 20px;
+    height: 20px;
+    /* Le trace ne doit pas se redimensionner avec la pastille : sinon le
+       changement d'etat fait sauter l'icone d'un pixel. */
+    display: block;
 }
 
-/* Icônes SVG. Les précédentes étaient dessinées en CSS — un cercle et quatre
-   box-shadow aux points cardinaux, qui se lisait comme un losange plutôt que
-   comme un soleil. */
-.theme-icon {
-    position: absolute;
-    inset: 50% auto auto 50%;
-    width: 19px;
-    height: 19px;
-    transform: translate(-50%, -50%);
-    transition: opacity 180ms ease, transform 240ms var(--ease-out);
-}
+.theme-switch__btn:hover { color: rgba(255, 255, 255, 0.85); }
 
-/* L'icône annonce CE QU'ON OBTIENT, pas l'état courant : en sombre on voit un
-   soleil, et le libellé dit « Activer le thème clair ». Auparavant l'icône
-   décrivait l'état et le libellé l'action — deux messages contraires sur le
-   même bouton, ce qui explique qu'il n'ait pas été compris. */
-.theme-toggle[data-theme-current="light"] .theme-icon-moon,
-.theme-toggle[data-theme-current="dark"] .theme-icon-sun {
-    opacity: 1;
-}
-
-.theme-toggle[data-theme-current="light"] .theme-icon-sun,
-.theme-toggle[data-theme-current="dark"] .theme-icon-moon {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.45);
+.theme-switch__btn[aria-pressed="true"] {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
 }
 
 .lang-opt {
@@ -1052,20 +1056,20 @@ html[data-theme="dark"] .page-2026 .logo-img {
     background: var(--color-accent-strong);
 }
 
-.page-2026 .theme-toggle {
-    color: var(--color-ink);
+.page-2026 .theme-switch {
     border-color: var(--color-line);
     background: var(--color-surface);
-    width: 50px;
-    height: 50px;
-    /* Décollé du sélecteur de langue : les deux se touchaient presque et se
-       lisaient comme un seul groupe de contrôles. */
+    /* Decolle du selecteur de langue : les deux se touchaient presque et se
+       lisaient comme un seul groupe de controles. */
     margin-left: clamp(6px, 0.8vw, 14px);
 }
 
-.page-2026 .theme-toggle:hover {
-    border-color: var(--color-line-strong);
+.page-2026 .theme-switch__btn { color: var(--color-ink-muted); }
+.page-2026 .theme-switch__btn:hover { color: var(--color-ink); }
+
+.page-2026 .theme-switch__btn[aria-pressed="true"] {
     background: var(--color-canvas-soft);
+    color: var(--color-ink);
 }
 
 .page-2026 .lang-switcher {

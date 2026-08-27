@@ -86,42 +86,54 @@ document.addEventListener('DOMContentLoaded', () => {
         if (persist) localStorage.setItem(themeStorageKey, theme);
         swapShots(theme);
 
-        document.querySelectorAll('.theme-toggle').forEach(button => {
-            const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        // Les deux options restent visibles : chaque bouton porte son propre
+        // libellé, l'actif est signalé par aria-pressed. Un bouton unique
+        // devait annoncer une action ; ici chacun annonce un état.
+        document.querySelectorAll('.theme-switch__btn').forEach(button => {
+            const value = button.dataset.themeValue;
             const label = isEnglish
-                ? `Use ${nextTheme} theme`
-                : `Activer le thème ${nextTheme === 'dark' ? 'sombre' : 'clair'}`;
+                ? (value === 'dark' ? 'Dark theme' : 'Light theme')
+                : (value === 'dark' ? 'Thème sombre' : 'Thème clair');
             button.setAttribute('aria-label', label);
             button.setAttribute('title', label);
-            button.setAttribute('aria-pressed', String(theme === 'dark'));
-            button.dataset.themeCurrent = theme;
+            button.setAttribute('aria-pressed', String(value === theme));
         });
     };
 
-    let themeToggle = document.querySelector('.theme-toggle');
-    const headerNav = document.querySelector('.header nav');
-    if (!themeToggle && headerNav) {
-        themeToggle = document.createElement('button');
-        themeToggle.type = 'button';
-        themeToggle.className = 'theme-toggle';
-        // Icônes vectorielles plutôt que dessinées en CSS : le soleil était un
-        // cercle et quatre points cardinaux, ce qui se lisait comme un losange.
-        // Huit rayons pour le soleil, un croissant franc pour la lune.
-        themeToggle.innerHTML = `
-            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+    // Contrôle de thème en segmented control : les deux options restent
+    // visibles côte à côte, l'active est marquée. Un bouton unique obligeait
+    // le visiteur à deviner ce que l'icône signifiait — état courant ou
+    // action à venir. Ici il n'y a rien à deviner.
+    const SOLEIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="4.2"/>
                 <path d="M12 2.4v2.3M12 19.3v2.3M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.3M19.3 12h2.3M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
-            </svg>
-            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            </svg>`;
+    const LUNE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>
-            </svg>
+            </svg>`;
+
+    let themeSwitch = document.querySelector('.theme-switch');
+    const headerNav = document.querySelector('.header nav');
+    if (!themeSwitch && headerNav) {
+        themeSwitch = document.createElement('div');
+        // role="group" plutôt que radiogroup : les enfants restent de vrais
+        // boutons, donc Tab et Entrée suffisent. Un radiogroup exigerait une
+        // navigation aux flèches qu'il faudrait écrire à la main.
+        themeSwitch.setAttribute('role', 'group');
+        themeSwitch.setAttribute('aria-label', isEnglish ? 'Color theme' : 'Thème de couleur');
+        themeSwitch.className = 'theme-switch';
+        themeSwitch.innerHTML = `
+            <button type="button" class="theme-switch__btn" data-theme-value="light">${SOLEIL}</button>
+            <button type="button" class="theme-switch__btn" data-theme-value="dark">${LUNE}</button>
         `;
-        headerNav.appendChild(themeToggle);
+        headerNav.appendChild(themeSwitch);
     }
     setTheme(getTheme(), false);
 
-    themeToggle?.addEventListener('click', () => {
-        setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+    themeSwitch?.addEventListener('click', event => {
+        const button = event.target.closest('.theme-switch__btn');
+        if (!button || button.dataset.themeValue === root.dataset.theme) return;
+        setTheme(button.dataset.themeValue);
     });
 
     // Pas d'écoute du thème système : le site part en sombre quoi qu'il
