@@ -1059,9 +1059,10 @@ html[data-theme="dark"] .page-2026 .logo-img {
 .page-2026 .theme-switch {
     border-color: var(--color-line);
     background: var(--color-surface);
-    /* Decolle du selecteur de langue : les deux se touchaient presque et se
-       lisaient comme un seul groupe de controles. */
-    margin-left: clamp(6px, 0.8vw, 14px);
+    /* Ecarte du selecteur de langue. A 22px — l'ecart courant de la nav — le
+       controle de theme se lisait dans la meme foulee que FR/EN ; il s'en
+       detache maintenant comme un reglage distinct de la navigation. */
+    margin-left: clamp(16px, 1.8vw, 30px);
 }
 
 .page-2026 .theme-switch__btn { color: var(--color-ink-muted); }
