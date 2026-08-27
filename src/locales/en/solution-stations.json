@@ -1,10 +1,10 @@
 {
   "text": [
-    "Datakö Stations — Service-station operations",
+    "Datakö Stations — Gas station operations",
     "Skip to main content",
     "Solutions",
     "/ Datakö Stations",
-    "Available · Service stations",
+    "Available · Gas stations",
     "Manage your station one",
     "day at a time.",
     "Sales, inventory and tanks, unloading, customer credit, expenses, cash and closing: field operations become a clear, manageable day.",
@@ -13,7 +13,7 @@
     "Day in progress",
     "Day open",
     "Declared sales",
-    "Petrol",
+    "Gasoline",
     "900 L",
     "Diesel",
     "3,100 L",
@@ -54,7 +54,7 @@
     "Revenue, credit, repayments, expenses and attention points.",
     "Inventory",
     "Diesel · 33,160 / 50,000 L",
-    "Petrol · 18,500 / 30,000 L",
+    "Gasoline · 18,500 / 30,000 L",
     "Tanks and unloading",
     "Levels, sold volume, latest unloading and gauge gaps tracked the same day.",
     "Customers",
@@ -127,7 +127,7 @@
     "Daily summary",
     "Diesel sold",
     "3,420 L",
-    "Petrol sold",
+    "Gasoline sold",
     "1,820 L",
     "Collected",
     "57.5 M GNF",
@@ -187,7 +187,7 @@
     "What the till should hold for this business day."
   ],
   "attributes": [
-    "Datakö Stations manages daily sales, cash, credit, inventory, tanks, expenses, unloading and closing for service stations.",
+    "Datakö Stations manages daily sales, cash, credit, inventory, tanks, expenses, unloading and closing for gas stations.",
     "Service-station day animation",
     "Datakö Stations principles",
     "Real Datakö Stations demo cockpit",

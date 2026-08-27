@@ -11,7 +11,7 @@
     "18 June 2026",
     "8 min read",
     "What the term covers",
-    "“Modern data stack” describes an assembly of specialised tools, usually managed services, covering the path from source to use. Each brick does one thing and interfaces with the others, where the platforms of fifteen years ago tried to do everything.",
+    "“Modern data stack” describes an assembly of specialized tools, usually managed services, covering the path from source to use. Each brick does one thing and interfaces with the others, where the platforms of fifteen years ago tried to do everything.",
     "The most visible shift concerns transformation: it increasingly happens after loading, inside the warehouse, rather than before. This is not an absolute rule — volume, cost or confidentiality still justify transforming upstream — but it has become the default starting point.",
     "The bricks, in the order they become useful",
     "The common mistake is choosing the whole chain before having a first use. A stack is better built in the order the needs appear: first get the data somewhere, then make it consistent, then make it readable, and only then industrialise it.",
