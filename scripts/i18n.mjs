@@ -128,7 +128,10 @@ function renderPlaceholders(template, locale) {
 
 function localizeEnglishPaths(html) {
   const assets = ['css/', 'js/', 'images/', 'data/', 'assets/'];
-  html = html.replace(/\b(href|src)="([^"]+)"/g, (full, attribute, value) => {
+  // data-shot-* porte des chemins d'images exactement comme src : sans eux
+  // dans cette liste, swapShots() ecrasait le src corrige par un chemin
+  // relatif a /en/, et les captures produit tombaient en 404 cote anglais.
+  html = html.replace(/\b(href|src|data-shot-light|data-shot-dark)="([^"]+)"/g, (full, attribute, value) => {
     if (/^(?:https?:|mailto:|tel:|#|\/)/.test(value)) return full;
     if (assets.some(prefix => value.startsWith(prefix))) return `${attribute}="../${value}"`;
     const routeMap = {
